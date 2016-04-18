@@ -1,0 +1,15 @@
+
+module.tx_seeder_seedermod {
+	view {
+		# cat=module.tx_seeder_seedermod/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:seeder/Resources/Private/Backend/Templates/
+		# cat=module.tx_seeder_seedermod/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:seeder/Resources/Private/Backend/Partials/
+		# cat=module.tx_seeder_seedermod/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:seeder/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_seeder_seedermod//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
