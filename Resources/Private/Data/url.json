@@ -1,0 +1,19 @@
+{
+	"cols": [
+		"url"
+	],
+	"data": [
+		[
+			"http://example.org/"
+		],
+		[
+			"http://www.example.org/"
+		],
+		[
+			"https://example.org/"
+		],
+		[
+			"https://www.example.org/"
+		]
+	]
+}

@@ -26,7 +26,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "TYPO3\\CMS\\Core\\": "vendor/typo3/cms/typo3/sysext/core/"
+      "TYPO3\\CMS\\Core\\Tests\\": "vendor/typo3/cms/typo3/sysext/core/Tests",
+      "TYPO3\\CMS\\Core\\": "vendor/typo3/cms/typo3/sysext/core/Classes/"
     }
   },
   "extra": {
