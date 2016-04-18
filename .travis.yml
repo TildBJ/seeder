@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 5.5
+env:
+  - TEST_SUITE=develop TEST_FILE=./apiary.apib
+  - TEST_SUITE=errors TEST_FILE=./errors.apib
+
+sudo: false
+
+before_script:
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
+
+script:
+- phpunit -c Tests/phpunit.xml

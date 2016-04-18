@@ -1,0 +1,32 @@
+{
+  "name": "typo3-ter/seeder",
+  "description": "Database seeder for TYPO3",
+  "version": "0.0.0",
+  "type": "Database",
+  "keywords": ["dummy data", "test data", "database seeder", "seeding"],
+  "homepage": "http://seeder.roemmich.eu",
+  "time": "2016-04-18",
+  "license": "GNU",
+  "authors": [
+    {
+      "name": "Dennis Römmich",
+      "email": "dennis@roemmich.eu",
+      "homepage": "http://www.roemmich.eu",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "dennis@roemmich.eu",
+    "issues": "https://github.com/TildBJ/seeder/issues",
+    "source": "https://github.com/TildBJ/seeder"
+  },
+  "require-dev": {
+    "typo3/cms": "~6.2",
+    "phpunit/phpunit": "~4.8"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TYPO3\\CMS\\Core\\": "typo3_src/typo3/sysext/core/"
+    }
+  }
+}
