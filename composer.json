@@ -23,9 +23,9 @@
   "require": {
     "fzaninotto/faker": "~1.5"
   },
-  "autoload-dev": {
+  "autoload": {
     "psr-4": {
-      "TYPO3\\CMS\\Core\\": "vendor/typo3/cms/typo3/sysext/core/Classes/"
+      "Dennis\\Seeder\\": "Classes"
     }
   }
 }
