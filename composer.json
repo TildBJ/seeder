@@ -20,29 +20,9 @@
     "issues": "https://github.com/TildBJ/seeder/issues",
     "source": "https://github.com/TildBJ/seeder"
   },
-  "require-dev": {
-    "typo3/cms": "~6.2",
-    "phpunit/phpunit": "~4.8"
-  },
   "autoload-dev": {
     "psr-4": {
-      "TYPO3\\CMS\\Core\\Tests\\": "vendor/typo3/cms/typo3/sysext/core/Tests",
       "TYPO3\\CMS\\Core\\": "vendor/typo3/cms/typo3/sysext/core/Classes/"
     }
-  },
-  "extra": {
-    "typo3/cms": {
-      "cms-package-dir": "{$vendor-dir}/typo3/cms"
-    }
-  },
-  "scripts": {
-    "post-update-cmd": [
-      "php -r \"unlink('typo3');\"",
-      "php -r \"unlink('index.php');\""
-    ],
-    "post-install-cmd": [
-      "php -r \"unlink('typo3');\"",
-      "php -r \"unlink('index.php');\""
-    ]
   }
 }
