@@ -1,5 +1,5 @@
 {
-  "name": "typo3-ter/seeder",
+  "name": "seeder",
   "description": "Database seeder for TYPO3",
   "version": "0.0.0",
   "type": "Database",
