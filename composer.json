@@ -20,6 +20,9 @@
     "issues": "https://github.com/TildBJ/seeder/issues",
     "source": "https://github.com/TildBJ/seeder"
   },
+  "require": {
+    "fzaninotto/faker": "~1.5"
+  },
   "autoload-dev": {
     "psr-4": {
       "TYPO3\\CMS\\Core\\": "vendor/typo3/cms/typo3/sysext/core/Classes/"
