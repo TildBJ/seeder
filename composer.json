@@ -20,13 +20,36 @@
     "issues": "https://github.com/TildBJ/seeder/issues",
     "source": "https://github.com/TildBJ/seeder"
   },
+  "require-dev": {
+    "typo3/cms": "~7.6",
+    "phpunit/phpunit": "~4.8"
+  },
   "require": {
     "fzaninotto/faker": "~1.5"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests",
+      "TYPO3\\CMS\\Core\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Classes/"
+    }
   },
   "autoload": {
     "psr-4": {
       "Dennis\\Seeder\\": "Classes",
-      "Faker\\": "vendor/fzaninotto/faker/src/Faker"
+      "Faker\\": ".Build/vendor/fzaninotto/faker/src/Faker"
     }
+  },
+  "config": {
+      "vendor-dir": ".Build/vendor",
+      "bin-dir": ".Build/bin"
+  },
+  "extra": {
+      "typo3/cms": {
+          "cms-package-dir": "{$vendor-dir}/typo3/cms",
+          "web-dir": ".Build/Web",
+          "Package": {
+              "partOfMinimalUsableSystem": true
+          }
+      }
   }
 }

@@ -8,3 +8,6 @@ sudo: false
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
+
+script:
+  - TYPO3_PATH_WEB=".Build/Web" .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Unit/

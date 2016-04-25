@@ -37,4 +37,9 @@ $EM_CONF[$_EXTKEY] = array(
 			'Faker\\' => 'vendor/fzaninotto/faker/src/Faker'
 		),
 	),
+	'autoload-dev' => array (
+		'psr-4' => array (
+			'Dennis\\Seeder\\Tests\\' => 'Tests',
+		),
+	),
 );
