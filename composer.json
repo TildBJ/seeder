@@ -25,7 +25,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Dennis\\Seeder\\": "Classes"
+      "Dennis\\Seeder\\": "Classes",
+      "Faker\\": "vendor/fzaninotto/faker/src/Faker"
     }
   }
 }
