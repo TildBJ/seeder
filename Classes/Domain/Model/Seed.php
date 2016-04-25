@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -26,24 +26,37 @@ namespace Dennis\Seeder\Controller;
  ***************************************************************/
 
 /**
- * TestClass
+ * Seed
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 	/**
-	 * seedRepository
+	 * title
 	 *
-	 * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-	 * @inject
+	 * @var string $title
 	 */
-	protected $seedRepository;
+	protected $title = '';
 
-	public function indexAction()
+	/**
+	 * @return string
+	 */
+	public function getTitle()
 	{
+		return $this->title;
+	}
 
+	/**
+	 * @param string $title
+	 * @return $this
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
+
+		return $this;
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -26,24 +26,13 @@ namespace Dennis\Seeder\Controller;
  ***************************************************************/
 
 /**
- * TestClass
+ * SeedRepository
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class SeedRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-	/**
-	 * seedRepository
-	 *
-	 * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-	 * @inject
-	 */
-	protected $seedRepository;
 
-	public function indexAction()
-	{
-
-	}
 }
