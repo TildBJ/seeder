@@ -1,5 +1,5 @@
 .idea
-.Build/*
+.Build
 typo3
 typo3_src
 index.php
