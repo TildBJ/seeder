@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace Dennis\Seeder\Tests\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -24,70 +24,91 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Domain\Model\Seed;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Seed
+ * SeedTest
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class SeedTest extends UnitTestCase
 {
-	/**
-	 * title
-	 *
-	 * @var string $title
-	 * @validate NotEmpty
-	 */
-	protected $title = '';
 
 	/**
-	 * properties
+	 * subject
 	 *
-	 * @var array $properties
+	 * @var Seed $subject
 	 */
-	protected $properties = [];
+	protected $subject;
 
 	/**
-	 * @return string
+	 * Properties
 	 */
-	public function getTitle()
+	const PROPERTIES = [
+		'key' => 'value',
+		'foo' => 'bar',
+	];
+
+	/**
+	 * setUp
+	 *
+	 * @return void
+	 */
+	public function setUp()
 	{
-		return $this->title;
+		parent::setUp();
+
+		$this->subject = $this->getMock(
+			$this->buildAccessibleProxy(Seed::class),
+			null
+		);
 	}
 
 	/**
-	 * @param string $title
-	 * @return $this
+	 * setTitleForStringSetsTitle
+	 * @test
 	 */
-	public function setTitle($title)
+	public function setTitleForStringSetsTitle()
 	{
-		$this->title = $title;
+		$this->subject->setTitle('MyTitle');
 
-		return $this;
+		$this->assertAttributeEquals(
+			'MyTitle',
+			'title',
+			$this->subject
+		);
 	}
 
 	/**
-	 * setProperties
-	 *
-	 * @param $properties
-	 * @return $this
+	 * setTitleReturnsSelf
+	 * @test
 	 */
-	public function setProperties(array $properties)
+	public function setTitleReturnsSelf()
 	{
-		$this->properties = serialize($properties);
-
-		return $this;
+		$this->assertEquals($this->subject, $this->subject->setTitle('FooBar'));
 	}
 
 	/**
-	 * getProperties
-	 *
-	 * @return array
+	 * setPropertiesForArraySetsProperties
+	 * @test
 	 */
-	public function getProperties()
+	public function setPropertiesForArraySetsProperties()
 	{
-		return unserialize($this->properties);
+		$this->subject->setProperties(self::PROPERTIES);
+
+		$this->assertAttributeEquals(serialize(self::PROPERTIES), 'properties', $this->subject);
 	}
+
+	/**
+	 * setPropertiesReturnsSelf
+	 * @test
+	 */
+	public function setPropertiesReturnsSelf()
+	{
+		$this->assertEquals($this->subject, $this->subject->setProperties(self::PROPERTIES));
+	}
+
 }
