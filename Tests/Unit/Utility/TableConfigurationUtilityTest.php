@@ -24,18 +24,20 @@ namespace Dennis\Seeder\Tests\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Tests\Accessible;
+use Dennis\Seeder\Traits\Language;
 use Dennis\Seeder\Utility\TableConfigurationUtility;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use Dennis\Seeder\Traits;
 
 /**
- * Test case for class \Dennis\Seeder\Tests\Main\TestTest
+ * Test case for class \Dennis\Seeder\Tests\Utility\TableConfigurationUtilityTest
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */
 class TableConfigurationUtilityTest extends UnitTestCase
 {
-	use Traits\Language;
+	use Language, Accessible;
 
 	/**
 	 * subject
@@ -89,7 +91,7 @@ class TableConfigurationUtilityTest extends UnitTestCase
 	 */
 	public function tableConfigurationContainsArray()
 	{
-		$tableConfiguration = $this->accessProtected($this->subject, 'tableConfiguration');
+		$tableConfiguration = $this->accessProtectedProperty($this->subject, 'tableConfiguration');
 		$this->assertTrue(is_array($tableConfiguration));
 	}
 
@@ -99,7 +101,7 @@ class TableConfigurationUtilityTest extends UnitTestCase
 	 */
 	public function tablePropertyContainsString()
 	{
-		$table = $this->accessProtected($this->subject, 'table');
+		$table = $this->accessProtectedProperty($this->subject, 'table');
 		$this->assertSame(self::TABLE, $table);
 	}
 
@@ -151,20 +153,5 @@ class TableConfigurationUtilityTest extends UnitTestCase
 	public function getColumnConfigurationReturnsArray()
 	{
 		$this->assertTrue(is_array($this->subject->getColumnConfiguration('title')));
-	}
-
-	/**
-	 * accessProtected
-	 *
-	 * @param $obj
-	 * @param $prop
-	 * @return mixed
-	 */
-	private function accessProtected($obj, $prop) {
-		$reflection = new \ReflectionClass($obj);
-		$property = $reflection->getProperty($prop);
-		$property->setAccessible(true);
-
-		return $property->getValue($obj);
 	}
 }
