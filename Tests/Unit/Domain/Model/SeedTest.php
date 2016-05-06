@@ -47,7 +47,7 @@ class SeedTest extends UnitTestCase
 	/**
 	 * Properties
 	 */
-	const PROPERTIES = [
+	protected $properties = [
 		'key' => 'value',
 		'foo' => 'bar',
 	];
@@ -97,9 +97,9 @@ class SeedTest extends UnitTestCase
 	 */
 	public function setPropertiesForArraySetsProperties()
 	{
-		$this->subject->setProperties(self::PROPERTIES);
+		$this->subject->setProperties($this->properties);
 
-		$this->assertAttributeEquals(serialize(self::PROPERTIES), 'properties', $this->subject);
+		$this->assertAttributeEquals(serialize($this->properties), 'properties', $this->subject);
 	}
 
 	/**
@@ -108,7 +108,7 @@ class SeedTest extends UnitTestCase
 	 */
 	public function setPropertiesReturnsSelf()
 	{
-		$this->assertEquals($this->subject, $this->subject->setProperties(self::PROPERTIES));
+		$this->assertEquals($this->subject, $this->subject->setProperties($this->properties));
 	}
 
 }
