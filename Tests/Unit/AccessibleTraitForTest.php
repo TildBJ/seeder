@@ -27,9 +27,9 @@ namespace Dennis\Seeder\Tests;
  ***************************************************************/
 
 /**
- * Trait Accessible
+ * Trait AccessibleTraitForTest
  */
-trait Accessible
+trait AccessibleTraitForTest
 {
 	/**
 	 * accessProtectedProperty

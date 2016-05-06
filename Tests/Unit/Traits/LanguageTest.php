@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Tests\Traits;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Tests\Accessible;
+use Dennis\Seeder\Tests\AccessibleTraitForTest;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use Dennis\Seeder\Traits;
 use TYPO3\CMS\Lang\LanguageService;
@@ -36,7 +36,7 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class LanguageTest extends UnitTestCase
 {
-	use Accessible;
+	use AccessibleTraitForTest;
 
 	/**
 	 * subject
