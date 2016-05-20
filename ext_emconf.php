@@ -13,7 +13,7 @@
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Seeder',
 	'description' => 'Database Seeder for TYPO3',
-	'category' => 'plugin',
+	'category' => 'backend',
 	'author' => 'Dennis Römmich',
 	'author_email' => 'dennis@roemmich.eu',
 	'state' => 'alpha',

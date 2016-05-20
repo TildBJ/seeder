@@ -42,5 +42,4 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
 	 */
 	protected $seedRepository;
 
-	
 }
