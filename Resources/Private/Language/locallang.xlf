@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-04-18T18:10:47Z" product-name="seeder">
+		<header/>
+		<body>
+			<trans-unit id="createNewSeeder">
+				<source>Create new seeder</source>
+			</trans-unit>
+			<trans-unit id="title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="noSeeds">
+				<source>No Seeds found</source>
+			</trans-unit>
+			<trans-unit id="seeder">
+				<source>Seeder</source>
+			</trans-unit>
+			<trans-unit id="new">
+				<source>New</source>
+			</trans-unit>
+
+			<trans-unit id="errorMsg">
+				<source>Something went wrong</source>
+			</trans-unit>
+			<trans-unit id="successMsg">
+				<source>Seeder successfully created</source>
+			</trans-unit>
+			<trans-unit id="error.code.1221560718">
+				<source>Field title is required</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

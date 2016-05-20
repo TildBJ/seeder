@@ -1,0 +1,26 @@
+<f:layout name="Default"/>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+		 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<f:section name="header">
+	<h1><f:translate key="new" /></h1>
+</f:section>
+
+<f:section name="main">
+	<div class="row">
+		<div class="col-md-6">
+			<f:form action="create">
+				<div class="form-group">
+					<label for="title"><f:translate key="title" /></label>
+					<f:form.textfield class="form-control" id="title" name="seed[title]" />
+				</div>
+				<div class="form-group">
+					<f:form.submit class="btn btn-primary" value="Create" />
+				</div>
+			</f:form>
+		</div>
+	</div>
+</f:section>
+
+</html>

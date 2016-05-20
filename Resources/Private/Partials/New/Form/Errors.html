@@ -1,0 +1,29 @@
+<f:flashMessages as="errorMessages">
+	<div class="alert alert-danger">
+		<div class="media">
+			<div class="media-left">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-times fa-stack-1x"></i>
+				</span>
+			</div>
+			<div class="media-body">
+				<f:if condition="{errorMessages -> f:count()} > 0">
+					<f:for each="{errorMessages}" as="errorMessage">
+						<h4 class="alert-title">{errorMessage.message}</h4>
+					</f:for>
+				</f:if>
+
+				<f:form.validationResults>
+					<f:for each="{validationResults.flattenedErrors}" as="errors">
+						<div class="alert-message">
+							<f:for each="{errors}" as="error">
+								<f:translate key="error.code.{error.code}" />
+							</f:for>
+						</div>
+					</f:for>
+				</f:form.validationResults>
+			</div>
+		</div>
+	</div>
+</f:flashMessages>

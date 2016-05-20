@@ -1,0 +1,32 @@
+<f:layout name="Default"/>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+		 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<f:section name="header">
+	<h1><f:translate key="seeder" /></h1>
+</f:section>
+
+<f:section name="main">
+	<div class="row">
+		<div class="col-md-6">
+			<f:if condition="{seeds -> f:count()} > 0">
+				<f:then>
+					<f:form object="{seeds}">
+						<f:form.select property="seeds" options="{seeds}" />
+					</f:form>
+				</f:then>
+				<f:else>
+					<p>
+						<f:translate key="noSeeds" />
+					</p>
+					<p>
+						<f:link.action action="new"><f:translate key="createNewSeeder" /></f:link.action>
+					</p>
+				</f:else>
+			</f:if>
+		</div>
+	</div>
+</f:section>
+
+</html>

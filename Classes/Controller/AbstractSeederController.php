@@ -32,7 +32,7 @@ namespace Dennis\Seeder\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 	/**
 	 * seedRepository
@@ -42,8 +42,5 @@ class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	protected $seedRepository;
 
-	public function indexAction()
-	{
-
-	}
+	
 }
