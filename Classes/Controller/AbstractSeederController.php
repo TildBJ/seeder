@@ -34,12 +34,11 @@ namespace Dennis\Seeder\Controller;
  */
 abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-	/**
-	 * seedRepository
-	 *
-	 * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-	 * @inject
-	 */
-	protected $seedRepository;
-
+    /**
+     * seedRepository
+     *
+     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
+     * @inject
+     */
+    protected $seedRepository;
 }

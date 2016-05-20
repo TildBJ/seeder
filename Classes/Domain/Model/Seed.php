@@ -34,60 +34,60 @@ namespace Dennis\Seeder\Domain\Model;
  */
 class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-	/**
-	 * title
-	 *
-	 * @var string $title
-	 * @validate NotEmpty
-	 */
-	protected $title = '';
+    /**
+     * title
+     *
+     * @var string $title
+     * @validate NotEmpty
+     */
+    protected $title = '';
 
-	/**
-	 * properties
-	 *
-	 * @var array $properties
-	 */
-	protected $properties = [];
+    /**
+     * properties
+     *
+     * @var array $properties
+     */
+    protected $properties = [];
 
-	/**
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @param string $title
-	 * @return $this
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
+    /**
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * setProperties
-	 *
-	 * @param $properties
-	 * @return $this
-	 */
-	public function setProperties(array $properties)
-	{
-		$this->properties = serialize($properties);
+    /**
+     * setProperties
+     *
+     * @param $properties
+     * @return $this
+     */
+    public function setProperties(array $properties)
+    {
+        $this->properties = serialize($properties);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * getProperties
-	 *
-	 * @return array
-	 */
-	public function getProperties()
-	{
-		return unserialize($this->properties);
-	}
+    /**
+     * getProperties
+     *
+     * @return array
+     */
+    public function getProperties()
+    {
+        return unserialize($this->properties);
+    }
 }

@@ -34,42 +34,43 @@ namespace Dennis\Seeder\Controller;
  */
 class SeederController extends AbstractSeederController
 {
-	public function indexAction()
-	{
-		$seeds = $this->seedRepository->findAll();
+    public function indexAction()
+    {
+        $seeds = $this->seedRepository->findAll();
 
-		$this->view->assign('seeds', $seeds);
-	}
+        $this->view->assign('seeds', $seeds);
+    }
 
-	public function newAction()
-	{
+    public function newAction()
+    {
 
-	}
+    }
 
-	/**
-	 * createAction
-	 *
-	 * @param \Dennis\Seeder\Domain\Model\Seed $seed
-	 */
-	public function createAction(\Dennis\Seeder\Domain\Model\Seed $seed)
-	{
-		$this->seedRepository->add($seed);
-		$this->addFlashMessage(
-			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('successMsg', 'Seeder'),
-			'',
-			\TYPO3\CMS\Core\Messaging\AbstractMessage::OK
-		);
-		$this->redirect('index');
-	}
+    /**
+     * createAction
+     *
+     * @param \Dennis\Seeder\Domain\Model\Seed $seed
+     */
+    public function createAction(\Dennis\Seeder\Domain\Model\Seed $seed)
+    {
+        $this->seedRepository->add($seed);
+        $this->addFlashMessage(
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('successMsg', 'Seeder'),
+            '',
+            \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+        );
+        $this->redirect('index');
+    }
 
-	/**
-	 * A template method for displaying custom error flash messages, or to
-	 * display no flash message at all on errors. Override this to customize
-	 * the flash message in your action controller.
-	 *
-	 * @return string The flash message or FALSE if no flash message should be set
-	 */
-	protected function getErrorFlashMessage() {
-		return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate( 'errorMsg', 'Seeder' );
-	}
+    /**
+     * A template method for displaying custom error flash messages, or to
+     * display no flash message at all on errors. Override this to customize
+     * the flash message in your action controller.
+     *
+     * @return string The flash message or FALSE if no flash message should be set
+     */
+    protected function getErrorFlashMessage()
+    {
+        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('errorMsg', 'Seeder');
+    }
 }

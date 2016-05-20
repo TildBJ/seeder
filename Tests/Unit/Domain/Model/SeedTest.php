@@ -37,78 +37,81 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 class SeedTest extends UnitTestCase
 {
 
-	/**
-	 * subject
-	 *
-	 * @var Seed $subject
-	 */
-	protected $subject;
+    /**
+     * subject
+     *
+     * @var Seed $subject
+     */
+    protected $subject;
 
-	/**
-	 * Properties
-	 */
-	protected $properties = [
-		'key' => 'value',
-		'foo' => 'bar',
-	];
+    /**
+     * Properties
+     */
+    protected $properties = [
+        'key' => 'value',
+        'foo' => 'bar',
+    ];
 
-	/**
-	 * setUp
-	 *
-	 * @return void
-	 */
-	public function setUp()
-	{
-		parent::setUp();
+    /**
+     * setUp
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
 
-		$this->subject = $this->getMock(
-			$this->buildAccessibleProxy(Seed::class),
-			null
-		);
-	}
+        $this->subject = $this->getMock(
+            $this->buildAccessibleProxy(Seed::class),
+            null
+        );
+    }
 
-	/**
-	 * setTitleForStringSetsTitle
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle()
-	{
-		$this->subject->setTitle('MyTitle');
+    /**
+     * setTitleForStringSetsTitle
+     *
+     * @test
+     */
+    public function setTitleForStringSetsTitle()
+    {
+        $this->subject->setTitle('MyTitle');
 
-		$this->assertAttributeEquals(
-			'MyTitle',
-			'title',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'MyTitle',
+            'title',
+            $this->subject
+        );
+    }
 
-	/**
-	 * setTitleReturnsSelf
-	 * @test
-	 */
-	public function setTitleReturnsSelf()
-	{
-		$this->assertEquals($this->subject, $this->subject->setTitle('FooBar'));
-	}
+    /**
+     * setTitleReturnsSelf
+     *
+     * @test
+     */
+    public function setTitleReturnsSelf()
+    {
+        $this->assertEquals($this->subject, $this->subject->setTitle('FooBar'));
+    }
 
-	/**
-	 * setPropertiesForArraySetsProperties
-	 * @test
-	 */
-	public function setPropertiesForArraySetsProperties()
-	{
-		$this->subject->setProperties($this->properties);
+    /**
+     * setPropertiesForArraySetsProperties
+     *
+     * @test
+     */
+    public function setPropertiesForArraySetsProperties()
+    {
+        $this->subject->setProperties($this->properties);
 
-		$this->assertAttributeEquals(serialize($this->properties), 'properties', $this->subject);
-	}
+        $this->assertAttributeEquals(serialize($this->properties), 'properties', $this->subject);
+    }
 
-	/**
-	 * setPropertiesReturnsSelf
-	 * @test
-	 */
-	public function setPropertiesReturnsSelf()
-	{
-		$this->assertEquals($this->subject, $this->subject->setProperties($this->properties));
-	}
-
+    /**
+     * setPropertiesReturnsSelf
+     *
+     * @test
+     */
+    public function setPropertiesReturnsSelf()
+    {
+        $this->assertEquals($this->subject, $this->subject->setProperties($this->properties));
+    }
 }

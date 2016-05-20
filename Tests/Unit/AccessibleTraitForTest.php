@@ -31,37 +31,36 @@ namespace Dennis\Seeder\Tests;
  */
 trait AccessibleTraitForTest
 {
-	/**
-	 * accessProtectedProperty
-	 *
-	 * @param $object
-	 * @param $property
-	 * @return mixed
-	 */
-	protected function accessProtectedProperty($object, $property)
-	{
-		$reflection = new \ReflectionClass($object);
-		$reflectionProperty = $reflection->getProperty($property);
-		$reflectionProperty->setAccessible(true);
+    /**
+     * accessProtectedProperty
+     *
+     * @param $object
+     * @param $property
+     * @return mixed
+     */
+    protected function accessProtectedProperty($object, $property)
+    {
+        $reflection = new \ReflectionClass($object);
+        $reflectionProperty = $reflection->getProperty($property);
+        $reflectionProperty->setAccessible(true);
 
-		return $reflectionProperty->getValue($object);
-	}
+        return $reflectionProperty->getValue($object);
+    }
 
-	/**
-	 * accessProtectedMethod
-	 *
-	 * @param $object
-	 * @param $method
-	 * @param $arguments
-	 * @return mixed
-	 */
-	protected function accessProtectedMethod($object, $method, $arguments) {
-		$reflection = new \ReflectionClass($object);
-		$reflectionMethod = $reflection->getMethod($method);
-		$reflectionMethod->setAccessible(true);
+    /**
+     * accessProtectedMethod
+     *
+     * @param $object
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    protected function accessProtectedMethod($object, $method, $arguments)
+    {
+        $reflection = new \ReflectionClass($object);
+        $reflectionMethod = $reflection->getMethod($method);
+        $reflectionMethod->setAccessible(true);
 
-		return $reflectionMethod->invoke($object, $arguments);
-	}
-
+        return $reflectionMethod->invoke($object, $arguments);
+    }
 }
-

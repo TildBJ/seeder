@@ -44,5 +44,4 @@ class TestTest extends UnitTestCase
     {
         $this->assertSame(true, true);
     }
-
 }

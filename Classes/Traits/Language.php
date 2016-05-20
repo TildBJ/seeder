@@ -32,17 +32,17 @@ namespace Dennis\Seeder\Traits;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-trait Language {
+trait Language
+{
 
-	/**
-	 * translate
-	 *
-	 * @param string $ll
-	 * @return string
-	 */
-	protected function translate($ll)
-	{
-		return $GLOBALS['LANG']->sL($ll);
-	}
-
+    /**
+     * translate
+     *
+     * @param string $ll
+     * @return string
+     */
+    protected function translate($ll)
+    {
+        return $GLOBALS['LANG']->sL($ll);
+    }
 }

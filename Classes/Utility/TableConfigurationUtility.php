@@ -26,7 +26,6 @@ namespace Dennis\Seeder\Utility;
  ***************************************************************/
 use Dennis\Seeder\Traits;
 
-
 /**
  * TableConfigurationUtility
  *
@@ -36,82 +35,82 @@ use Dennis\Seeder\Traits;
  */
 class TableConfigurationUtility
 {
-	use Traits\Language;
+    use Traits\Language;
 
-	/**
-	 * extensionConfiguration
-	 *
-	 * @var array $tableConfiguration
-	 */
-	protected $tableConfiguration;
+    /**
+     * extensionConfiguration
+     *
+     * @var array $tableConfiguration
+     */
+    protected $tableConfiguration;
 
-	/**
-	 * table
-	 *
-	 * @var string $table
-	 */
-	protected $table;
+    /**
+     * table
+     *
+     * @var string $table
+     */
+    protected $table;
 
-	/**
-	 * ExtensionConfigurationUtility constructor.
-	 * @param $table
-	 * @return void
-	 */
-	public function __construct($table)
-	{
-		if (!isset($GLOBALS['TCA'][$table])) {
-			throw new \InvalidArgumentException(
-				'Configuration for table ' . $table . ' not found!'
-			);
-		}
-		$this->table = $table;
-		$this->tableConfiguration = $GLOBALS['TCA'][$table];
-	}
+    /**
+     * ExtensionConfigurationUtility constructor.
+     *
+     * @param $table
+     */
+    public function __construct($table)
+    {
+        if (!isset($GLOBALS['TCA'][$table])) {
+            throw new \InvalidArgumentException(
+                'Configuration for table ' . $table . ' not found!'
+            );
+        }
+        $this->table = $table;
+        $this->tableConfiguration = $GLOBALS['TCA'][$table];
+    }
 
-	/**
-	 * getName
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->table;
-	}
+    /**
+     * getName
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->table;
+    }
 
-	/**
-	 * getName
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->translate($this->tableConfiguration['ctrl']['title']);
-	}
+    /**
+     * getName
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->translate($this->tableConfiguration['ctrl']['title']);
+    }
 
-	/**
-	 * getColumns
-	 *
-	 * @return mixed
-	 */
-	public function getColumns()
-	{
-		return array_keys($this->tableConfiguration['columns']);
-	}
+    /**
+     * getColumns
+     *
+     * @return mixed
+     */
+    public function getColumns()
+    {
+        return array_keys($this->tableConfiguration['columns']);
+    }
 
-	/**
-	 * getColumnConfiguration
-	 *
-	 * @param $column
-	 * @return array
-	 */
-	public function getColumnConfiguration($column)
-	{
-		if (!isset($this->tableConfiguration['columns'][$column])) {
-			throw new \InvalidArgumentException(
-				'Column ' . $column . ' does not exist for table ' . $this->table
-			);
-		}
-		return $this->tableConfiguration['columns'][$column]['config'];
-	}
+    /**
+     * getColumnConfiguration
+     *
+     * @param $column
+     * @return array
+     */
+    public function getColumnConfiguration($column)
+    {
+        if (!isset($this->tableConfiguration['columns'][$column])) {
+            throw new \InvalidArgumentException(
+                'Column ' . $column . ' does not exist for table ' . $this->table
+            );
+        }
 
+        return $this->tableConfiguration['columns'][$column]['config'];
+    }
 }

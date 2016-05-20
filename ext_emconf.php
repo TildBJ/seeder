@@ -11,35 +11,33 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Seeder',
-	'description' => 'Database Seeder for TYPO3',
-	'category' => 'backend',
-	'author' => 'Dennis Römmich',
-	'author_email' => 'dennis@roemmich.eu',
-	'state' => 'alpha',
-	'internal' => '',
-	'uploadfolder' => '0',
-	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '0.0.0',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '7.6.0-7.6.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-	'autoload' => array(
-		'psr-4' => array(
-			'Dennis\\Seeder\\' => 'Classes',
-			'Faker\\' => 'vendor/fzaninotto/faker/src/Faker'
-		),
-	),
-	'autoload-dev' => array (
-		'psr-4' => array (
-			'Dennis\\Seeder\\Tests\\' => 'Tests',
-		),
-	),
+    'title' => 'Seeder',
+    'description' => 'Database Seeder for TYPO3',
+    'category' => 'backend',
+    'author' => 'Dennis Römmich',
+    'author_email' => 'dennis@roemmich.eu',
+    'state' => 'alpha',
+    'internal' => '',
+    'uploadfolder' => '0',
+    'createDirs' => '',
+    'clearCacheOnLoad' => 0,
+    'version' => '0.0.0',
+    'constraints' => array(
+        'depends' => array(
+            'typo3' => '7.6.0-7.6.99',
+        ),
+        'conflicts' => array(),
+        'suggests' => array(),
+    ),
+    'autoload' => array(
+        'psr-4' => array(
+            'Dennis\\Seeder\\' => 'Classes',
+            'Faker\\' => 'vendor/fzaninotto/faker/src/Faker',
+        ),
+    ),
+    'autoload-dev' => array(
+        'psr-4' => array(
+            'Dennis\\Seeder\\Tests\\' => 'Tests',
+        ),
+    ),
 );

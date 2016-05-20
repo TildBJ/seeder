@@ -36,57 +36,68 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class LanguageTest extends UnitTestCase
 {
-	use AccessibleTraitForTest;
+    use AccessibleTraitForTest;
 
-	/**
-	 * subject
-	 *
-	 * @var Traits\Language $subject
-	 */
-	protected $subject;
+    /**
+     * subject
+     *
+     * @var Traits\Language $subject
+     */
+    protected $subject;
 
-	/**
-	 * setUp
-	 *
-	 * @return void
-	 */
-	public function setUp()
-	{
-		parent::setUp();
+    /**
+     * setUp
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
 
-		$GLOBALS['LANG'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(LanguageService::class);
-		$GLOBALS['LANG']->init('default');
+        $GLOBALS['LANG'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(LanguageService::class);
+        $GLOBALS['LANG']->init('default');
 
-		$this->subject = $this->getObjectForTrait(Traits\Language::class);
-	}
+        $this->subject = $this->getObjectForTrait(Traits\Language::class);
+    }
 
-	/**
-	 * translateReturnsTranslatedString
-	 * @test
-	 */
-	public function translateReturnsTranslatedString()
-	{
-		$translation = $this->accessProtectedMethod($this->subject, 'translate', 'LLL:EXT:lang/locallang_tca.xlf:pages');
-		$this->assertSame('Page', $translation);
-	}
+    /**
+     * translateReturnsTranslatedString
+     *
+     * @test
+     */
+    public function translateReturnsTranslatedString()
+    {
+        $translation = $this->accessProtectedMethod(
+            $this->subject,
+            'translate',
+            'LLL:EXT:lang/locallang_tca.xlf:pages'
+        );
+        $this->assertSame('Page', $translation);
+    }
 
-	/**
-	 * translateWithWrongArgumentShouldReturnEmptyString
-	 * @test
-	 */
-	public function translateWithWrongLLLKeyReturnsEmptyString()
-	{
-		$translation = $this->accessProtectedMethod($this->subject, 'translate', 'LLL:EXT:lang/locallang_tca.xlf:FooBar');
-		$this->assertSame('', $translation);
-	}
+    /**
+     * translateWithWrongArgumentShouldReturnEmptyString
+     *
+     * @test
+     */
+    public function translateWithWrongLLLKeyReturnsEmptyString()
+    {
+        $translation = $this->accessProtectedMethod(
+            $this->subject,
+            'translate',
+            'LLL:EXT:lang/locallang_tca.xlf:FooBar'
+        );
+        $this->assertSame('', $translation);
+    }
 
-	/**
-	 * translateWithRandomStringReturnsRandomString
-	 * @test
-	 */
-	public function translateWithRandomStringReturnsRandomString()
-	{
-		$translation = $this->accessProtectedMethod($this->subject, 'translate', 'FooBar');
-		$this->assertSame('FooBar', $translation);
-	}
+    /**
+     * translateWithRandomStringReturnsRandomString
+     *
+     * @test
+     */
+    public function translateWithRandomStringReturnsRandomString()
+    {
+        $translation = $this->accessProtectedMethod($this->subject, 'translate', 'FooBar');
+        $this->assertSame('FooBar', $translation);
+    }
 }
