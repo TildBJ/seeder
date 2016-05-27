@@ -25,9 +25,6 @@
     "phpunit/phpunit": "~4.8",
     "squizlabs/php_codesniffer": "~2.6"
   },
-  "require": {
-    "fzaninotto/faker": "~1.5"
-  },
   "autoload-dev": {
     "psr-4": {
       "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests",
@@ -36,8 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Dennis\\Seeder\\": "Classes",
-      "Faker\\": ".Build/vendor/fzaninotto/faker/src/Faker"
+      "Dennis\\Seeder\\": "Classes"
     }
   },
   "config": {

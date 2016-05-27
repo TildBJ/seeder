@@ -41,4 +41,14 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
      * @inject
      */
     protected $seedRepository;
+
+    /**
+     * initializeAction
+     *
+     * @return void
+     */
+    public function initializeAction()
+    {
+        \Dennis\Seeder\Utility\Dependency::checkDependencies();
+    }
 }

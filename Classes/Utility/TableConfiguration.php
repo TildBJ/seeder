@@ -27,13 +27,13 @@ namespace Dennis\Seeder\Utility;
 use Dennis\Seeder\Traits;
 
 /**
- * TableConfigurationUtility
+ * TableConfiguration
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class TableConfigurationUtility
+class TableConfiguration
 {
     use Traits\Language;
 

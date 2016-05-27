@@ -1,0 +1,2 @@
+	# cat=basic
+pathToFaker = vendor/fzaninotto/faker/

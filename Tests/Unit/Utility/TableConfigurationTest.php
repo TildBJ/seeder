@@ -26,7 +26,7 @@ namespace Dennis\Seeder\Tests\Utility;
  ***************************************************************/
 use Dennis\Seeder\Tests\AccessibleTraitForTest;
 use Dennis\Seeder\Traits\Language;
-use Dennis\Seeder\Utility\TableConfigurationUtility;
+use Dennis\Seeder\Utility\TableConfiguration;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use Dennis\Seeder\Traits;
 
@@ -35,14 +35,14 @@ use Dennis\Seeder\Traits;
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */
-class TableConfigurationUtilityTest extends UnitTestCase
+class TableConfigurationTest extends UnitTestCase
 {
     use Language, AccessibleTraitForTest;
 
     /**
      * subject
      *
-     * @var TableConfigurationUtility $subject
+     * @var TableConfiguration $subject
      */
     protected $subject;
 
@@ -79,7 +79,7 @@ class TableConfigurationUtilityTest extends UnitTestCase
         ];
 
         $this->subject = $this->getMock(
-            $this->buildAccessibleProxy(TableConfigurationUtility::class),
+            $this->buildAccessibleProxy(TableConfiguration::class),
             ['translate'],
             ['pages']
         );
