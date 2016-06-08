@@ -13,7 +13,7 @@ $init = function ($extKey) {
         'seedermod',
         '',
         array(
-            'Seeder' => 'index, new, create',
+            'Seeder' => 'index, new, create, show, edit, update, delete',
             'Install' => 'index',
         ),
         array(

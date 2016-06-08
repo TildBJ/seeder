@@ -12,8 +12,14 @@
 		<div class="col-md-6">
 			<f:if condition="{seeds -> f:count()} > 0">
 				<f:then>
-					<f:form object="{seeds}">
-						<f:form.select property="seeds" options="{seeds}"/>
+					<f:form action="show" object="{seeds}">
+						<f:form.select name="seed"
+									   class="form-control"
+									   options="{seeds}"
+									   optionLabelField="title"
+									   prependOptionLabel="{f:translate(key: 'pleaseChoose')}"
+									   additionalAttributes="{onchange:'this.form.submit()'}"
+						/>
 					</f:form>
 				</f:then>
 				<f:else>

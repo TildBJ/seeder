@@ -34,7 +34,6 @@ namespace Dennis\Seeder\Traits;
  */
 trait Language
 {
-
     /**
      * translate
      *

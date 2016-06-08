@@ -4,13 +4,13 @@
 		 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
 <f:section name="header">
-	<h1><f:translate key="new" /></h1>
+	<h1>Edit {seed.title}</h1>
 </f:section>
 
 <f:section name="main">
 	<div class="row">
 		<div class="col-md-6">
-			<f:render partial="Form" arguments="{action: 'create', seed: seed}" />
+			<f:render partial="Form" arguments="{action: 'update', seed: seed}" />
 		</div>
 	</div>
 </f:section>

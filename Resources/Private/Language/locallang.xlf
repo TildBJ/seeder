@@ -18,12 +18,33 @@
 			<trans-unit id="new">
 				<source>New</source>
 			</trans-unit>
+			<trans-unit id="create">
+				<source>Create</source>
+			</trans-unit>
+			<trans-unit id="update">
+				<source>Update</source>
+			</trans-unit>
+			<trans-unit id="edit">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="delete">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="pleaseChoose">
+				<source>Please choose...</source>
+			</trans-unit>
 
 			<trans-unit id="errorMsg">
 				<source>Something went wrong</source>
 			</trans-unit>
-			<trans-unit id="successMsg">
+			<trans-unit id="createSuccessMsg">
 				<source>Seeder successfully created</source>
+			</trans-unit>
+			<trans-unit id="deleteSuccessMsg">
+				<source>Seeder successfully deleted</source>
+			</trans-unit>
+			<trans-unit id="updateSuccessMsg">
+				<source>Seeder successfully updated</source>
 			</trans-unit>
 			<trans-unit id="error.code.1221560718">
 				<source>Field title is required</source>
