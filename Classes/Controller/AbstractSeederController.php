@@ -49,8 +49,7 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
      */
     public function initializeAction()
     {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false)
-        {
+        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
             $this->redirect('index', 'Install');
         }
     }

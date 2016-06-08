@@ -55,12 +55,10 @@ class Dependency
         /** @var EmConfiguration $emConfiguration */
         $emConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(EmConfiguration::class);
 
-        if (!is_file(PATH_site . $emConfiguration->pathToFaker . 'src/autoload.php'))
-        {
+        if (!is_file(PATH_site . $emConfiguration->pathToFaker . 'src/autoload.php')) {
             return false;
         }
 
         return true;
     }
 }
-
