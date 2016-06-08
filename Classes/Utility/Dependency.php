@@ -30,7 +30,8 @@ namespace Dennis\Seeder\Utility;
  * Class Dependency
  *
  * @package Dennis\Seeder\Utility
- * Dennis\Seeder\Utility; */
+ * Dennis\Seeder\Utility;
+ */
 class Dependency
 {
     /**
@@ -48,7 +49,6 @@ class Dependency
      * fakerCanBeLoaded
      *
      * @return bool
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\NoSuchFileException
      */
     protected static function fakerCanBeLoaded()
     {
@@ -57,11 +57,7 @@ class Dependency
 
         if (!is_file(PATH_site . $emConfiguration->pathToFaker . 'src/autoload.php'))
         {
-            throw new \TYPO3\CMS\Extbase\Configuration\Exception\NoSuchFileException
-            (
-                'Faker does not exist make sure you executed composer require fzaninotto/faker since Seeder depends on it!',
-                1464370194
-            );
+            return false;
         }
 
         return true;

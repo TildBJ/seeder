@@ -24,34 +24,18 @@ namespace Dennis\Seeder\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extensionmanager\Controller\ActionController;
 
 /**
- * AbstractSeederController
+ * InstallController
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class InstallController extends ActionController
 {
-    /**
-     * seedRepository
-     *
-     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-     * @inject
-     */
-    protected $seedRepository;
-
-    /**
-     * initializeAction
-     *
-     * @return void
-     */
-    public function initializeAction()
+    public function indexAction()
     {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false)
-        {
-            $this->redirect('index', 'Install');
-        }
     }
 }

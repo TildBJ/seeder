@@ -30,7 +30,7 @@ namespace Dennis\Seeder\Utility;
  * Class EmConfiguration
  *
  * @package Dennis\Seeder\Utility
- * Dennis\Seeder\Utility; */
+ */
 class EmConfiguration
 {
     /**

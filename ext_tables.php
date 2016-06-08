@@ -9,11 +9,12 @@ $init = function ($extKey) {
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
         'Dennis.' . $extKey,
-        'web',     // Make module a submodule of 'tools'
-        'seedermod',    // Submodule key
-        '',                        // Position
+        'web',
+        'seedermod',
+        '',
         array(
             'Seeder' => 'index, new, create',
+            'Install' => 'index',
         ),
         array(
             'access' => 'user,group',
