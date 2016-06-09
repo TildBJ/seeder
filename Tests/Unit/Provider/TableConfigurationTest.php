@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Utility;
+namespace Dennis\Seeder\Tests\Provider;
 
 /***************************************************************
  *  Copyright notice
@@ -26,12 +26,12 @@ namespace Dennis\Seeder\Tests\Utility;
  ***************************************************************/
 use Dennis\Seeder\Tests\AccessibleTraitForTest;
 use Dennis\Seeder\Traits\Language;
-use Dennis\Seeder\Utility\TableConfiguration;
+use Dennis\Seeder\Provider\TableConfiguration;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use Dennis\Seeder\Traits;
 
 /**
- * Test case for class \Dennis\Seeder\Tests\Utility\TableConfigurationUtilityTest
+ * Test case for class \Dennis\Seeder\Tests\Provider\TableConfigurationTest
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */

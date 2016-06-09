@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Utility;
+namespace Dennis\Seeder\Provider;
 
 /***************************************************************
  *  Copyright notice
