@@ -52,13 +52,23 @@ class Dependency
      */
     protected static function fakerCanBeLoaded()
     {
-        /** @var EmConfiguration $emConfiguration */
-        $emConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(EmConfiguration::class);
-
-        if (!is_file(PATH_site . $emConfiguration->pathToFaker . 'src/autoload.php')) {
+        if (!is_file(self::getFakerAutoloadPath())) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * getFakerAutoloadPath
+     *
+     * @return string
+     */
+    public static function getFakerAutoloadPath()
+    {
+        /** @var EmConfiguration $emConfiguration */
+        $emConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(EmConfiguration::class);
+
+        return PATH_site . $emConfiguration->pathToFaker . 'src/autoload.php';
     }
 }
