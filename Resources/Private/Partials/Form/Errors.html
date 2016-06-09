@@ -17,10 +17,10 @@
 				<div class="media-body">
 					<h4 class="alert-title">{errorMessage.message}</h4>
 					<f:form.validationResults>
-						<f:for each="{validationResults.flattenedErrors}" as="errors">
+						<f:for each="{validationResults.flattenedErrors}" key="property" as="errors">
 							<div class="alert-message">
 								<f:for each="{errors}" as="error">
-									<f:translate key="error.code.{error.code}"/>
+									<f:translate key="error.{property}"/>
 								</f:for>
 							</div>
 						</f:for>

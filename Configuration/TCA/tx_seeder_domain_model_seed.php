@@ -130,5 +130,14 @@ return array(
                 'eval' => 'trim'
             ),
         ),
+        'table_name' => array(
+            'exclude' => 1,
+            'label' => 'LLL:EXT:seeder/Resources/Private/Language/locallang_db.xlf:table_name',
+            'config' => array(
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ),
+        ),
     ),
 );

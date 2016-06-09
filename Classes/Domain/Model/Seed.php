@@ -43,6 +43,14 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $title = '';
 
     /**
+     * tableName
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $tableName = '';
+
+    /**
      * properties
      *
      * @var array $properties
@@ -89,5 +97,24 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getProperties()
     {
         return unserialize($this->properties);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
+
+    /**
+     * @param string $tableName
+     * @return Seed
+     */
+    public function setTableName($tableName)
+    {
+        $this->tableName = $tableName;
+
+        return $this;
     }
 }

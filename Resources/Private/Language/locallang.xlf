@@ -9,6 +9,9 @@
 			<trans-unit id="title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tableName">
+				<source>Table name</source>
+			</trans-unit>
 			<trans-unit id="noSeeds">
 				<source>No Seeds found</source>
 			</trans-unit>
@@ -46,8 +49,11 @@
 			<trans-unit id="updateSuccessMsg">
 				<source>Seeder successfully updated</source>
 			</trans-unit>
-			<trans-unit id="error.code.1221560718">
-				<source>Field title is required</source>
+			<trans-unit id="error.seed.title">
+				<source>Field Title is required</source>
+			</trans-unit>
+			<trans-unit id="error.seed.tableName">
+				<source>Please choose a Table name</source>
 			</trans-unit>
 		</body>
 	</file>

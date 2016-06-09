@@ -1,22 +1,42 @@
-<f:form action="{action}" name="seed" object="{seed}">
-	<div class="form-group">
-		<label for="title"><f:translate key="title" /></label>
-		<f:if condition="{action} == 'edit'">
-			<f:then>
-				<f:form.textfield class="form-control" id="title" property="title" additionalAttributes="{readonly: 'readonly'}" />
-			</f:then>
-			<f:else>
-				<f:form.textfield class="form-control" id="title" property="title" />
-			</f:else>
-		</f:if>
-	</div>
-	<div class="form-group">
-		<button class="btn btn-primary">
-			<i class="fa fa-pencil"></i>
-			<f:translate key="{action}" />
-		</button>
-		<f:if condition="{action} != 'create'">
-			<f:link.action class="btn btn-danger" action="delete" arguments="{seed: seed}"><i class="fa fa-trash"></i> <f:translate key="delete" /></f:link.action>
-		</f:if>
-	</div>
-</f:form>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	  xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<f:section name="Form">
+
+	<f:form action="{action}" name="seed" object="{seed}">
+		<div class="form-group">
+			<label for="title"><f:translate key="title" /></label>
+			<f:if condition="{action} == 'edit'">
+				<f:then>
+					<f:form.textfield class="form-control" id="title" property="title" additionalAttributes="{readonly: 'readonly'}" />
+				</f:then>
+				<f:else>
+					<f:form.textfield class="form-control" id="title" property="title" />
+				</f:else>
+			</f:if>
+		</div>
+		<div class="form-group">
+			<label for="tableName"><f:translate key="tableName" /></label>
+			<f:if condition="{action} != 'create'">
+				<f:then>
+					<f:form.textfield class="form-control" id="tableName" property="tableName" additionalAttributes="{readonly: 'readonly'}" />
+				</f:then>
+				<f:else>
+					<f:form.select class="form-control" id="tableName" options="{tables}" property="tableName" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" />
+				</f:else>
+			</f:if>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary">
+				<i class="fa fa-pencil"></i>
+				<f:translate key="{action}" />
+			</button>
+			<f:if condition="{action} != 'create'">
+				<f:link.action class="btn btn-danger" action="delete" arguments="{seed: seed}"><i class="fa fa-trash"></i> <f:translate key="delete" /></f:link.action>
+			</f:if>
+		</div>
+	</f:form>
+
+</f:section>
+
+</html>

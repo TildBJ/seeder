@@ -164,4 +164,14 @@ class TableConfigurationTest extends UnitTestCase
     {
         $this->assertTrue(is_array($this->subject->getColumnConfiguration('title')));
     }
+
+    /**
+     * getAllTablesReturnsArray
+     *
+     * @test
+     */
+    public function getAllTablesReturnsArray()
+    {
+        $this->assertTrue(is_array(($this->subject->getAllTables())));
+    }
 }

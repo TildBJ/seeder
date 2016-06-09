@@ -90,7 +90,7 @@ class TableConfiguration
     /**
      * getColumns
      *
-     * @return mixed
+     * @return array
      */
     public function getColumns()
     {
@@ -112,5 +112,17 @@ class TableConfiguration
         }
 
         return $this->tableConfiguration['columns'][$column]['config'];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllTables()
+    {
+        $tables = array();
+        foreach (array_keys($GLOBALS['TCA']) as $tableName) {
+            $tables[$tableName] = $tableName;
+        }
+        return $tables;
     }
 }
