@@ -35,6 +35,12 @@ use TYPO3\CMS\Extensionmanager\Controller\ActionController;
  */
 class InstallController extends ActionController
 {
+
+    /**
+     * indexAction
+     *
+     * @return void
+     */
     public function indexAction()
     {
     }

@@ -37,6 +37,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class SeederController extends AbstractSeederController
 {
+    /**
+     * indexAction
+     *
+     * @return void
+     */
     public function indexAction()
     {
         $seeds = $this->seedRepository->findAll();
@@ -46,6 +51,8 @@ class SeederController extends AbstractSeederController
 
     /**
      * newAction
+     *
+     * @return void
      */
     public function newAction()
     {
@@ -55,6 +62,7 @@ class SeederController extends AbstractSeederController
      * createAction
      *
      * @param Seed $seed
+     * @return void
      */
     public function createAction(Seed $seed)
     {
@@ -71,6 +79,7 @@ class SeederController extends AbstractSeederController
      * editAction
      *
      * @param Seed $seed
+     * @return void
      */
     public function editAction(Seed $seed)
     {
@@ -83,6 +92,7 @@ class SeederController extends AbstractSeederController
      * @param Seed $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @return void
      */
     public function updateAction(Seed $seed)
     {
@@ -99,6 +109,7 @@ class SeederController extends AbstractSeederController
      * showAction
      *
      * @param Seed $seed
+     * @return void
      */
     public function showAction(Seed $seed)
     {
@@ -111,6 +122,7 @@ class SeederController extends AbstractSeederController
      * @param Seed $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @return void
      */
     public function deleteAction(Seed $seed)
     {
