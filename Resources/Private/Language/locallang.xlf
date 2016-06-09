@@ -24,6 +24,9 @@
 			<trans-unit id="create">
 				<source>Create</source>
 			</trans-unit>
+			<trans-unit id="show">
+				<source>Show</source>
+			</trans-unit>
 			<trans-unit id="update">
 				<source>Update</source>
 			</trans-unit>
@@ -32,6 +35,9 @@
 			</trans-unit>
 			<trans-unit id="delete">
 				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="back">
+				<source>go back</source>
 			</trans-unit>
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>

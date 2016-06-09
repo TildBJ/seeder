@@ -12,15 +12,22 @@
 		<div class="col-md-6">
 			<f:if condition="{seeds -> f:count()} > 0">
 				<f:then>
-					<f:form action="show" object="{seeds}">
-						<f:form.select name="seed"
-									   class="form-control"
-									   options="{seeds}"
-									   optionLabelField="title"
-									   prependOptionLabel="{f:translate(key: 'pleaseChoose')}"
-									   additionalAttributes="{onchange:'this.form.submit()'}"
-						/>
-					</f:form>
+					<table class="table">
+						<tr>
+							<th><f:translate key="title" /></th>
+							<th></th>
+						</tr>
+						<f:for each="{seeds}" as="seed">
+							<tr>
+								<td>{seed.title}</td>
+								<td>
+									<f:link.action class="btn btn-primary" action="show" arguments="{seed: seed}"><i class="fa fa-eye"></i> <f:translate key="show" /></f:link.action>
+									<f:link.action class="btn btn-primary" action="edit" arguments="{seed: seed}"><i class="fa fa-pencil"></i> <f:translate key="edit" /></f:link.action>
+									<f:link.action class="btn btn-danger" action="delete" arguments="{seed: seed}"><i class="fa fa-trash"></i> <f:translate key="delete" /></f:link.action>
+								</td>
+							</tr>
+						</f:for>
+					</table>
 				</f:then>
 				<f:else>
 					<p>

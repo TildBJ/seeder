@@ -27,13 +27,11 @@
 			</f:if>
 		</div>
 		<div class="form-group">
-			<button class="btn btn-primary">
+			<button class="btn btn-primary pull-right">
 				<i class="fa fa-pencil"></i>
 				<f:translate key="{action}" />
 			</button>
-			<f:if condition="{action} != 'create'">
-				<f:link.action class="btn btn-danger" action="delete" arguments="{seed: seed}"><i class="fa fa-trash"></i> <f:translate key="delete" /></f:link.action>
-			</f:if>
+			<f:link.page class="btn btn-default" pageUid="#"><i class="fa fa-arrow-left"></i> <f:translate key="back" /></f:link.page>
 		</div>
 	</f:form>
 
