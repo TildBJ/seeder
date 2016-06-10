@@ -58,5 +58,4 @@ class Radio extends Column implements RadioInterface
     {
         return $this->items;
     }
-
 }

@@ -43,5 +43,4 @@ interface TextInterface extends ColumnInterface
      * @return int
      */
     public function getRows();
-
 }

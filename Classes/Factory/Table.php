@@ -58,5 +58,4 @@ class Table
 
         return self::$tables[$tableName];
     }
-
 }

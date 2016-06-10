@@ -72,5 +72,4 @@ class None extends Column implements NoneInterface
     {
         return $this->rows;
     }
-
 }

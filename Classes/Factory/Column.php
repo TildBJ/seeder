@@ -39,9 +39,13 @@ class Column
      */
     protected static $columns = [];
 
-    protected function __construct() {}
+    protected function __construct()
+    {
+    }
 
-    protected function __clone() {}
+    protected function __clone()
+    {
+    }
 
     /**
      * @param string $tableName

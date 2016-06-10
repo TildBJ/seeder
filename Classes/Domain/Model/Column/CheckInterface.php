@@ -49,5 +49,4 @@ interface CheckInterface extends ColumnInterface
      * @return CheckInterface
      */
     public function setItems(array $items);
-
 }
