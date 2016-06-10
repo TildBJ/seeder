@@ -103,7 +103,7 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function tablePropertyContainsString()
     {
-        $table = $this->accessProtectedProperty($this->subject, 'table');
+        $table = $this->accessProtectedProperty($this->subject, 'name');
         $this->assertSame(self::TABLE, $table);
     }
 

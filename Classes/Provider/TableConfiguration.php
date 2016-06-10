@@ -47,24 +47,24 @@ class TableConfiguration
     /**
      * table
      *
-     * @var string $table
+     * @var string $name
      */
-    protected $table;
+    protected $name;
 
     /**
      * ExtensionConfigurationUtility constructor.
      *
-     * @param $table
+     * @param $tableName
      */
-    public function __construct($table)
+    public function __construct($tableName)
     {
-        if (!isset($GLOBALS['TCA'][$table])) {
+        if (!isset($GLOBALS['TCA'][$tableName])) {
             throw new \InvalidArgumentException(
-                'Configuration for table ' . $table . ' not found!'
+                'Configuration for table ' . $tableName . ' not found!'
             );
         }
-        $this->table = $table;
-        $this->tableConfiguration = $GLOBALS['TCA'][$table];
+        $this->name = $tableName;
+        $this->tableConfiguration = $GLOBALS['TCA'][$tableName];
     }
 
     /**
@@ -74,7 +74,7 @@ class TableConfiguration
      */
     public function getName()
     {
-        return $this->table;
+        return $this->name;
     }
 
     /**
@@ -107,17 +107,17 @@ class TableConfiguration
     {
         if (!isset($this->tableConfiguration['columns'][$column])) {
             throw new \InvalidArgumentException(
-                'Column ' . $column . ' does not exist for table ' . $this->table
+                'Column ' . $column . ' does not exist for table ' . $this->name
             );
         }
 
-        return $this->tableConfiguration['columns'][$column]['config'];
+        return array($column => $this->tableConfiguration['columns'][$column]['config']);
     }
 
     /**
      * @return array
      */
-    public function getAllTables()
+    public static function getAllTables()
     {
         $tables = array();
         foreach (array_keys($GLOBALS['TCA']) as $tableName) {
