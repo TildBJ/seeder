@@ -68,10 +68,10 @@ class Group extends Column implements GroupInterface
     public function __construct($columnName, $configuration)
     {
         parent::__construct($columnName);
-        $this->foreignTable = $configuration['foreignTable'];
-        $this->internalType = $configuration['internalType'];
-        $this->minItems = $configuration['minItems'];
-        $this->maxItems = $configuration['maxItems'];
+        $this->foreignTable = $configuration['foreign_table'];
+        $this->internalType = $configuration['internal_type'];
+        $this->minItems = $configuration['minitems'];
+        $this->maxItems = $configuration['maxitems'];
         $this->size = $configuration['size'];
     }
 

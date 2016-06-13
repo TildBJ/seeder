@@ -34,8 +34,6 @@ use Dennis\Seeder\Domain\Model\Column;
  */
 class Check extends Column implements CheckInterface
 {
-
-
     /**
      * @var int
      */

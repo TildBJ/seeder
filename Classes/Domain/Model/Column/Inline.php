@@ -78,12 +78,12 @@ class Inline extends Column implements InlineInterface
     public function __construct($columnName, $configuration)
     {
         parent::__construct($columnName);
-        $this->foreignType = $configuration['foreignType'];
-        $this->foreignTable = $configuration['foreignTable'];
-        $this->foreignTableWhere = $configuration['foreignTableWhere'];
+        $this->foreignType = $configuration['foreign_type'];
+        $this->foreignTable = $configuration['foreign_table'];
+        $this->foreignTableWhere = $configuration['foreign_table_where'];
         $this->items = $configuration['items'];
-        $this->maxItems = $configuration['maxItems'];
-        $this->minItems = $configuration['minItems'];
+        $this->maxItems = $configuration['maxitems'];
+        $this->minItems = $configuration['minitems'];
         $this->size = $configuration['size'];
     }
 
