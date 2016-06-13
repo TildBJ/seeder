@@ -25,6 +25,7 @@ namespace Dennis\Seeder\Provider;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class Faker
@@ -49,6 +50,67 @@ class Faker
      */
     public function get($property)
     {
-        return $this->faker->$property;
+        $testData = call_user_func($this->guessFormat($property));
+
+        return $testData;
+    }
+
+    /**
+     * @param string $name
+     * @return callable
+     */
+    protected function guessFormat($name)
+    {
+        $guesser = new \Faker\Guesser\Name($this->faker);
+        $callable = $guesser->guessFormat($name);
+
+        if (is_callable($callable)) {
+            return $callable;
+        }
+
+        $name = GeneralUtility::strtolower($name);
+        $faker = $this->faker;
+        switch (str_replace('_', '', $name)) {
+            case 'password':
+                return function () use ($faker) {
+                    return $faker->password(24, 24);
+                };
+            case 'middlename':
+            case 'name':
+                return function () use ($faker) {
+                    return $faker->lastName;
+                };
+            case 'fax':
+                return function () use ($faker) {
+                    return $faker->phoneNumber;
+                };
+            case 'zip':
+                return function () use ($faker) {
+                    return $faker->postcode;
+                };
+            case 'www':
+                return function () use ($faker) {
+                    return $faker->url;
+                };
+            case 'image':
+                return function () use ($faker) {
+                    return $faker->imageUrl();
+                };
+            case 'lastlogin':
+            case 'starttime':
+                return function () use ($faker) {
+                    return $faker->dateTime('now');
+                };
+            case 'endtime':
+                return function () use ($faker) {
+                    return $faker->dateTime('now + 2 weeks');
+                };
+            case 'disable':
+                return function () {
+                    return false;
+                };
+        }
+
+        return $callable;
     }
 }
