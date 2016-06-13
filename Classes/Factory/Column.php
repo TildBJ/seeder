@@ -100,7 +100,7 @@ class Column
             case 'user':
             case 'flex':
             default:
-                $column = null;
+                $column = new Model\Column\None($columnName, $configuration);
         }
 
         return $column;
