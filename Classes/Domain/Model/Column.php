@@ -56,4 +56,14 @@ abstract class Column implements ColumnInterface
     {
         return $this->name;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $reflectionClass = new \ReflectionClass($this);
+
+        return $reflectionClass->getShortName();
+    }
 }
