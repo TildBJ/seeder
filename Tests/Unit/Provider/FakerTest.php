@@ -55,16 +55,6 @@ class FakerTest extends UnitTestCase
         $this->subject = new Faker($generator);
     }
 
-    function myMockGetter( $classPropertyName ) {
-        switch( $classPropertyName ) {
-            case 'city':
-                return 'City';
-
-            case 'middle_name':
-                return 'Middle Name';
-        }
-    }
-
     /**
      * getSupportedProvidersReturnsArrayWithProviders
      *

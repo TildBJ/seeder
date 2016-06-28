@@ -177,8 +177,7 @@ class Faker implements FakerInterface
     {
         $providerName = $this->guessProviderName($property);
 
-        if ($providerName === null)
-        {
+        if ($providerName === null) {
             return null;
         }
 
@@ -253,5 +252,4 @@ class Faker implements FakerInterface
                 return null;
         }
     }
-
 }
