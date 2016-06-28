@@ -32,14 +32,139 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package Dennis\Seeder\Provider\Faker
  */
-class Faker
+class Faker implements FakerInterface
 {
-    /** @var  $faker */
-    protected $faker = null;
+    /** @var \Faker\Generator $generator */
+    protected $generator = null;
 
-    public function __construct()
+    /** @var \Faker\Guesser\Name $guesser */
+    protected $guesser = null;
+
+    /**
+     * @var array
+     */
+    protected $supportedProviders = [
+        'name' => 'name',
+        'firstname' => 'firstName',
+        'firstnamemale' => 'firstNameMale',
+        'firstnamefemale' => 'firstNameFemale',
+        'lastname' => 'lastName',
+        'title' => 'title',
+        'titlemale' => 'titleMale',
+        'titlefemale' => 'titleFemale',
+        'citysuffix' => 'citySuffix',
+        'streetsuffix' => 'streetSuffix',
+        'buildingnumber' => 'buildingNumber',
+        'city' => 'city',
+        'streetname' => 'streetName',
+        'streetaddress' => 'streetAddress',
+        'postcode' => 'postcode',
+        'address' => 'address',
+        'country' => 'country',
+        'latitude' => 'latitude',
+        'longitude' => 'longitude',
+        'ean13' => 'ean13',
+        'ean8' => 'ean8',
+        'isbn13' => 'isbn13',
+        'isbn10' => 'isbn10',
+        'phonenumber' => 'phoneNumber',
+        'company' => 'company',
+        'companysuffix' => 'companySuffix',
+        'jobtitle' => 'jobTitle',
+        'creditcardtype' => 'creditCardType',
+        'creditcardnumber' => 'creditCardNumber',
+        'creditcardexpirationdate' => 'creditCardExpirationDate',
+        'creditcardexpirationdatestring' => 'creditCardExpirationDateString',
+        'creditcarddetails' => 'creditCardDetails',
+        'bankaccountnumber' => 'bankAccountNumber',
+        'iban' => 'iban',
+        'swiftbicnumber' => 'swiftBicNumber',
+        'vat' => 'vat',
+        'word' => 'word',
+        'words' => 'words',
+        'sentence' => 'sentence',
+        'paragraph' => 'paragraph',
+        'text' => 'text',
+        'realtext' => 'realText',
+        'email' => 'email',
+        'safeemail' => 'safeEmail',
+        'freeemail' => 'freeEmail',
+        'companyemail' => 'companyEmail',
+        'freeEmaildomain' => 'freeEmailDomain',
+        'safeEmaildomain' => 'safeEmailDomain',
+        'username' => 'userName',
+        'password' => 'password',
+        'domainname' => 'domainName',
+        'domainword' => 'domainWord',
+        'tld' => 'tld',
+        'url' => 'url',
+        'slug' => 'slug',
+        'ipv4' => 'ipv4',
+        'ipv6' => 'ipv6',
+        'localipv4' => 'localIpv4',
+        'macaddress' => 'macAddress',
+        'unixtime' => 'unixTime',
+        'datetime' => 'dateTime',
+        'datetimead' => 'dateTimeAD',
+        'iso8601' => 'iso8601',
+        'datetimethiscentury' => 'dateTimeThisCentury',
+        'datetimethisdecade' => 'dateTimeThisDecade',
+        'datetimethisyear' => 'dateTimeThisYear',
+        'datetimethismonth' => 'dateTimeThisMonth',
+        'ampm' => 'amPm',
+        'dayofmonth' => 'dayOfMonth',
+        'dayofweek' => 'dayOfWeek',
+        'month' => 'month',
+        'monthname' => 'monthName',
+        'year' => 'year',
+        'century' => 'century',
+        'timezone' => 'timezone',
+        'date' => 'date',
+        'time' => 'time',
+        'md5' => 'md5',
+        'sha1' => 'sha1',
+        'sha256' => 'sha256',
+        'locale' => 'locale',
+        'countrycode' => 'countryCode',
+        'countryisoalpha3' => 'countryISOAlpha3',
+        'languagecode' => 'languageCode',
+        'currencycode' => 'currencyCode',
+        'boolean' => 'boolean',
+        'randomdigit' => 'randomDigit',
+        'randomdigitnotnull' => 'randomDigitNotNull',
+        'randomletter' => 'randomLetter',
+        'randomascii' => 'randomAscii',
+        'randomnumber' => 'randomNumber',
+        'randomfloat' => 'randomFloat',
+        'macprocessor' => 'macProcessor',
+        'linuxprocessor' => 'linuxProcessor',
+        'useragent' => 'userAgent',
+        'chrome' => 'chrome',
+        'firefox' => 'firefox',
+        'safari' => 'safari',
+        'opera' => 'opera',
+        'internetexplorer' => 'internetExplorer',
+        'windowsplatformtoken' => 'windowsPlatformToken',
+        'macplatformtoken' => 'macPlatformToken',
+        'linuxplatformtoken' => 'linuxPlatformToken',
+        'uuid' => 'uuid',
+        'mimetype' => 'mimeType',
+        'fileextension' => 'fileExtension',
+        'imageurl' => 'imageUrl',
+        'hexcolor' => 'hexColor',
+        'safehexcolor' => 'safeHexColor',
+        'rgbcolor' => 'rgbColor',
+        'rgbcsscolor' => 'rgbCssColor',
+        'safecolorname' => 'safeColorName',
+        'colorname' => 'colorName',
+    ];
+
+    /**
+     * Faker constructor.
+     */
+    public function __construct(\Faker\Generator $generator)
     {
-        $this->faker = \Faker\Factory::create();
+        $this->generator = $generator;
     }
 
     /**
@@ -50,67 +175,83 @@ class Faker
      */
     public function get($property)
     {
-        $testData = call_user_func($this->guessFormat($property));
+        $providerName = $this->guessProviderName($property);
 
-        return $testData;
+        if ($providerName === null)
+        {
+            return null;
+        }
+
+        return $this->generator->$providerName;
     }
 
     /**
-     * @param string $name
-     * @return callable
+     * @return array
      */
-    protected function guessFormat($name)
+    public function getSupportedProviders()
     {
-        $guesser = new \Faker\Guesser\Name($this->faker);
-        $callable = $guesser->guessFormat($name);
+        return $this->supportedProviders;
+    }
 
-        if (is_callable($callable)) {
-            return $callable;
+    /**
+     * @param $name
+     * @return string ProviderName
+     */
+    public function guessProviderName($name)
+    {
+        if (preg_match('/^is[_A-Z]/', $name)) {
+            return $this->supportedProviders['boolean'];
         }
-
+        if (preg_match('/(_a|A)t$/', $name)) {
+            return $this->supportedProviders['datetime'];
+        }
         $name = GeneralUtility::strtolower($name);
-        $faker = $this->faker;
-        switch (str_replace('_', '', $name)) {
-            case 'password':
-                return function () use ($faker) {
-                    return $faker->password(24, 24);
-                };
-            case 'middlename':
-            case 'name':
-                return function () use ($faker) {
-                    return $faker->lastName;
-                };
+        $name = str_replace('_', '', $name);
+        if (array_key_exists($name, $this->supportedProviders)) {
+            return $this->supportedProviders[$name];
+        }
+        switch ($name) {
+            case 'emailaddress':
+                return $this->supportedProviders['email'];
+            case 'phone':
+            case 'telephone':
             case 'fax':
-                return function () use ($faker) {
-                    return $faker->phoneNumber;
-                };
+            case 'telnumber':
+                return $this->supportedProviders['phonenumber'];
+            case 'town':
+                return $this->supportedProviders['city'];
+            case 'zipcode':
             case 'zip':
-                return function () use ($faker) {
-                    return $faker->postcode;
-                };
+                return $this->supportedProviders['postcode'];
+            case 'currency':
+                return $this->supportedProviders['currencycode'];
+            case 'website':
+                return $this->supportedProviders['url'];
+            case 'companyname':
+            case 'employer':
+                return $this->supportedProviders['company'];
+            case 'body':
+            case 'summary':
+            case 'article':
+            case 'description':
+                return $this->supportedProviders['text'];
+            case 'middlename':
+                return $this->supportedProviders['name'];
             case 'www':
-                return function () use ($faker) {
-                    return $faker->url;
-                };
+                return $this->supportedProviders['url'];
             case 'image':
-                return function () use ($faker) {
-                    return $faker->imageUrl();
-                };
+                return $this->supportedProviders['imageurl'];
             case 'lastlogin':
             case 'starttime':
-                return function () use ($faker) {
-                    return $faker->dateTime('now');
-                };
+            case 'crdate':
+            case 'tstamp':
             case 'endtime':
-                return function () use ($faker) {
-                    return $faker->dateTime('now + 2 weeks');
-                };
+                return $this->supportedProviders['datetimethismonth'];
             case 'disable':
-                return function () {
-                    return false;
-                };
+                return $this->supportedProviders['boolean'];
+            default:
+                return null;
         }
-
-        return $callable;
     }
+
 }
