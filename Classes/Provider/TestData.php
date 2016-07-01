@@ -35,16 +35,16 @@ use Dennis\Seeder\Domain\Model\TableInterface;
 class TestData
 {
     /**
-     * @var Faker
+     * @var FakerInterface
      */
     protected $faker;
 
     /**
      * TestData constructor.
      *
-     * @param Faker $faker
+     * @param FakerInterface $faker
      */
-    public function __construct(Faker $faker)
+    public function __construct(FakerInterface $faker)
     {
         $this->faker = $faker;
     }
