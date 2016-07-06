@@ -28,7 +28,17 @@
 		</div>
 		<f:for each="{table.columns}" as="column" iteration="i">
 			<div class="form-group">
-				<f:render section="main" partial="Column/{column}" arguments="{action: action, column: column, providers: providers}" />
+				<div class="row">
+					<div class="col-md-12">
+						<label for="{column.name}">{column.name}</label>
+					</div>
+					<div class="col-sm-8">
+						<f:render section="main" partial="Column/{column}" arguments="{action: action, column: column, providers: providers}" />
+					</div>
+					<div class="col-sm-4">
+
+					</div>
+				</div>
 			</div>
 		</f:for>
 		<div class="form-group">
