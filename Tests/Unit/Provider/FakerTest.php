@@ -189,13 +189,13 @@ class FakerTest extends UnitTestCase
     {
         return [
             ['emailaddress', 'email'],
-            ['phone', 'phoneNumber'],
-            ['telephone', 'phoneNumber'],
-            ['telnumber', 'phoneNumber'],
-            ['fax', 'phoneNumber'],
+            ['phone', 'phonenumber'],
+            ['telephone', 'phonenumber'],
+            ['telnumber', 'phonenumber'],
+            ['fax', 'phonenumber'],
             ['town', 'city'],
             ['zipcode', 'postcode'],
-            ['currency', 'currencyCode'],
+            ['currency', 'currencycode'],
             ['website', 'url'],
             ['companyname', 'company'],
             ['employer', 'company'],
@@ -205,21 +205,23 @@ class FakerTest extends UnitTestCase
             ['description', 'text'],
             ['middlename', 'name'],
             ['www', 'url'],
-            ['image', 'imageUrl'],
-            ['lastlogin', 'dateTimeThisMonth'],
-            ['starttime', 'dateTimeThisMonth'],
-            ['crdate', 'dateTimeThisMonth'],
-            ['tstamp', 'dateTimeThisMonth'],
-            ['datetime', 'dateTime'],
-            ['endtime', 'dateTimeThisMonth'],
+            ['image', 'imageurl'],
+            ['lastlogin', 'datetimethismonth'],
+            ['starttime', 'datetimethismonth'],
+            ['crdate', 'datetimethismonth'],
+            ['tstamp', 'datetimethismonth'],
+            ['datetime', 'datetime'],
+            ['endtime', 'datetimethismonth'],
             ['disable', 'boolean'],
-            ['created_at', 'dateTime'],
-            ['createdAt', 'dateTime'],
+            ['created_at', 'datetime'],
+            ['createdAt', 'datetime'],
             ['is_active', 'boolean'],
             ['isActive', 'boolean'],
-            ['companysuffix', 'companySuffix'],
-            ['creditcardexpirationdatestring', 'creditCardExpirationDateString'],
+            ['companysuffix', 'companysuffix'],
+            ['creditcardexpirationdatestring', 'creditcardexpirationdatestring'],
             ['address', 'address'],
+            // Default provider is text:
+            ['foobar', 'text'],
         ];
     }
 
@@ -238,11 +240,23 @@ class FakerTest extends UnitTestCase
      * @param $property
      * @param $expected
      * @dataProvider propertyNameProvider
-     * @method guessProviderName
+     * @method guessProvider
      * @test
      */
-    public function guessProviderNameReturnsExpectedProvider($property, $expected)
+    public function guessProviderReturnsExpectedProvider($property, $expected)
     {
-        $this->assertSame($expected, $this->subject->guessProviderName($property));
+        $this->assertSame($expected, $this->subject->guessProvider($property));
+    }
+
+    /**
+     * @method getProviderNameByKey
+     * @test
+     */
+    public function guessProviderNameByKeyWithInvalidArgumentThrowsException()
+    {
+        $this->setExpectedException(
+            \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException::class
+        );
+        $this->subject->getProviderNameByKey('');
     }
 }

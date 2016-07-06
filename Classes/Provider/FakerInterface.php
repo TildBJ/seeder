@@ -54,5 +54,5 @@ interface FakerInterface
      * @param $name
      * @return string
      */
-    public function guessProviderName($name);
+    public function guessProvider($name);
 }
