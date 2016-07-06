@@ -35,8 +35,6 @@ namespace Dennis\Seeder\Traits;
 trait Language
 {
     /**
-     * translate
-     *
      * @param string $ll
      * @return string
      */

@@ -42,6 +42,7 @@ class GetViewHelper extends AbstractViewHelper
 
     /**
      * GetViewHelper constructor.
+     * @todo: L49: Don't create Faker here. Faker should delivered in FakerProvider
      */
     public function initialize()
     {
