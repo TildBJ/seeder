@@ -1,3 +1,5 @@
+{namespace seeder=Dennis\Seeder\ViewHelpers}
+
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
 	  xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
@@ -36,7 +38,19 @@
 						<f:render section="main" partial="Column/{column}" arguments="{action: action, column: column, providers: providers}" />
 					</div>
 					<div class="col-sm-4">
-
+						<div class="form-inline">
+							<div class="form-group">
+								<label for="provider{column.name}"><f:translate key="type" /></label>
+								<f:if condition="{action} == 'edit'">
+									<f:then>
+										<f:form.select id="provider{column.name}" value="{column.name -> seeder:testData.guessProvider()}" options="{providers}" class="form-control" additionalAttributes="{readonly: 'readonly'}" />
+									</f:then>
+									<f:else>
+										 <f:form.select id="provider{column.name}" value="{column.name -> seeder:testData.guessProvider()}" options="{providers}" class="form-control" />
+									</f:else>
+								</f:if>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
