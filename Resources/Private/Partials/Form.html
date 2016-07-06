@@ -26,6 +26,11 @@
 				</f:else>
 			</f:if>
 		</div>
+		<f:for each="{table.columns}" as="column" iteration="i">
+			<div class="form-group">
+				<f:render section="main" partial="Column/{column}" arguments="{action: action, column: column, providers: providers}" />
+			</div>
+		</f:for>
 		<div class="form-group">
 			<button class="btn btn-primary pull-right">
 				<i class="fa fa-pencil"></i>
