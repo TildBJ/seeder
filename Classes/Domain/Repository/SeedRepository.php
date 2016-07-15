@@ -24,6 +24,8 @@ namespace Dennis\Seeder\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  * SeedRepository
@@ -34,5 +36,14 @@ namespace Dennis\Seeder\Domain\Repository;
  */
 class SeedRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
+    /**
+     * Repository Constructor
+     */
+    public function initializeObject()
+    {
+        /** @var Typo3QuerySettings $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $this->defaultQuerySettings = $querySettings;
+    }
 }
