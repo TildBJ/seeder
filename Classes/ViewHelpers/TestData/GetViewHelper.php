@@ -31,7 +31,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 /**
  * Class GetViewHelper
  *
- * @package Dennis\Seeder\ViewHelper\GetViewHelper
+ * @package Dennis\Seeder\ViewHelpers\TestData\GetViewHelper
  */
 class GetViewHelper extends AbstractViewHelper
 {

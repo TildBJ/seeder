@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\ViewHelpers\TestData;
+namespace Dennis\Seeder\ViewHelpers;
 
 /***************************************************************
  *
@@ -29,32 +29,20 @@ use Dennis\Seeder\Provider\Faker;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class GuessProviderViewHelper
+ * Class ArrayViewHelper
  *
- * @package Dennis\Seeder\ViewHelpers\TestData\GetViewHelper
+ * @package Dennis\Seeder\ViewHelper\GetViewHelper
  */
-class GuessProviderViewHelper extends AbstractViewHelper
+class ArrayViewHelper extends AbstractViewHelper
 {
     /**
-     * @var Faker
+     * @param string $key
+     * @return string
      */
-    protected $faker;
-
-    /**
-     * GetViewHelper constructor.
-     * @todo: L49: Don't create Faker here. Faker should delivered in FakerProvider
-     */
-    public function initialize()
+    public function render($key)
     {
-        $faker = \Faker\Factory::create();
-        $this->faker = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Faker::class, $faker);
-    }
+        $array = $this->renderChildren();
 
-    /**
-     * @return mixed
-     */
-    public function render()
-    {
-        return $this->faker->guessProvider($this->renderChildren());
+        return $array[$key];
     }
 }
