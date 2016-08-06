@@ -56,7 +56,7 @@ class SeederController extends AbstractSeederController
      */
     public function newAction()
     {
-        $tableConfiguration = new \Dennis\Seeder\Utility\TableConfiguration('fe_users');
+        $tableConfiguration = new \Dennis\Seeder\Provider\TableConfiguration('fe_users');
         $this->view->assign('tables', $tableConfiguration->getAllTables());
     }
 

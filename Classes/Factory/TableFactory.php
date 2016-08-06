@@ -53,12 +53,12 @@ class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
      *
      * @param string $tableName
      * @param TableConfiguration $tableConfiguration
-     * @return \Dennis\Seeder\Domain\Model\TableInterface
+     * @return Model\TableInterface
      */
     public static function createTable($tableName, TableConfiguration $tableConfiguration)
     {
         if (!in_array($tableName, self::$tables)) {
-            self::$tables[$tableName] = new \Dennis\Seeder\Domain\Model\Table($tableConfiguration);
+            self::$tables[$tableName] = new Model\Table($tableConfiguration);
         }
 
         return self::$tables[$tableName];
@@ -67,8 +67,8 @@ class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * createColumn
      *
-     * @param $tableName
-     * @param $columnConfiguration
+     * @param string $tableName
+     * @param array $columnConfiguration
      * @return Model\ColumnInterface
      */
     public static function createColumn($tableName, $columnConfiguration)
