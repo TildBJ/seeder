@@ -25,19 +25,20 @@ namespace Dennis\Seeder\Factory;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Provider\TableConfiguration;
 use Dennis\Seeder\Domain\Model;
 
 /**
- * Class Column
+ * Class TableFactory
  *
- * @package Dennis\Seeder\Factory\Column
+ * @package Dennis\Seeder\Factory\TableFactory
  */
-class Column
+class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
 {
     /**
      * @var array
      */
-    protected static $columns = [];
+    protected static $tables = [];
 
     protected function __construct()
     {
@@ -48,11 +49,29 @@ class Column
     }
 
     /**
+     * Provides a Table
+     *
      * @param string $tableName
-     * @param array $columnConfiguration
-     * @return \Dennis\Seeder\Domain\Model\ColumnInterface
+     * @param TableConfiguration $tableConfiguration
+     * @return \Dennis\Seeder\Domain\Model\TableInterface
      */
-    public static function getInstance($tableName, $columnConfiguration)
+    public static function createTable($tableName, TableConfiguration $tableConfiguration)
+    {
+        if (!in_array($tableName, self::$tables)) {
+            self::$tables[$tableName] = new \Dennis\Seeder\Domain\Model\Table($tableConfiguration);
+        }
+
+        return self::$tables[$tableName];
+    }
+
+    /**
+     * createColumn
+     *
+     * @param $tableName
+     * @param $columnConfiguration
+     * @return Model\ColumnInterface
+     */
+    public static function createColumn($tableName, $columnConfiguration)
     {
         $columnName = key($columnConfiguration);
         $key = $tableName . '.' . key($columnConfiguration);
