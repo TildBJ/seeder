@@ -148,4 +148,16 @@ class SeederController extends AbstractSeederController
     {
         return LocalizationUtility::translate('errorMsg', 'Seeder');
     }
+
+    /**
+     * runAction
+     *
+     * @param Seed $seed
+     */
+    public function runAction(Seed $seed)
+    {
+        $connection = $this->objectManager->get(\Dennis\Seeder\Connection\DatabaseConnection::class, $GLOBALS['TYPO3_DB']);
+        $this->seeder->setConnection($connection);
+        $this->seeder->run($seed);
+    }
 }

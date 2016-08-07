@@ -32,7 +32,7 @@ namespace Dennis\Seeder\Domain\Model;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements SeedInterface
 {
     /**
      * title
@@ -102,7 +102,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return string
      */
-    public function getTableName()
+    public function getTarget()
     {
         return $this->tableName;
     }
@@ -111,7 +111,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $tableName
      * @return Seed
      */
-    public function setTableName($tableName)
+    public function setTarget($tableName)
     {
         $this->tableName = $tableName;
 

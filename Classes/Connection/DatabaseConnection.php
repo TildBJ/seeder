@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder\Connection;
 
 /***************************************************************
  *  Copyright notice
@@ -24,41 +24,42 @@ namespace Dennis\Seeder\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Connection;
 
 /**
- * AbstractSeederController
+ * InstallController
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class DatabaseConnection implements Connection
 {
     /**
-     * seedRepository
+     * connection
      *
-     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-     * @inject
+     * @var \TYPO3\CMS\Core\Database\DatabaseConnection $connection
      */
-    protected $seedRepository;
+    protected $connection;
 
     /**
-     * Only DatabaseSeeder is provided for Backend usage yet.
-     *
-     * @var \Dennis\Seeder\Seeder\DatabaseSeeder
-     * @inject
+     * DatabaseConnection constructor.
+     * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
      */
-    protected $seeder;
+    public function __construct(\TYPO3\CMS\Core\Database\DatabaseConnection $connection)
+    {
+        $this->connection = $connection;
+    }
 
     /**
-     * initializeAction
+     * fetch
      *
+     * @param string $tableName
+     * @param array $data
      * @return void
      */
-    public function initializeAction()
+    public function fetch($tableName, array $data)
     {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
-            $this->redirect('index', 'Install');
-        }
+        $this->connection->exec_INSERTquery($tableName, $data);
     }
 }

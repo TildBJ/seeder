@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -24,41 +24,53 @@ namespace Dennis\Seeder\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Domain\Model\SeedInterface;
 
 /**
- * AbstractSeederController
+ * Seeder
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+abstract class AbstractSeeder implements Seeder
 {
     /**
-     * seedRepository
+     * connection
      *
-     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-     * @inject
+     * @var Connection $connection
      */
-    protected $seedRepository;
+    protected $connection = null;
 
     /**
-     * Only DatabaseSeeder is provided for Backend usage yet.
+     * setConnection
      *
-     * @var \Dennis\Seeder\Seeder\DatabaseSeeder
-     * @inject
-     */
-    protected $seeder;
-
-    /**
-     * initializeAction
-     *
+     * @param Connection $connection
      * @return void
      */
-    public function initializeAction()
+    public function setConnection(Connection $connection)
     {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
-            $this->redirect('index', 'Install');
+        $this->connection = $connection;
+    }
+
+    /**
+     * Runs the Seeder process. Returns true if succeed.
+     *
+     * @param SeedInterface $seed
+     * @throws Connection\NotFoundException
+     * @return boolean
+     */
+    public function run(SeedInterface $seed)
+    {
+        if (is_null($this->connection))
+        {
+            throw new \Dennis\Seeder\Connection\NotFoundException('Connection Not Found.');
         }
+
+        if ($seed->getProperties() === false) {
+            return false;
+        }
+        $this->connection->fetch($seed->getTarget(), $seed->getProperties());
+        return true;
     }
 }

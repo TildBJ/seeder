@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -26,39 +26,13 @@ namespace Dennis\Seeder\Controller;
  ***************************************************************/
 
 /**
- * AbstractSeederController
+ * Exception
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class Exception extends \Exception
 {
-    /**
-     * seedRepository
-     *
-     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-     * @inject
-     */
-    protected $seedRepository;
 
-    /**
-     * Only DatabaseSeeder is provided for Backend usage yet.
-     *
-     * @var \Dennis\Seeder\Seeder\DatabaseSeeder
-     * @inject
-     */
-    protected $seeder;
-
-    /**
-     * initializeAction
-     *
-     * @return void
-     */
-    public function initializeAction()
-    {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
-            $this->redirect('index', 'Install');
-        }
-    }
 }
