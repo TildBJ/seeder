@@ -104,7 +104,9 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         fwrite($file, $seederClass);
         fclose($file);
 
-        $this->output->outputLine('<fg=green>' . __DIR__ . '/../../../' . $this->path . $className . '.php' . ' successfully created</>');
+        $this->output->outputLine(
+            '<fg=green>' . __DIR__ . '/../../../' . $this->path . $className . '.php' . ' successfully created</>'
+        );
 
         return true;
     }

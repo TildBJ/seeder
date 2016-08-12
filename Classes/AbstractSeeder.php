@@ -79,8 +79,7 @@ abstract class AbstractSeeder implements Seeder
      */
     public function seed(SeedCollection $seedCollection)
     {
-        if (is_null($this->connection))
-        {
+        if (is_null($this->connection)) {
             throw new Connection\NotFoundException('Connection not found.');
         }
 
