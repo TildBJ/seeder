@@ -32,7 +32,7 @@ namespace Dennis\Seeder\Domain\Model;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements SeedInterface
+class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \Dennis\Seeder\Seed
 {
     /**
      * title
@@ -109,7 +109,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements See
 
     /**
      * @param string $tableName
-     * @return Seed
+     * @return $this
      */
     public function setTarget($tableName)
     {

@@ -34,7 +34,25 @@ use Dennis\Seeder\AbstractSeeder;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FileSeeder extends AbstractSeeder
+abstract class FileSeeder extends AbstractSeeder
 {
+    /**
+     * before
+     *
+     * @return void
+     */
+    public function before()
+    {
+        // TODO: Implement before() method.
+    }
 
+    /**
+     * after
+     *
+     * @return void
+     */
+    public function after()
+    {
+        // TODO: Implement after() method.
+    }
 }

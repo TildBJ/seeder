@@ -25,6 +25,8 @@ namespace Dennis\Seeder\Seeder;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Dennis\Seeder\AbstractSeeder;
+use Dennis\Seeder\Connection\DatabaseConnection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * DatabaseSeeder
@@ -33,7 +35,26 @@ use Dennis\Seeder\AbstractSeeder;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DatabaseSeeder extends AbstractSeeder
+abstract class DatabaseSeeder extends AbstractSeeder
 {
+    /**
+     * Initialize Database Connection
+     *
+     * @return void
+     */
+    public function before()
+    {
+        $this->setConnection(GeneralUtility::makeInstance(DatabaseConnection::class, $GLOBALS['TYPO3_DB']));
+        $this->setFactory(GeneralUtility::makeInstance(\Dennis\Seeder\Factory\SeederFactory::class));
+    }
 
+    /**
+     * after
+     *
+     * @return void
+     */
+    public function after()
+    {
+
+    }
 }

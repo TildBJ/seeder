@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Connection;
+namespace Dennis\Seeder\Factory;
 
 /***************************************************************
  *  Copyright notice

@@ -32,7 +32,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package Dennis\Seeder\Provider\Faker
  */
-class Faker implements FakerInterface
+class Faker implements \Dennis\Seeder\Faker
 {
     /** @var \Faker\Generator $generator */
     protected $generator = null;

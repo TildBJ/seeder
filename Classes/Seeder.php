@@ -24,7 +24,6 @@ namespace Dennis\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Domain\Model\SeedInterface;
 
 /**
  * Seeder
@@ -44,10 +43,39 @@ interface Seeder
     public function setConnection(Connection $connection);
 
     /**
+     * setFactory
+     *
+     * @param Factory $factory
+     * @return void
+     */
+    public function setFactory(Factory $factory);
+
+    /**
      * Runs the Seeder process. Returns true if succeed.
      *
-     * @param SeedInterface $seed
+     * @return void
+     */
+    public function run();
+
+    /**
+     * preProcess
+     *
+     * @return void
+     */
+    public function before();
+
+    /**
+     * after
+     *
+     * @return void
+     */
+    public function after();
+
+    /**
+     * seed
+     *
+     * @param SeedCollection $seedCollection
      * @return boolean
      */
-    public function run(SeedInterface $seed);
+    public function seed(SeedCollection $seedCollection);
 }
