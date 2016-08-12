@@ -24,7 +24,6 @@ namespace Dennis\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Domain\Model\SeedInterface;
 
 /**
  * Seeder
@@ -43,6 +42,13 @@ abstract class AbstractSeeder implements Seeder
     protected $connection = null;
 
     /**
+     * factory
+     *
+     * @var Factory $factory
+     */
+    protected $factory = null;
+
+    /**
      * setConnection
      *
      * @param Connection $connection
@@ -54,23 +60,36 @@ abstract class AbstractSeeder implements Seeder
     }
 
     /**
-     * Runs the Seeder process. Returns true if succeed.
+     * setFactory
      *
-     * @param SeedInterface $seed
-     * @throws Connection\NotFoundException
-     * @return boolean
+     * @param Factory $factory
+     * @return void
      */
-    public function run(SeedInterface $seed)
+    public function setFactory(Factory $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * seed
+     *
+     * @param SeedCollection $seedCollection
+     * @throws Connection\NotFoundException
+     * @return void
+     */
+    public function seed(SeedCollection $seedCollection)
     {
         if (is_null($this->connection))
         {
-            throw new \Dennis\Seeder\Connection\NotFoundException('Connection Not Found.');
+            throw new Connection\NotFoundException('Connection not found.');
         }
 
-        if ($seed->getProperties() === false) {
-            return false;
+        /** @var Seed $seed */
+        foreach ($seedCollection as $seed) {
+            if ($seed->getProperties() === false) {
+                continue;
+            }
+            $this->connection->fetch($seed->getTarget(), $seed->getProperties());
         }
-        $this->connection->fetch($seed->getTarget(), $seed->getProperties());
-        return true;
     }
 }

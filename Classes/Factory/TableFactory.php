@@ -36,17 +36,14 @@ use Dennis\Seeder\Domain\Model;
 class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
 {
     /**
-     * @var array
+     * @var array $tables
      */
     protected static $tables = [];
 
-    protected function __construct()
-    {
-    }
-
-    protected function __clone()
-    {
-    }
+    /**
+     * @var array $columns
+     */
+    protected static $columns = [];
 
     /**
      * Provides a Table
