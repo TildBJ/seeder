@@ -71,14 +71,38 @@ abstract class AbstractSeeder implements Seeder
     }
 
     /**
+     * preProcess
+     *
+     * @return void
+     */
+    abstract protected function before();
+
+    /**
+     * Runs the Seeder process.
+     *
+     * @return void
+     */
+    abstract protected function run();
+
+    /**
+     * after
+     *
+     * @return void
+     */
+    abstract protected function after();
+
+    /**
      * seed
      *
      * @param SeedCollection $seedCollection
      * @throws Connection\NotFoundException
      * @return void
      */
-    public function seed(SeedCollection $seedCollection)
+    final public function seed(SeedCollection $seedCollection)
     {
+        $this->before();
+        $this->run();
+        $this->after();
         if (is_null($this->connection)) {
             throw new Connection\NotFoundException('Connection not found.');
         }

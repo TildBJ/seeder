@@ -49,33 +49,4 @@ interface Seeder
      * @return void
      */
     public function setFactory(Factory $factory);
-
-    /**
-     * Runs the Seeder process. Returns true if succeed.
-     *
-     * @return void
-     */
-    public function run();
-
-    /**
-     * preProcess
-     *
-     * @return void
-     */
-    public function before();
-
-    /**
-     * after
-     *
-     * @return void
-     */
-    public function after();
-
-    /**
-     * seed
-     *
-     * @param SeedCollection $seedCollection
-     * @return boolean
-     */
-    public function seed(SeedCollection $seedCollection);
 }
