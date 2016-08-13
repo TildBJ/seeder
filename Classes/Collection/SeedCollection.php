@@ -140,4 +140,14 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
     {
         return count($this->seeds);
     }
+
+    /**
+     * destroy
+     *
+     * @return void
+     */
+    public function destroy()
+    {
+        $this->seeds = [];
+    }
 }
