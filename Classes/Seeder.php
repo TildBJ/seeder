@@ -49,4 +49,13 @@ interface Seeder
      * @return void
      */
     public function setFactory(Factory $factory);
+
+    /**
+     * seed
+     *
+     * @param SeedCollection $seedCollection
+     * @throws Connection\NotFoundException
+     * @return void
+     */
+    public function seed(SeedCollection $seedCollection);
 }
