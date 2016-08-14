@@ -63,10 +63,10 @@ class SeederController extends AbstractSeederController
     /**
      * createAction
      *
-     * @param Seeder\Domain\Model\SeedCollection $seed
+     * @param Seed $seed
      * @return void
      */
-    public function createAction(Seeder\Domain\Model\SeedCollection $seed)
+    public function createAction(Seed $seed)
     {
         $this->seedRepository->add($seed);
         $this->addFlashMessage(
@@ -80,10 +80,10 @@ class SeederController extends AbstractSeederController
     /**
      * editAction
      *
-     * @param Seeder\Domain\Model\SeedCollection $seed
+     * @param Seed $seed
      * @return void
      */
-    public function editAction(Seeder\Domain\Model\SeedCollection $seed)
+    public function editAction(Seed $seed)
     {
         $this->view->assign('seed', $seed);
     }
@@ -91,12 +91,12 @@ class SeederController extends AbstractSeederController
     /**
      * updateAction
      *
-     * @param Seeder\Domain\Model\SeedCollection $seed
+     * @param Seed $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function updateAction(Seeder\Domain\Model\SeedCollection $seed)
+    public function updateAction(Seed $seed)
     {
         $this->seedRepository->update($seed);
         $this->addFlashMessage(
@@ -110,10 +110,10 @@ class SeederController extends AbstractSeederController
     /**
      * showAction
      *
-     * @param Seeder\Domain\Model\SeedCollection $seed
+     * @param Seed $seed
      * @return void
      */
-    public function showAction(Seeder\Domain\Model\SeedCollection $seed)
+    public function showAction(Seed $seed)
     {
         $this->view->assign('seed', $seed);
     }
@@ -121,12 +121,12 @@ class SeederController extends AbstractSeederController
     /**
      * deleteAction
      *
-     * @param Seeder\Domain\Model\SeedCollection $seed
+     * @param Seed $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function deleteAction(Seeder\Domain\Model\SeedCollection $seed)
+    public function deleteAction(Seed $seed)
     {
         $this->seedRepository->remove($seed);
         $this->addFlashMessage(
@@ -152,9 +152,9 @@ class SeederController extends AbstractSeederController
     /**
      * runAction
      *
-     * @param Seeder\Domain\Model\SeedCollection $seed
+     * @param Seed $seed
      */
-    public function runAction(Seeder\Domain\Model\SeedCollection $seed)
+    public function runAction(Seed $seed)
     {
         $this->seeder->setConnection(
             $this->objectManager->get(Seeder\Connection\DatabaseConnection::class, $GLOBALS['TYPO3_DB'])
