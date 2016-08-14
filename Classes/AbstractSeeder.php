@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -26,39 +26,69 @@ namespace Dennis\Seeder\Controller;
  ***************************************************************/
 
 /**
- * AbstractSeederController
+ * Seeder
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+abstract class AbstractSeeder implements Seeder
 {
     /**
-     * seedRepository
+     * connection
      *
-     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-     * @inject
+     * @var Connection $connection
      */
-    protected $seedRepository;
+    protected $connection = null;
 
     /**
-     * Only DatabaseSeeder is provided for Backend usage yet.
+     * factory
      *
-     * @var \Dennis\Seeder\Seeder\DatabaseSeeder
-     * @inject
+     * @var Factory $factory
      */
-    protected $seeder;
+    protected $factory = null;
 
     /**
-     * initializeAction
+     * setConnection
      *
+     * @param Connection $connection
      * @return void
      */
-    public function initializeAction()
+    public function setConnection(Connection $connection)
     {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
-            $this->redirect('index', 'Install');
+        $this->connection = $connection;
+    }
+
+    /**
+     * setFactory
+     *
+     * @param Factory $factory
+     * @return void
+     */
+    public function setFactory(Factory $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * seed
+     *
+     * @param SeedCollection $seedCollection
+     * @throws Connection\NotFoundException
+     * @return void
+     */
+    public function seed(SeedCollection $seedCollection)
+    {
+        if (is_null($this->connection)) {
+            throw new Connection\NotFoundException('Connection not found.');
+        }
+
+        /** @var Seed $seed */
+        foreach ($seedCollection as $seed) {
+            if ($seed->getProperties() === false) {
+                continue;
+            }
+            $this->connection->fetch($seed->getTarget(), $seed->getProperties());
         }
     }
 }

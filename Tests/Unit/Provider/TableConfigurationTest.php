@@ -58,8 +58,6 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function setUp()
     {
-        parent::setUp();
-
         $GLOBALS['TCA'] = [
             'pages' => [
                 'ctrl' => [

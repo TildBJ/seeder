@@ -1,8 +1,7 @@
 <?php
-namespace Dennis\Seeder\Utility;
+namespace Dennis\Seeder\Connection;
 
 /***************************************************************
- *
  *  Copyright notice
  *
  *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
@@ -12,7 +11,7 @@ namespace Dennis\Seeder\Utility;
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -25,50 +24,42 @@ namespace Dennis\Seeder\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Connection;
 
 /**
- * Class Dependency
+ * InstallController
  *
- * @package Dennis\Seeder\Utility
- * Dennis\Seeder\Utility;
+ * @author Dennis Römmich<dennis@roemmich.eu>
+ * @copyright Copyright belongs to the respective authors
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Dependency
+class DatabaseConnection implements Connection
 {
     /**
-     * checkDependencies
+     * connection
      *
-     * @return bool
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\NoSuchFileException
+     * @var \TYPO3\CMS\Core\Database\DatabaseConnection $connection
      */
-    public static function checkDependencies()
+    protected $connection;
+
+    /**
+     * DatabaseConnection constructor.
+     * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
+     */
+    public function __construct(\TYPO3\CMS\Core\Database\DatabaseConnection $connection)
     {
-        return self::fakerCanBeLoaded();
+        $this->connection = $connection;
     }
 
     /**
-     * fakerCanBeLoaded
+     * fetch
      *
-     * @return bool
+     * @param string $tableName
+     * @param array $data
+     * @return void
      */
-    protected static function fakerCanBeLoaded()
+    public function fetch($tableName, array $data)
     {
-        if (!is_file(self::getFakerAutoloadPath())) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * getFakerAutoloadPath
-     *
-     * @return string
-     */
-    public static function getFakerAutoloadPath()
-    {
-        /** @var EmConfiguration $emConfiguration */
-        $emConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(EmConfiguration::class);
-
-        return PATH_site . $emConfiguration->pathToFaker . 'src/autoload.php';
+        $this->connection->exec_INSERTquery($tableName, $data);
     }
 }

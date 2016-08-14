@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Domain\Model\Seed;
+use Dennis\Seeder;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -56,17 +56,17 @@ class SeederController extends AbstractSeederController
      */
     public function newAction()
     {
-        $tableConfiguration = new \Dennis\Seeder\Utility\TableConfiguration('fe_users');
+        $tableConfiguration = new Seeder\Provider\TableConfiguration('fe_users');
         $this->view->assign('tables', $tableConfiguration->getAllTables());
     }
 
     /**
      * createAction
      *
-     * @param Seed $seed
+     * @param Seeder\Domain\Model\SeedCollection $seed
      * @return void
      */
-    public function createAction(Seed $seed)
+    public function createAction(Seeder\Domain\Model\SeedCollection $seed)
     {
         $this->seedRepository->add($seed);
         $this->addFlashMessage(
@@ -80,10 +80,10 @@ class SeederController extends AbstractSeederController
     /**
      * editAction
      *
-     * @param Seed $seed
+     * @param Seeder\Domain\Model\SeedCollection $seed
      * @return void
      */
-    public function editAction(Seed $seed)
+    public function editAction(Seeder\Domain\Model\SeedCollection $seed)
     {
         $this->view->assign('seed', $seed);
     }
@@ -91,12 +91,12 @@ class SeederController extends AbstractSeederController
     /**
      * updateAction
      *
-     * @param Seed $seed
+     * @param Seeder\Domain\Model\SeedCollection $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function updateAction(Seed $seed)
+    public function updateAction(Seeder\Domain\Model\SeedCollection $seed)
     {
         $this->seedRepository->update($seed);
         $this->addFlashMessage(
@@ -110,10 +110,10 @@ class SeederController extends AbstractSeederController
     /**
      * showAction
      *
-     * @param Seed $seed
+     * @param Seeder\Domain\Model\SeedCollection $seed
      * @return void
      */
-    public function showAction(Seed $seed)
+    public function showAction(Seeder\Domain\Model\SeedCollection $seed)
     {
         $this->view->assign('seed', $seed);
     }
@@ -121,12 +121,12 @@ class SeederController extends AbstractSeederController
     /**
      * deleteAction
      *
-     * @param Seed $seed
+     * @param Seeder\Domain\Model\SeedCollection $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function deleteAction(Seed $seed)
+    public function deleteAction(Seeder\Domain\Model\SeedCollection $seed)
     {
         $this->seedRepository->remove($seed);
         $this->addFlashMessage(
@@ -147,5 +147,21 @@ class SeederController extends AbstractSeederController
     protected function getErrorFlashMessage()
     {
         return LocalizationUtility::translate('errorMsg', 'Seeder');
+    }
+
+    /**
+     * runAction
+     *
+     * @param Seeder\Domain\Model\SeedCollection $seed
+     */
+    public function runAction(Seeder\Domain\Model\SeedCollection $seed)
+    {
+        $this->seeder->setConnection(
+            $this->objectManager->get(Seeder\Connection\DatabaseConnection::class, $GLOBALS['TYPO3_DB'])
+        );
+        $this->seeder->setFactory(
+            $this->objectManager->get(Seeder\Factory\SeederFactory::class)
+        );
+        $this->seeder->run($seed, Seeder\Factory\FakerFactory::createFaker());
     }
 }

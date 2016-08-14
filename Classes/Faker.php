@@ -1,11 +1,11 @@
 <?php
-namespace Dennis\Seeder\Factory;
+namespace Dennis\Seeder;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -25,37 +25,34 @@ namespace Dennis\Seeder\Factory;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Provider\TableConfiguration;
 
 /**
- * Class Table
+ * Interface Faker
  *
- * @package Dennis\Seeder\Factory\Table
+ * @package Dennis\Seeder\Provider\FakerInterface
  */
-class Table
+interface Faker
 {
     /**
-     * @var array
+     * Returns random dummy data by property
+     *
+     * @param $property
+     * @return mixed
      */
-    protected static $tables = [];
-
-    protected function __construct()
-    {
-    }
+    public function get($property);
 
     /**
-     * Provides a Table
+     * Returns all supported providers
      *
-     * @param string $tableName
-     * @param TableConfiguration $tableConfiguration
-     * @return \Dennis\Seeder\Domain\Model\TableInterface
+     * @return array
      */
-    public static function getInstance($tableName, TableConfiguration $tableConfiguration)
-    {
-        if (!in_array($tableName, self::$tables)) {
-            self::$tables[$tableName] = new \Dennis\Seeder\Domain\Model\Table($tableConfiguration);
-        }
+    public function getSupportedProviders();
 
-        return self::$tables[$tableName];
-    }
+    /**
+     * Guesses which provider will be returned by given property name
+     *
+     * @param $name
+     * @return string
+     */
+    public function guessProvider($name);
 }

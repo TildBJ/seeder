@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace Dennis\Seeder\Factory;
 
 /***************************************************************
  *
@@ -25,21 +25,34 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Class ColumnInterface
+ * Class SeederFactory
  *
- * @package Dennis\Seeder\Domain\Model\ColumnInterface
+ * @package Dennis\Seeder\Factory\SeederFactory
  */
-interface ColumnInterface
+class SeederFactory implements \Dennis\Seeder\Factory, \TYPO3\CMS\Core\SingletonInterface
 {
     /**
-     * @return string
+     * Creates a new SeedCollection
+     *
+     * @param string $name
+     * @param int $limit
+     * @return Seeder\SeedCollection
      */
-    public function getName();
+    public function create($name, $limit = 1)
+    {
+        /** @var Seeder\SeedCollection $seedCollection */
+        $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
+        for ($i = 1; $i <= $limit; $i++) {
+            /** @var Seeder\Seed $seed */
+            $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
+            $seed->setTarget($name);
+            $seedCollection->attach($seed);
+        }
 
-    /**
-     * @return string
-     */
-    public function __toString();
+        return $seedCollection;
+    }
 }

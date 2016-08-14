@@ -5,7 +5,7 @@ namespace Dennis\Seeder\Domain\Model\Column;
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -34,5 +34,5 @@ namespace Dennis\Seeder\Domain\Model\Column;
  */
 interface SelectInterface extends OneToManyInterface
 {
-    
+
 }

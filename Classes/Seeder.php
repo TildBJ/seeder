@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Controller;
+namespace Dennis\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -26,39 +26,56 @@ namespace Dennis\Seeder\Controller;
  ***************************************************************/
 
 /**
- * AbstractSeederController
+ * Seeder
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+interface Seeder
 {
     /**
-     * seedRepository
+     * setConnection
      *
-     * @var \Dennis\Seeder\Domain\Repository\SeedRepository
-     * @inject
+     * @param Connection $connection
+     * @return void
      */
-    protected $seedRepository;
+    public function setConnection(Connection $connection);
 
     /**
-     * Only DatabaseSeeder is provided for Backend usage yet.
+     * setFactory
      *
-     * @var \Dennis\Seeder\Seeder\DatabaseSeeder
-     * @inject
+     * @param Factory $factory
+     * @return void
      */
-    protected $seeder;
+    public function setFactory(Factory $factory);
 
     /**
-     * initializeAction
+     * Runs the Seeder process. Returns true if succeed.
      *
      * @return void
      */
-    public function initializeAction()
-    {
-        if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
-            $this->redirect('index', 'Install');
-        }
-    }
+    public function run();
+
+    /**
+     * preProcess
+     *
+     * @return void
+     */
+    public function before();
+
+    /**
+     * after
+     *
+     * @return void
+     */
+    public function after();
+
+    /**
+     * seed
+     *
+     * @param SeedCollection $seedCollection
+     * @return boolean
+     */
+    public function seed(SeedCollection $seedCollection);
 }

@@ -5,7 +5,7 @@ namespace Dennis\Seeder\Provider;
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -35,16 +35,16 @@ use Dennis\Seeder\Domain\Model\TableInterface;
 class TestData
 {
     /**
-     * @var FakerInterface
+     * @var Faker
      */
     protected $faker;
 
     /**
      * TestData constructor.
      *
-     * @param FakerInterface $faker
+     * @param \Dennis\Seeder\Faker $faker
      */
-    public function __construct(FakerInterface $faker)
+    public function __construct(\Dennis\Seeder\Faker $faker)
     {
         $this->faker = $faker;
     }

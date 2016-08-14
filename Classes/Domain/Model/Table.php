@@ -5,7 +5,7 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -25,6 +25,7 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Factory\TableFactory;
 use Dennis\Seeder\Provider\TableConfiguration;
 
 /**
@@ -52,7 +53,7 @@ class Table implements TableInterface
     public function __construct(TableConfiguration $tableConfiguration)
     {
         foreach ($tableConfiguration->getColumns() as $columnName) {
-            $this->columns[] = \Dennis\Seeder\Factory\Column::getInstance(
+            $this->columns[] = TableFactory::createColumn(
                 $tableConfiguration->getName(),
                 $tableConfiguration->getColumnConfiguration($columnName)
             );

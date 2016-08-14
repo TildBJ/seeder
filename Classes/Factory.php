@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace Dennis\Seeder;
 
 /***************************************************************
  *
@@ -27,19 +27,18 @@ namespace Dennis\Seeder\Domain\Model;
  ***************************************************************/
 
 /**
- * Class ColumnInterface
+ * Interface Factory
  *
- * @package Dennis\Seeder\Domain\Model\ColumnInterface
+ * @package Dennis\Seeder\Provider\FakerInterface
  */
-interface ColumnInterface
+interface Factory
 {
     /**
-     * @return string
+     * create
+     *
+     * @param string $name
+     * @param int $limit
+     * @return SeedCollection|SeedCollection
      */
-    public function getName();
-
-    /**
-     * @return string
-     */
-    public function __toString();
+    public function create($name, $limit = 1);
 }

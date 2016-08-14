@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace Dennis\Seeder\Factory;
 
 /***************************************************************
  *
@@ -27,19 +27,43 @@ namespace Dennis\Seeder\Domain\Model;
  ***************************************************************/
 
 /**
- * Class ColumnInterface
+ * Class FakerFactory
  *
- * @package Dennis\Seeder\Domain\Model\ColumnInterface
+ * @package Dennis\Seeder\Factory\TableFactory
  */
-interface ColumnInterface
+class FakerFactory
 {
     /**
-     * @return string
+     * instance
+     *
+     * @var \Dennis\Seeder\Faker $instance
      */
-    public function getName();
+    protected static $instance = null;
+
+    protected function __construct()
+    {
+    }
+
+    protected function __clone()
+    {
+    }
 
     /**
-     * @return string
+     * Provides a Faker
+     *
+     * @return \Dennis\Seeder\Faker
      */
-    public function __toString();
+    public static function createFaker()
+    {
+        if (!is_null(self::$instance)) {
+            return self::$instance;
+        }
+
+        $generator = \Faker\Factory::create();
+        $faker = new \Dennis\Seeder\Provider\Faker($generator);
+
+        self::$instance = $faker;
+
+        return $faker;
+    }
 }

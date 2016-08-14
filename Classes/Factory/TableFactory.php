@@ -5,7 +5,7 @@ namespace Dennis\Seeder\Factory;
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -25,34 +25,50 @@ namespace Dennis\Seeder\Factory;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Provider\TableConfiguration;
 use Dennis\Seeder\Domain\Model;
 
 /**
- * Class Column
+ * Class TableFactory
  *
- * @package Dennis\Seeder\Factory\Column
+ * @package Dennis\Seeder\Factory\TableFactory
  */
-class Column
+class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
 {
     /**
-     * @var array
+     * @var array $tables
+     */
+    protected static $tables = [];
+
+    /**
+     * @var array $columns
      */
     protected static $columns = [];
 
-    protected function __construct()
+    /**
+     * Provides a Table
+     *
+     * @param string $tableName
+     * @param TableConfiguration $tableConfiguration
+     * @return Model\TableInterface
+     */
+    public static function createTable($tableName, TableConfiguration $tableConfiguration)
     {
-    }
+        if (!in_array($tableName, self::$tables)) {
+            self::$tables[$tableName] = new Model\Table($tableConfiguration);
+        }
 
-    protected function __clone()
-    {
+        return self::$tables[$tableName];
     }
 
     /**
+     * createColumn
+     *
      * @param string $tableName
      * @param array $columnConfiguration
-     * @return \Dennis\Seeder\Domain\Model\ColumnInterface
+     * @return Model\ColumnInterface
      */
-    public static function getInstance($tableName, $columnConfiguration)
+    public static function createColumn($tableName, $columnConfiguration)
     {
         $columnName = key($columnConfiguration);
         $key = $tableName . '.' . key($columnConfiguration);
