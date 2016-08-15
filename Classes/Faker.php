@@ -29,7 +29,7 @@ namespace Dennis\Seeder;
 /**
  * Interface Faker
  *
- * @package Dennis\Seeder\Provider\FakerInterface
+ * @package Dennis\Seeder
  */
 interface Faker
 {

@@ -45,10 +45,15 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
     /**
      * Only DatabaseSeeder is provided for Backend usage yet.
      *
-     * @var \Dennis\Seeder\Seeder\DatabaseSeeder
+     * @var \Dennis\Seeder\Seeder\BackendSeeder
      * @inject
      */
     protected $seeder;
+
+    /**
+     * @var \Dennis\Seeder\Provider\Faker
+     */
+    protected $faker = null;
 
     /**
      * initializeAction
@@ -57,6 +62,7 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
      */
     public function initializeAction()
     {
+        $this->faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
         if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
             $this->redirect('index', 'Install');
         }

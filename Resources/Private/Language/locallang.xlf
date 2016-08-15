@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="createNewSeeder">
-				<source>Create new seeder</source>
+				<source>Create new seed</source>
 			</trans-unit>
 			<trans-unit id="title">
 				<source>Title</source>
@@ -36,8 +36,14 @@
 			<trans-unit id="delete">
 				<source>Delete</source>
 			</trans-unit>
+			<trans-unit id="run">
+				<source>Run</source>
+			</trans-unit>
 			<trans-unit id="back">
 				<source>go back</source>
+			</trans-unit>
+			<trans-unit id="type">
+				<source>Type</source>
 			</trans-unit>
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>
@@ -54,6 +60,9 @@
 			</trans-unit>
 			<trans-unit id="updateSuccessMsg">
 				<source>Seeder successfully updated</source>
+			</trans-unit>
+			<trans-unit id="runSuccessMsg">
+				<source>Successfully created %s records of %s</source>
 			</trans-unit>
 			<trans-unit id="error.seed.title">
 				<source>Field Title is required</source>

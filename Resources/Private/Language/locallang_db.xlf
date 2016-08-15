@@ -9,6 +9,9 @@
 			<trans-unit id="title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="properties">
+				<source>Properties</source>
+			</trans-unit>
 			<trans-unit id="table_name">
 				<source>Table name</source>
 			</trans-unit>

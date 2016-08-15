@@ -45,7 +45,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
     /**
      * tableName
      *
-     * @var string
+     * @var string $tableName
      * @validate NotEmpty
      */
     protected $tableName = '';
@@ -53,9 +53,14 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
     /**
      * properties
      *
-     * @var array $properties
+     * @var string $properties
      */
-    protected $properties = [];
+    protected $properties;
+
+    /**
+     * @var int
+     */
+    protected $pid = 0;
 
     /**
      * @return string
@@ -112,6 +117,17 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
      * @return $this
      */
     public function setTarget($tableName)
+    {
+        $this->tableName = $tableName;
+
+        return $this;
+    }
+
+    /**
+     * @param string $tableName
+     * @return $this
+     */
+    public function setTableName($tableName)
     {
         $this->tableName = $tableName;
 

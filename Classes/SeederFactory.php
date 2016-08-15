@@ -2,6 +2,7 @@
 namespace Dennis\Seeder;
 
 /***************************************************************
+ *
  *  Copyright notice
  *
  *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
@@ -11,7 +12,7 @@ namespace Dennis\Seeder;
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -26,48 +27,18 @@ namespace Dennis\Seeder;
  ***************************************************************/
 
 /**
- * Seeder
+ * Interface SeederFactory
  *
- * @author Dennis Römmich<dennis@roemmich.eu>
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package Dennis\Seeder
  */
-interface Seeder
+interface SeederFactory
 {
     /**
-     * setConnection
+     * create
      *
-     * @param Connection $connection
-     * @return void
+     * @param string $name
+     * @param int $limit
+     * @return SeedCollection|SeedCollection
      */
-    public function setConnection(Connection $connection);
-
-    /**
-     * Runs the Seeder process. Returns true if succeed.
-     *
-     * @return void
-     */
-    public function run();
-
-    /**
-     * preProcess
-     *
-     * @return void
-     */
-    public function before();
-
-    /**
-     * after
-     *
-     * @return void
-     */
-    public function after();
-
-    /**
-     * seed
-     *
-     * @param SeedCollection $seedCollection
-     * @return boolean
-     */
-    public function seed(SeedCollection $seedCollection);
+    public function create($name, $limit = 1);
 }

@@ -33,7 +33,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package Dennis\Seeder\Factory\SeederFactory
  */
-class SeederFactory implements \Dennis\Seeder\Factory, \TYPO3\CMS\Core\SingletonInterface
+class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\SingletonInterface
 {
     /**
      * Creates a new SeedCollection
