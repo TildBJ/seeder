@@ -69,7 +69,9 @@ class SeederController extends AbstractSeederController
     public function createAction(Seeder\Domain\Model\Seed $seed)
     {
         /** @var Seeder\Provider\TableConfiguration $tableConfiguration */
-        $tableConfiguration = GeneralUtility::makeInstance(Seeder\Provider\TableConfiguration::class, $seed->getTarget());
+        $tableConfiguration = GeneralUtility::makeInstance(
+            Seeder\Provider\TableConfiguration::class, $seed->getTarget()
+        );
         $properties = [];
         foreach ($tableConfiguration->getColumns() as $column) {
             $properties[$column] = $this->faker->guessProvider($column);

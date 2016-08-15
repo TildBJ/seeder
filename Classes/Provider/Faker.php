@@ -263,12 +263,14 @@ class Faker implements \Dennis\Seeder\Faker
     public function getProviderNameByKey($key = null)
     {
         if (is_null($key) || $key === '') {
-            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException('$key must be set');
+            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
+                '$key must be set'
+            );
         }
         if (!array_key_exists($key, $this->supportedProviders)) {
-            var_dump($key);
-            echo PHP_EOL;
-            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(sprintf('%s is not a supported key', $key));
+            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
+                sprintf('%s is not a supported key', $key)
+            );
         }
 
         return $this->supportedProviders[$key];
