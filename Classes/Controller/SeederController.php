@@ -70,7 +70,8 @@ class SeederController extends AbstractSeederController
     {
         /** @var Seeder\Provider\TableConfiguration $tableConfiguration */
         $tableConfiguration = GeneralUtility::makeInstance(
-            Seeder\Provider\TableConfiguration::class, $seed->getTarget()
+            Seeder\Provider\TableConfiguration::class,
+            $seed->getTarget()
         );
         $properties = [];
         foreach ($tableConfiguration->getColumns() as $column) {
@@ -78,7 +79,7 @@ class SeederController extends AbstractSeederController
         }
         $seed->setProperties($properties);
 
-        $this->seedRepository->add($seed);;
+        $this->seedRepository->add($seed);
         $this->addFlashMessage(
             LocalizationUtility::translate('createSuccessMsg', 'Seeder'),
             '',
