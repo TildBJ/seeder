@@ -1,17 +1,18 @@
 <?php
-namespace Dennis\Seeder\Traits;
+namespace Dennis\Seeder\ViewHelpers;
 
 /***************************************************************
+ *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
+ *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
  *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -24,22 +25,24 @@ namespace Dennis\Seeder\Traits;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Provider\Faker;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Language
+ * Class ArrayViewHelper
  *
- * @author Dennis Römmich<dennis@roemmich.eu>
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package Dennis\Seeder\ViewHelper\GetViewHelper
  */
-trait Language
+class ArrayViewHelper extends AbstractViewHelper
 {
     /**
-     * @param string $ll
+     * @param string $key
      * @return string
      */
-    protected function translate($ll)
+    public function render($key)
     {
-        return $GLOBALS['LANG']->sL($ll);
+        $array = $this->renderChildren();
+
+        return $array[$key];
     }
 }

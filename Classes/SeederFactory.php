@@ -1,7 +1,8 @@
 <?php
-namespace Dennis\Seeder\Tests\Main;
+namespace Dennis\Seeder;
 
 /***************************************************************
+ *
  *  Copyright notice
  *
  *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
@@ -11,7 +12,7 @@ namespace Dennis\Seeder\Tests\Main;
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -24,24 +25,20 @@ namespace Dennis\Seeder\Tests\Main;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Test case for class \Dennis\Seeder\Tests\Main\TestTest
+ * Interface SeederFactory
  *
- * @author Dennis Römmich <dennis@roemmich.eu>
+ * @package Dennis\Seeder
  */
-class TestTest extends UnitTestCase
+interface SeederFactory
 {
-
     /**
-     * testsCanBeExecuted
+     * create
      *
-     * @test
-     * @return void
+     * @param string $name
+     * @param int $limit
+     * @return SeedCollection|SeedCollection
      */
-    public function testsCanBeExecuted()
-    {
-        $this->assertSame(true, true);
-    }
+    public function create($name, $limit = 1);
 }

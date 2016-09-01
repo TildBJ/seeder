@@ -24,6 +24,7 @@ namespace Dennis\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Seeder
@@ -44,9 +45,17 @@ abstract class AbstractSeeder implements Seeder
     /**
      * factory
      *
-     * @var Factory $factory
+     * @var SeederFactory $factory
      */
     protected $factory = null;
+
+    /**
+     * AbstractSeeder constructor.
+     */
+    public function __construct()
+    {
+        $this->factory = GeneralUtility::makeInstance(Factory\SeederFactory::class);
+    }
 
     /**
      * setConnection
@@ -57,17 +66,6 @@ abstract class AbstractSeeder implements Seeder
     public function setConnection(Connection $connection)
     {
         $this->connection = $connection;
-    }
-
-    /**
-     * setFactory
-     *
-     * @param Factory $factory
-     * @return void
-     */
-    public function setFactory(Factory $factory)
-    {
-        $this->factory = $factory;
     }
 
     /**
@@ -101,11 +99,12 @@ abstract class AbstractSeeder implements Seeder
     final public function seed(SeedCollection $seedCollection)
     {
         $this->before();
-        $this->run();
-        $this->after();
+
         if (is_null($this->connection)) {
             throw new Connection\NotFoundException('Connection not found.');
         }
+
+        $this->run();
 
         /** @var Seed $seed */
         foreach ($seedCollection as $seed) {
@@ -114,5 +113,9 @@ abstract class AbstractSeeder implements Seeder
             }
             $this->connection->fetch($seed->getTarget(), $seed->getProperties());
         }
+
+        $this->after();
+
+        $seedCollection->destroy();
     }
 }

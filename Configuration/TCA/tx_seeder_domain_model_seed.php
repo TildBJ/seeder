@@ -127,7 +127,14 @@ return array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
+            ),
+        ),
+        'properties' => array(
+            'exclude' => 1,
+            'label' => 'LLL:EXT:seeder/Resources/Private/Language/locallang_db.xlf:properties',
+            'config' => array(
+                'type' => 'text',
             ),
         ),
         'table_name' => array(
@@ -136,7 +143,7 @@ return array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ),
         ),
     ),

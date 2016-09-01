@@ -21,6 +21,7 @@
 							<tr>
 								<td>{seed.title}</td>
 								<td>
+									<f:link.action class="btn btn-success" action="run" arguments="{seed: seed}"><i class="fa fa-play"></i> <f:translate key="run" /></f:link.action>
 									<f:link.action class="btn btn-primary" action="show" arguments="{seed: seed}"><i class="fa fa-eye"></i> <f:translate key="show" /></f:link.action>
 									<f:link.action class="btn btn-primary" action="edit" arguments="{seed: seed}"><i class="fa fa-pencil"></i> <f:translate key="edit" /></f:link.action>
 									<f:link.action class="btn btn-danger" action="delete" arguments="{seed: seed}"><i class="fa fa-trash"></i> <f:translate key="delete" /></f:link.action>

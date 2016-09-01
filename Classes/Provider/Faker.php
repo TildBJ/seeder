@@ -175,7 +175,8 @@ class Faker implements \Dennis\Seeder\Faker
      */
     public function get($property)
     {
-        $providerName = $this->guessProviderName($property);
+        $provider = $this->guessProvider($property);
+        $providerName = $this->getProviderNameByKey($provider);
 
         if ($providerName === null) {
             return null;
@@ -196,60 +197,82 @@ class Faker implements \Dennis\Seeder\Faker
      * @param $name
      * @return string ProviderName
      */
-    public function guessProviderName($name)
+    public function guessProvider($name)
     {
         if (preg_match('/^is[_A-Z]/', $name)) {
-            return $this->supportedProviders['boolean'];
+            return 'boolean';
         }
         if (preg_match('/(_a|A)t$/', $name)) {
-            return $this->supportedProviders['datetime'];
+            return 'datetime';
         }
         $name = GeneralUtility::strtolower($name);
         $name = str_replace('_', '', $name);
         if (array_key_exists($name, $this->supportedProviders)) {
-            return $this->supportedProviders[$name];
+            return $name;
         }
         switch ($name) {
             case 'emailaddress':
-                return $this->supportedProviders['email'];
+                return 'email';
             case 'phone':
             case 'telephone':
             case 'fax':
             case 'telnumber':
-                return $this->supportedProviders['phonenumber'];
+                return 'phonenumber';
             case 'town':
-                return $this->supportedProviders['city'];
+                return 'city';
             case 'zipcode':
             case 'zip':
-                return $this->supportedProviders['postcode'];
+                return 'postcode';
             case 'currency':
-                return $this->supportedProviders['currencycode'];
+                return 'currencycode';
             case 'website':
-                return $this->supportedProviders['url'];
+                return 'url';
             case 'companyname':
             case 'employer':
-                return $this->supportedProviders['company'];
+                return 'company';
             case 'body':
             case 'summary':
             case 'article':
             case 'description':
-                return $this->supportedProviders['text'];
+                return 'text';
             case 'middlename':
-                return $this->supportedProviders['name'];
+                return 'name';
             case 'www':
-                return $this->supportedProviders['url'];
+                return 'url';
             case 'image':
-                return $this->supportedProviders['imageurl'];
+                return 'imageurl';
             case 'lastlogin':
             case 'starttime':
             case 'crdate':
             case 'tstamp':
             case 'endtime':
-                return $this->supportedProviders['datetimethismonth'];
+                return 'datetimethismonth';
             case 'disable':
-                return $this->supportedProviders['boolean'];
+                return 'boolean';
+            // Default provider is text:
             default:
-                return null;
+                return 'text';
         }
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException
+     */
+    public function getProviderNameByKey($key = null)
+    {
+        if (is_null($key) || $key === '') {
+            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
+                '$key must be set'
+            );
+        }
+        if (!array_key_exists($key, $this->supportedProviders)) {
+            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
+                sprintf('%s is not a supported key', $key)
+            );
+        }
+
+        return $this->supportedProviders[$key];
     }
 }

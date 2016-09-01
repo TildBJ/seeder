@@ -1,3 +1,5 @@
+{namespace seeder=Dennis\Seeder\ViewHelpers}
+
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
 	  xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
@@ -26,6 +28,33 @@
 				</f:else>
 			</f:if>
 		</div>
+		<f:for each="{table.columns}" as="column" iteration="i">
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-12">
+						<label for="{column.name}">{column.name}</label>
+					</div>
+					<div class="col-sm-8">
+						<f:render section="main" partial="Column/{column}" arguments="{action: action, column: column, providers: providers, properties: seed.properties}" />
+					</div>
+					<div class="col-sm-4">
+						<div class="form-inline">
+							<div class="form-group">
+								<label for="provider{column.name}"><f:translate key="type" /></label>
+								<f:if condition="{action} == 'edit'">
+									<f:then>
+										<f:form.select name="properties[{column.name}]" id="provider{column.name}" value="{seed.properties -> seeder:array(key: '{column.name}')}" options="{providers}" class="form-control" additionalAttributes="{readonly: 'readonly'}" />
+									</f:then>
+									<f:else>
+										<f:form.select name="properties[{column.name}]" id="provider{column.name}" value="{seed.properties -> seeder:array(key: '{column.name}')}" options="{providers}" class="form-control" />
+									</f:else>
+								</f:if>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</f:for>
 		<div class="form-group">
 			<button class="btn btn-primary pull-right">
 				<i class="fa fa-pencil"></i>

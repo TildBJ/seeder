@@ -1,11 +1,11 @@
 <?php
-namespace Dennis\Seeder;
+namespace Dennis\Seeder\ViewHelpers\TestData;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
+ *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
  *
  *  All rights reserved
  *
@@ -25,34 +25,36 @@ namespace Dennis\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Provider\Faker;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Interface Faker
+ * Class GetViewHelper
  *
- * @package Dennis\Seeder
+ * @package Dennis\Seeder\ViewHelpers\TestData\GetViewHelper
  */
-interface Faker
+class GetViewHelper extends AbstractViewHelper
 {
     /**
-     * Returns random dummy data by property
-     *
-     * @param $property
+     * @var Faker
+     */
+    protected $faker;
+
+    /**
+     * GetViewHelper constructor.
+     * @todo: L49: Don't create Faker here. Faker should delivered in FakerProvider
+     */
+    public function initialize()
+    {
+        $faker = \Faker\Factory::create();
+        $this->faker = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Faker::class, $faker);
+    }
+
+    /**
      * @return mixed
      */
-    public function get($property);
-
-    /**
-     * Returns all supported providers
-     *
-     * @return array
-     */
-    public function getSupportedProviders();
-
-    /**
-     * Guesses which provider will be returned by given property name
-     *
-     * @param $name
-     * @return string
-     */
-    public function guessProvider($name);
+    public function render()
+    {
+        return $this->faker->get($this->renderChildren());
+    }
 }
