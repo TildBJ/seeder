@@ -33,7 +33,7 @@ use Dennis\Seeder;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FlashMessage implements Seeder\Message
+class FlashMessage implements Seeder\Message, \TYPO3\CMS\Core\SingletonInterface
 {
     /**
      * error
