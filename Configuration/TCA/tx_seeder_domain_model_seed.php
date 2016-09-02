@@ -137,7 +137,7 @@ return array(
                 'type' => 'text',
             ),
         ),
-        'table_name' => array(
+        'target' => array(
             'exclude' => 1,
             'label' => 'LLL:EXT:seeder/Resources/Private/Language/locallang_db.xlf:table_name',
             'config' => array(
