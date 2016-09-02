@@ -107,12 +107,17 @@ class FlashMessage implements Seeder\Message, \TYPO3\CMS\Core\SingletonInterface
         }
         /* @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
         $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Core\Messaging\FlashMessage::class, $message, '', $severity, true
+            \TYPO3\CMS\Core\Messaging\FlashMessage::class,
+            $message,
+            '',
+            $severity,
+            true
         );
 
         /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
         $flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-           \TYPO3\CMS\Core\Messaging\FlashMessageService::class);
+            \TYPO3\CMS\Core\Messaging\FlashMessageService::class
+        );
         $messageQueue = $flashMessageService->getMessageQueueByIdentifier(
             'extbase.flashmessages.tx_seeder_web_seederseedermod'
         );
