@@ -76,13 +76,6 @@ abstract class AbstractSeeder implements Seeder
     abstract protected function before();
 
     /**
-     * Runs the Seeder process.
-     *
-     * @return void
-     */
-    abstract protected function run();
-
-    /**
      * after
      *
      * @return void

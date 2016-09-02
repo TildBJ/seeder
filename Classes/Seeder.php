@@ -43,25 +43,11 @@ interface Seeder
     public function setConnection(Connection $connection);
 
     /**
-     * Runs the Seeder process. Returns true if succeed.
+     * Runs the Seeder process.
      *
      * @return void
      */
     public function run();
-
-    /**
-     * preProcess
-     *
-     * @return void
-     */
-    public function before();
-
-    /**
-     * after
-     *
-     * @return void
-     */
-    public function after();
 
     /**
      * seed
