@@ -25,7 +25,6 @@ namespace Dennis\Seeder\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Dennis\Seeder;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -80,11 +79,7 @@ class SeederController extends AbstractSeederController
         $seed->setProperties($properties);
 
         $this->seedRepository->add($seed);
-        $this->addFlashMessage(
-            LocalizationUtility::translate('createSuccessMsg', 'Seeder'),
-            '',
-            AbstractMessage::OK
-        );
+        $this->message->success(LocalizationUtility::translate('createSuccessMsg', 'Seeder'));
         $this->redirect('index');
     }
 
@@ -120,11 +115,7 @@ class SeederController extends AbstractSeederController
         $seed->setProperties($properties);
         $this->seedRepository->update($seed);
 
-        $this->addFlashMessage(
-            LocalizationUtility::translate('updateSuccessMsg', 'Seeder'),
-            '',
-            AbstractMessage::OK
-        );
+        $this->message->success(LocalizationUtility::translate('updateSuccessMsg', 'Seeder'));
         $this->redirect('index');
     }
 
@@ -157,11 +148,7 @@ class SeederController extends AbstractSeederController
     public function deleteAction(Seeder\Domain\Model\Seed $seed)
     {
         $this->seedRepository->remove($seed);
-        $this->addFlashMessage(
-            LocalizationUtility::translate('deleteSuccessMsg', 'Seeder'),
-            '',
-            AbstractMessage::OK
-        );
+        $this->message->success(LocalizationUtility::translate('deleteSuccessMsg', 'Seeder'));
         $this->redirect('index');
     }
 
@@ -192,6 +179,7 @@ class SeederController extends AbstractSeederController
         foreach ($seed->getProperties() as $name => $type) {
             $properties[$name] = $this->faker->get($type);
         }
+        $properties['pid'] = intval(GeneralUtility::_GET('id'));
         $seed->setProperties($properties);
 
         /** @var Seeder\SeedCollection $seedCollection */
@@ -200,11 +188,7 @@ class SeederController extends AbstractSeederController
 
         $this->seeder->seed($seedCollection);
 
-        $this->addFlashMessage(
-            LocalizationUtility::translate('runSuccessMsg', 'Seeder', [1, $seed->getTarget()]),
-            '',
-            AbstractMessage::OK
-        );
+        $this->message->success(LocalizationUtility::translate('runSuccessMsg', 'Seeder', [1, $seed->getTarget()]));
         $this->redirect('index');
     }
 }
