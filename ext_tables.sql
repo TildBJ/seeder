@@ -8,7 +8,7 @@ CREATE TABLE tx_seeder_domain_model_seed (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	table_name varchar(255) DEFAULT '' NOT NULL,
-	properties longtext DEFAULT '' NOT NULL,
+	properties longtext NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
