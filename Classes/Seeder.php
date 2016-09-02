@@ -54,7 +54,7 @@ interface Seeder
      *
      * @param SeedCollection $seedCollection
      * @throws Connection\NotFoundException
-     * @return void
+     * @return bool
      */
     public function seed(SeedCollection $seedCollection);
 }

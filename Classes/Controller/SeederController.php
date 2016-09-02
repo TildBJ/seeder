@@ -171,10 +171,6 @@ class SeederController extends AbstractSeederController
      */
     public function runAction(Seeder\Domain\Model\Seed $seed)
     {
-        $this->seeder->setConnection(
-            $this->objectManager->get(Seeder\Connection\DatabaseConnection::class, $GLOBALS['TYPO3_DB'])
-        );
-
         $properties = [];
         foreach ($seed->getProperties() as $name => $type) {
             $properties[$name] = $this->faker->get($type);
@@ -186,9 +182,10 @@ class SeederController extends AbstractSeederController
         $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
         $seedCollection->attach($seed);
 
-        $this->seeder->seed($seedCollection);
+        if ($this->seeder->seed($seedCollection)) {
+            $this->message->success(LocalizationUtility::translate('runSuccessMsg', 'Seeder', [1, $seed->getTarget()]));
+        }
 
-        $this->message->success(LocalizationUtility::translate('runSuccessMsg', 'Seeder', [1, $seed->getTarget()]));
         $this->redirect('index');
     }
 }

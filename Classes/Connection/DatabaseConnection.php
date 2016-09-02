@@ -27,7 +27,7 @@ namespace Dennis\Seeder\Connection;
 use Dennis\Seeder\Connection;
 
 /**
- * InstallController
+ * DatabaseConnection
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
@@ -43,12 +43,21 @@ class DatabaseConnection implements Connection
     protected $connection;
 
     /**
+     * output
+     *
+     * @var \Dennis\Seeder\Message $message
+     */
+    protected $message;
+
+    /**
      * DatabaseConnection constructor.
      * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
+     * @param \Dennis\Seeder\Message $message
      */
-    public function __construct(\TYPO3\CMS\Core\Database\DatabaseConnection $connection)
+    public function __construct(\TYPO3\CMS\Core\Database\DatabaseConnection $connection, \Dennis\Seeder\Message $message)
     {
         $this->connection = $connection;
+        $this->message = $message;
     }
 
     /**
@@ -56,10 +65,17 @@ class DatabaseConnection implements Connection
      *
      * @param string $tableName
      * @param array $data
-     * @return void
+     * @return bool
      */
     public function fetch($tableName, array $data)
     {
-        $this->connection->exec_INSERTquery($tableName, $data);
+        $res = $this->connection->exec_INSERTquery($tableName, $data);
+
+        if (!$res) {
+            $this->message->error($this->connection->sql_error());
+            return false;
+        }
+
+        return true;
     }
 }
