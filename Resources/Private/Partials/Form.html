@@ -19,9 +19,10 @@
 		</div>
 		<div class="form-group">
 			<label for="tableName"><f:translate key="tableName" /></label>
+			<f:debug>{seed.tableName}</f:debug>
 			<f:if condition="{action} != 'create'">
 				<f:then>
-					<f:form.textfield class="form-control" id="tableName" property="tableName" additionalAttributes="{readonly: 'readonly'}" />
+					<f:form.textfield class="form-control" id="tableName" value="{seed.tableName}" additionalAttributes="{readonly: 'readonly'}" />
 				</f:then>
 				<f:else>
 					<f:form.select class="form-control" id="tableName" options="{tables}" property="tableName" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" />

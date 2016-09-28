@@ -133,4 +133,12 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 }
