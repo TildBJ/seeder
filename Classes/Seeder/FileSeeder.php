@@ -41,7 +41,7 @@ abstract class FileSeeder extends AbstractSeeder
      *
      * @return void
      */
-    public function before()
+    protected function before()
     {
         // TODO: Implement before() method.
     }
@@ -51,7 +51,7 @@ abstract class FileSeeder extends AbstractSeeder
      *
      * @return void
      */
-    public function after()
+    protected function after()
     {
         // TODO: Implement after() method.
     }

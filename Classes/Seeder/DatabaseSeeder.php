@@ -42,7 +42,7 @@ abstract class DatabaseSeeder extends AbstractSeeder
      *
      * @return void
      */
-    public function before()
+    protected function before()
     {
         $this->setConnection(GeneralUtility::makeInstance(DatabaseConnection::class, $GLOBALS['TYPO3_DB']));
     }
@@ -52,7 +52,7 @@ abstract class DatabaseSeeder extends AbstractSeeder
      *
      * @return void
      */
-    public function after()
+    protected function after()
     {
 
     }

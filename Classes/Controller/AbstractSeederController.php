@@ -24,6 +24,8 @@ namespace Dennis\Seeder\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Dennis\Seeder;
 
 /**
  * AbstractSeederController
@@ -51,7 +53,14 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
     protected $seeder;
 
     /**
-     * @var \Dennis\Seeder\Provider\Faker
+     * message
+     *
+     * @var Seeder\Message $message
+     */
+    protected $message;
+
+    /**
+     * @var Seeder\Provider\Faker
      */
     protected $faker = null;
 
@@ -62,7 +71,8 @@ abstract class AbstractSeederController extends \TYPO3\CMS\Extbase\Mvc\Controlle
      */
     public function initializeAction()
     {
-        $this->faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
+        $this->faker = Seeder\Factory\FakerFactory::createFaker();
+        $this->message = GeneralUtility::makeInstance(Seeder\Message\FlashMessage::class);
         if (\Dennis\Seeder\Utility\Dependency::checkDependencies() === false) {
             $this->redirect('index', 'Install');
         }

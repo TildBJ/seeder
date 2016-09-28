@@ -69,6 +69,20 @@ abstract class AbstractSeeder implements Seeder
     }
 
     /**
+     * preProcess
+     *
+     * @return void
+     */
+    abstract protected function before();
+
+    /**
+     * after
+     *
+     * @return void
+     */
+    abstract protected function after();
+
+    /**
      * seed
      *
      * @param SeedCollection $seedCollection

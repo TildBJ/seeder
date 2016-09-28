@@ -26,35 +26,51 @@ namespace Dennis\Seeder;
  ***************************************************************/
 
 /**
- * Seeder
+ * Message
  *
  * @author Dennis Römmich<dennis@roemmich.eu>
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-interface Seeder
+interface Message
 {
     /**
-     * setConnection
+     * notice
      *
-     * @param Connection $connection
+     * @param string $message
      * @return void
      */
-    public function setConnection(Connection $connection);
+    public function notice($message);
 
     /**
-     * Runs the Seeder process.
+     * info
      *
+     * @param string $message
      * @return void
      */
-    public function run();
+    public function info($message);
 
     /**
-     * seed
+     * success
      *
-     * @param SeedCollection $seedCollection
-     * @throws Connection\NotFoundException
+     * @param string $message
      * @return void
      */
-    public function seed(SeedCollection $seedCollection);
+    public function success($message);
+
+    /**
+     * warning
+     *
+     * @param string $message
+     * @return void
+     */
+    public function warning($message);
+
+    /**
+     * error
+     *
+     * @param string $message
+     * @return void
+     */
+    public function error($message);
 }
