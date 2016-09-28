@@ -2,7 +2,7 @@
   "name": "TildBJ/seeder",
   "description": "Database seeder for TYPO3",
   "version": "0.0.0",
-  "type": "Database",
+  "type": "typo3-cms-extension",
   "keywords": ["dummy data", "test data", "database seeder", "seeding"],
   "homepage": "http://seeder.roemmich.eu",
   "time": "2016-04-18",
