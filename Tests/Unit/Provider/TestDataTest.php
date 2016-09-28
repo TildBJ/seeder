@@ -37,11 +37,6 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 class TestDataTest extends UnitTestCase
 {
     /**
-     * @var Faker $subject
-     */
-    protected $subject;
-
-    /**
      * testFetchArray
      * @test
      */

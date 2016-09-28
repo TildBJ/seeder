@@ -58,6 +58,9 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function setUp()
     {
+        $GLOBALS['LANG'] = new \TYPO3\CMS\Lang\LanguageService();
+        $GLOBALS['LANG']->init('de');
+
         $GLOBALS['TCA'] = [
             'pages' => [
                 'ctrl' => [
@@ -72,15 +75,21 @@ class TableConfigurationTest extends UnitTestCase
                             'eval' => 'trim,required',
                         ],
                     ],
+                    'doctype' => [
+                        'exclude' => 1,
+                        'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.type',
+                        'config' => [
+                           'type' => 'select',
+                           'renderType' => 'selectSingle',
+                           'default' => '1'
+                        ],
+                    ],
                 ],
             ],
+            'fe_users' => [],
         ];
 
-        $this->subject = $this->getMock(
-            $this->buildAccessibleProxy(TableConfiguration::class),
-            ['translate'],
-            ['pages']
-        );
+        $this->subject = new TableConfiguration('pages');
     }
 
     /**
@@ -122,10 +131,7 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function getTitleReturnsTitleOfTable()
     {
-        $this->subject->expects($this->once())
-            ->method('translate')
-            ->will($this->returnValue('Pages'));
-        $this->assertSame('Pages', $this->subject->getTitle());
+        $this->assertSame('Page', $this->subject->getTitle());
     }
 
     /**
@@ -135,7 +141,7 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function getColumnsReturnsArray()
     {
-        $this->assertTrue(is_array($this->subject->getColumns()));
+        $this->assertSame(['title', 'doctype'], $this->subject->getColumns());
     }
 
     /**
@@ -160,7 +166,15 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function getColumnConfigurationReturnsArray()
     {
-        $this->assertTrue(is_array($this->subject->getColumnConfiguration('title')));
+        $expected = [
+            'title' => [
+                'type' => 'array',
+                'size' => '50',
+                'max' => '255',
+                'eval' => 'trim,required',
+            ],
+        ];
+        $this->assertSame($expected, $this->subject->getColumnConfiguration('title'));
     }
 
     /**
@@ -170,6 +184,6 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function getAllTablesReturnsArray()
     {
-        $this->assertTrue(is_array(($this->subject->getAllTables())));
+        $this->assertSame(['pages' => 'pages', 'fe_users' => 'fe_users'], $this->subject->getAllTables());
     }
 }
