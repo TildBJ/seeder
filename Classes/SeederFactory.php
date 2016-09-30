@@ -38,7 +38,16 @@ interface SeederFactory
      *
      * @param string $name
      * @param int $limit
-     * @return SeedCollection|SeedCollection
+     * @return SeedCollection
      */
     public function create($name, $limit = 1);
+
+    /**
+     * make
+     *
+     * @param string $name
+     * @param int $limit
+     * @return SeedCollection
+     */
+    public function make($name, $limit = 1);
 }

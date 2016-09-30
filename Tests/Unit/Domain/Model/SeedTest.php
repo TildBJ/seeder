@@ -61,10 +61,7 @@ class SeedTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->subject = $this->getMock(
-            $this->buildAccessibleProxy(Seed::class),
-            null
-        );
+        $this->subject = new Seed();
     }
 
     /**
@@ -102,7 +99,7 @@ class SeedTest extends UnitTestCase
     {
         $this->subject->setProperties($this->properties);
 
-        $this->assertAttributeEquals(serialize($this->properties), 'properties', $this->subject);
+        $this->assertAttributeEquals($this->properties, 'properties', $this->subject);
     }
 
     /**

@@ -36,6 +36,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\SingletonInterface
 {
     /**
+     * @var Seeder\Faker
+     */
+    protected $faker;
+
+    public function __construct()
+    {
+        $this->faker = FakerFactory::createFaker();
+    }
+
+    /**
      * Creates a new SeedCollection
      *
      * @param string $name
@@ -44,11 +54,41 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
      */
     public function create($name, $limit = 1)
     {
+        /** @var Seeder\Provider\TableConfiguration $tableConfiguration */
+        $tableConfiguration = GeneralUtility::makeInstance(Seeder\Provider\TableConfiguration::class, $name);
+        /** @var Seeder\SeedCollection $seedCollection */
+        $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
+
+        for ($i = 1; $i <= $limit; $i++) {
+            $row = [];
+            foreach ($tableConfiguration->getColumns() as $column) {
+                $row[$column] = $this->faker->get($column);
+            }
+            /** @var Seeder\Seed $seed */
+            $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
+            $seed->setTarget($name)
+                ->setProperties($row);
+            $seedCollection->attach($seed);
+        }
+
+        return $seedCollection;
+    }
+
+    /**
+     * Creates a new SeedCollection
+     *
+     * @param string $name
+     * @param int $limit
+     * @return Seeder\SeedCollection
+     */
+    public function make($name, $limit = 1)
+    {
         /** @var Seeder\SeedCollection $seedCollection */
         $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
         for ($i = 1; $i <= $limit; $i++) {
             /** @var Seeder\Seed $seed */
             $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
+            $seed =
             $seed->setTarget($name);
             $seedCollection->attach($seed);
         }

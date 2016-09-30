@@ -32,7 +32,7 @@ namespace Dennis\Seeder\Domain\Model;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \Dennis\Seeder\Seed
+final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject implements \Dennis\Seeder\Seed
 {
     /**
      * title
@@ -40,7 +40,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
      * @var string $title
      * @validate NotEmpty
      */
-    protected $title = '';
+    private $title = '';
 
     /**
      * tableName
@@ -48,19 +48,14 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
      * @var string $tableName
      * @validate NotEmpty
      */
-    protected $tableName = '';
+    private $tableName = '';
 
     /**
      * properties
      *
-     * @var string $properties
+     * @var array $properties
      */
     protected $properties;
-
-    /**
-     * @var int
-     */
-    protected $pid = 0;
 
     /**
      * @return string
@@ -89,7 +84,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
      */
     public function setProperties(array $properties)
     {
-        $this->properties = serialize($properties);
+        $this->properties = $properties;
 
         return $this;
     }
@@ -101,7 +96,7 @@ class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \De
      */
     public function getProperties()
     {
-        return unserialize($this->properties);
+        return $this->properties;
     }
 
     /**
