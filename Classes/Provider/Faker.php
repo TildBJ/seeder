@@ -317,7 +317,7 @@ class Faker implements \Dennis\Seeder\Faker
             return 'boolean';
         }
         if (preg_match('/(_a|A)t$/', $name)) {
-            return 'datetime';
+            return 'unixtime';
         }
         $name = GeneralUtility::strtolower($name);
         $name = str_replace('_', '', $name);
@@ -345,7 +345,9 @@ class Faker implements \Dennis\Seeder\Faker
             case 'employer':
                 return 'company';
             case 'body':
+            case 'bodytext':
             case 'summary':
+            case 'teaser':
             case 'article':
             case 'description':
                 return 'text';
@@ -360,7 +362,7 @@ class Faker implements \Dennis\Seeder\Faker
             case 'crdate':
             case 'tstamp':
             case 'endtime':
-                return 'datetimethismonth';
+                return 'unixtime';
             case 'disable':
                 return 'boolean';
             // Default provider is text:
