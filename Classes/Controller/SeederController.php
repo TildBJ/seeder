@@ -97,6 +97,7 @@ class SeederController extends AbstractSeederController
         $this->view->assignMultiple([
             'seed' => $seed,
             'table' => $table,
+            'tables' => Seeder\Provider\TableConfiguration::getAllTables(),
             'providers' => $this->faker->getSupportedProviders(),
         ]);
     }
@@ -133,6 +134,7 @@ class SeederController extends AbstractSeederController
         $this->view->assignMultiple([
             'seed' => $seed,
             'table' => $table,
+            'tables' => Seeder\Provider\TableConfiguration::getAllTables(),
             'providers' => $this->faker->getSupportedProviders(),
         ]);
     }
