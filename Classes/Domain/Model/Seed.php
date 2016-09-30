@@ -132,7 +132,7 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
         foreach ($properties as $property => $value) {
             if (!isset($this->properties[$property])) {
                 throw new \InvalidArgumentException(
-                    'Property ' . $property . ' not found!'
+                    'Property ' . $property . ' not found for target ' .  $this->getTarget()
                 );
             }
             $this->properties[$property] = $value;

@@ -103,10 +103,11 @@ abstract class AbstractSeeder implements Seeder
 
         /** @var Seed $seed */
         foreach ($seedCollection as $seed) {
+            print_r($seed->getTarget() . PHP_EOL);
             if ($seed->getProperties() === false) {
                 continue;
             }
-            $success = $this->connection->fetch($seed->getTarget(), $seed->getProperties());
+            $success = $this->connection->fetch($seed);
         }
 
         $this->after();
@@ -114,5 +115,26 @@ abstract class AbstractSeeder implements Seeder
         $seedCollection->destroy();
 
         return $success;
+    }
+
+    /**
+     * @param $className
+     * @return \Closure
+     */
+    protected function call($className)
+    {
+        /** @var self $class */
+        $class = new $className;
+
+        return function($lastInsertId, $column) use ($class) {
+            /** @var SeedCollection $seedCollection */
+            $seedCollection = GeneralUtility::makeInstance(\Dennis\Seeder\Collection\SeedCollection::class);
+            $seedCollection->destroy();
+            $class->run();
+            /** @var Seed $seed */
+            foreach ($seedCollection as $seed) {
+                $seed->set([$column => $lastInsertId]);
+            }
+        };
     }
 }

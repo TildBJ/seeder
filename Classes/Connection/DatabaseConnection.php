@@ -25,6 +25,7 @@ namespace Dennis\Seeder\Connection;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Dennis\Seeder\Connection;
+use Dennis\Seeder\Seed;
 
 /**
  * DatabaseConnection
@@ -50,6 +51,13 @@ class DatabaseConnection implements Connection
     protected $message;
 
     /**
+     * closures
+     *
+     * @var array
+     */
+    protected $closures;
+
+    /**
      * DatabaseConnection constructor.
      *
      * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
@@ -66,19 +74,30 @@ class DatabaseConnection implements Connection
     /**
      * fetch
      *
-     * @param string $tableName
-     * @param array $data
-     * @return bool
+     * @param Seed $seed
      * @throws \Dennis\Seeder\Exception
      * @return bool
      */
-    public function fetch($tableName, array $data)
+    public function fetch(Seed $seed)
     {
-        $this->connection->exec_INSERTquery($tableName, $data);
+        foreach ($seed->getProperties() as $column => $property) {
+            if (get_class($property) === 'Closure') {
+                echo ('<pre>');var_dump($column);echo __LINE__;die();
+                $this->closures[] = $property;
+                // Todo: $property unsetten, wenn insert fehlschlägt
+            }
+        }
+        $this->connection->exec_INSERTquery($seed->getTarget(), $seed->getProperties());
         if ($this->connection->sql_error()) {
             throw new \Dennis\Seeder\Exception(
                 $this->connection->sql_error()
             );
+        }
+        $lastInsertId = $this->connection->getDatabaseHandle()->insert_id;
+
+        foreach ($this->closures as $closure) {
+            call_user_func($closure($lastInsertId, 'parent'));
+            $this->connection->exec_UPDATEquery($seed->getTarget(), 'uid = ' . $lastInsertId, ['$column' => '$lastInsertId']);
         }
 
         return true;
