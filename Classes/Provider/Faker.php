@@ -179,7 +179,7 @@ class Faker implements \Dennis\Seeder\Faker
         $providerName = $this->getProviderNameByKey($provider);
 
         if ($providerName === null) {
-            return null;
+            return '';
         }
 
         return $this->generator->$providerName;
@@ -251,7 +251,7 @@ class Faker implements \Dennis\Seeder\Faker
                 return 'boolean';
             // Default provider is text:
             default:
-                return 'text';
+                return null;
         }
     }
 
@@ -262,7 +262,10 @@ class Faker implements \Dennis\Seeder\Faker
      */
     public function getProviderNameByKey($key = null)
     {
-        if (is_null($key) || $key === '') {
+        if (is_null($key)) {
+            return null;
+        }
+        if ($key === '') {
             throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
                 '$key must be set'
             );

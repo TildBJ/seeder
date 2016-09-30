@@ -29,7 +29,7 @@ use Dennis\Seeder\Provider\Faker;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Test case for class \Dennis\Seeder\Tests\Provider\FakerTest
+ * Test case for class \Dennis\Seeder\Provider\Faker
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */
@@ -220,8 +220,8 @@ class FakerTest extends UnitTestCase
             ['companysuffix', 'companysuffix'],
             ['creditcardexpirationdatestring', 'creditcardexpirationdatestring'],
             ['address', 'address'],
-            // Default provider is text:
-            ['foobar', 'text'],
+            // Default provider is null:
+            ['foobar', null],
         ];
     }
 
