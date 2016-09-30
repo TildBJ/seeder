@@ -56,10 +56,16 @@ class DatabaseConnection implements Connection
      *
      * @param string $tableName
      * @param array $data
+     * @throws \Dennis\Seeder\Exception
      * @return void
      */
     public function fetch($tableName, array $data)
     {
         $this->connection->exec_INSERTquery($tableName, $data);
+        if ($this->connection->sql_error()) {
+            throw new \Dennis\Seeder\Exception(
+                $this->connection->sql_error()
+            );
+        }
     }
 }
