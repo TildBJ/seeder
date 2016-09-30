@@ -51,11 +51,14 @@ class DatabaseConnection implements Connection
 
     /**
      * DatabaseConnection constructor.
+     *
      * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
      * @param \Dennis\Seeder\Message $message
      */
-    public function __construct(\TYPO3\CMS\Core\Database\DatabaseConnection $connection, \Dennis\Seeder\Message $message)
-    {
+    public function __construct(
+        \TYPO3\CMS\Core\Database\DatabaseConnection $connection,
+        \Dennis\Seeder\Message $message
+    ) {
         $this->connection = $connection;
         $this->message = $message;
     }
