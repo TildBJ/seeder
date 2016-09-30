@@ -25,6 +25,7 @@ namespace Dennis\Seeder\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Dennis\Seeder;
+use Dennis\Seeder\Domain\Model\Seed;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -62,10 +63,10 @@ class SeederController extends AbstractSeederController
     /**
      * createAction
      *
-     * @param Seeder\Domain\Model\Seed $seed
+     * @param Seed $seed
      * @return void
      */
-    public function createAction(Seeder\Domain\Model\Seed $seed)
+    public function createAction(Seed $seed)
     {
         /** @var Seeder\Provider\TableConfiguration $tableConfiguration */
         $tableConfiguration = GeneralUtility::makeInstance(
@@ -86,10 +87,10 @@ class SeederController extends AbstractSeederController
     /**
      * editAction
      *
-     * @param Seeder\Domain\Model\Seed $seed
+     * @param Seeder\Seed $seed
      * @return void
      */
-    public function editAction(Seeder\Domain\Model\Seed $seed)
+    public function editAction(Seeder\Seed $seed)
     {
         $tableConfiguration = new Seeder\Provider\TableConfiguration($seed->getTarget());
         $table = \Dennis\Seeder\Factory\TableFactory::createTable($seed->getTarget(), $tableConfiguration);
@@ -105,13 +106,13 @@ class SeederController extends AbstractSeederController
     /**
      * updateAction
      *
-     * @param Seeder\Domain\Model\Seed $seed
+     * @param Seed $seed
      * @param array $properties
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function updateAction(Seeder\Domain\Model\Seed $seed, $properties = [])
+    public function updateAction(Seed $seed, $properties = [])
     {
         $seed->setProperties($properties);
         $this->seedRepository->update($seed);
@@ -123,10 +124,10 @@ class SeederController extends AbstractSeederController
     /**
      * showAction
      *
-     * @param Seeder\Domain\Model\Seed $seed
+     * @param Seed $seed
      * @return void
      */
-    public function showAction(Seeder\Domain\Model\Seed $seed)
+    public function showAction(Seed $seed)
     {
         $tableConfiguration = new Seeder\Provider\TableConfiguration($seed->getTarget());
         $table = \Dennis\Seeder\Factory\TableFactory::createTable($seed->getTarget(), $tableConfiguration);
@@ -142,12 +143,12 @@ class SeederController extends AbstractSeederController
     /**
      * deleteAction
      *
-     * @param Seeder\Domain\Model\Seed $seed
+     * @param Seed $seed
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function deleteAction(Seeder\Domain\Model\Seed $seed)
+    public function deleteAction(Seed $seed)
     {
         $this->seedRepository->remove($seed);
         $this->message->success(LocalizationUtility::translate('deleteSuccessMsg', 'Seeder'));
@@ -169,9 +170,9 @@ class SeederController extends AbstractSeederController
     /**
      * runAction
      *
-     * @param Seeder\Domain\Model\Seed $seed
+     * @param Seed $seed
      */
-    public function runAction(Seeder\Domain\Model\Seed $seed)
+    public function runAction(Seed $seed)
     {
         $properties = [];
         foreach ($seed->getProperties() as $name => $type) {
