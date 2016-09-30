@@ -87,9 +87,10 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * This command allows you to create new Seeds.
      *
      * @param string $className
+     * @param string $tableName
      * @return boolean
      */
-    public function makeCommand($className)
+    public function makeCommand($className, $tableName)
     {
         $class = $this->namespace . '\\' . $className;
 
@@ -98,7 +99,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
             return false;
         }
 
-        $seederClass = $this->getSeederClass($this->namespace, $className);
+        $seederClass = $this->getSeederClass($this->namespace, $className, $tableName);
         $file = fopen(__DIR__ . '/../../../' . $this->path . $className . '.php', 'w');
         fwrite($file, $seederClass);
         fclose($file);
@@ -117,12 +118,13 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * @param string $className
      * @return string
      */
-    protected function getSeederClass($namespace, $className)
+    protected function getSeederClass($namespace, $className, $tableName)
     {
         $stub = file_get_contents(__DIR__ . '/../../../' . $this->stub);
 
         $stub = str_replace('{namespace}', $namespace, $stub);
         $stub = str_replace('{ClassName}', $className, $stub);
+        $stub = str_replace('{TableName}', $tableName, $stub);
 
         return $stub;
     }
