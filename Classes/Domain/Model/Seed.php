@@ -119,4 +119,23 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
 
         return $this;
     }
+
+    /**
+     * Overrides given properties
+     *
+     * @param array $properties
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function set(array $properties)
+    {
+        foreach ($properties as $property => $value) {
+            if (!isset($this->properties[$property])) {
+                throw new \InvalidArgumentException(
+                    'Property ' . $property . ' not found!'
+                );
+            }
+            $this->properties[$property] = $value;
+        }
+    }
 }

@@ -66,4 +66,10 @@ interface Seed
      * @return $this
      */
     public function setTarget($target);
+
+    /**
+     * @param array $properties
+     * @return mixed
+     */
+    public function set(array $properties);
 }
