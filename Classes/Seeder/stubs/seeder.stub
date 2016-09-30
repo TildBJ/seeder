@@ -1,10 +1,10 @@
 <?php
 namespace {namespace};
 
-use Dennis\Seeder\Seed;
+use Dennis\Seeder;
 
 /**
- * Class Test
+ * Class {ClassName}
  * @package {namespace}
  */
 class {ClassName} extends DatabaseSeeder
@@ -12,11 +12,9 @@ class {ClassName} extends DatabaseSeeder
     /**
      * Run the database seeds.
      *
-     * @param SeedInterface $seed
-     * @param \Dennis\Seeder\Faker $faker
      * @return void
      */
-    public function run(SeedInterface &$seed, \Dennis\Seeder\Faker $faker)
+    public function run()
     {
         //
     }
