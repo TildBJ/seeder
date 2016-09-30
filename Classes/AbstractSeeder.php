@@ -87,7 +87,7 @@ abstract class AbstractSeeder implements Seeder
      *
      * @param SeedCollection $seedCollection
      * @throws Connection\NotFoundException
-     * @return void
+     * @return bool
      */
     final public function seed(SeedCollection $seedCollection)
     {
@@ -99,16 +99,20 @@ abstract class AbstractSeeder implements Seeder
 
         $this->run();
 
+        $success = false;
+
         /** @var Seed $seed */
         foreach ($seedCollection as $seed) {
             if ($seed->getProperties() === false) {
                 continue;
             }
-            $this->connection->fetch($seed->getTarget(), $seed->getProperties());
+            $success = $this->connection->fetch($seed->getTarget(), $seed->getProperties());
         }
 
         $this->after();
 
         $seedCollection->destroy();
+
+        return $success;
     }
 }

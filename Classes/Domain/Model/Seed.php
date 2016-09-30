@@ -43,12 +43,12 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
     private $title = '';
 
     /**
-     * tableName
+     * target
      *
-     * @var string $tableName
+     * @var string $target
      * @validate NotEmpty
      */
-    private $tableName = '';
+    protected $target = '';
 
     /**
      * properties
@@ -104,36 +104,19 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
      */
     public function getTarget()
     {
-        return $this->tableName;
+        return $this->target;
     }
 
     /**
-     * @param string $tableName
+     * The target, for example the table name
+     *
+     * @param string $target
      * @return $this
      */
-    public function setTarget($tableName)
+    public function setTarget($target)
     {
-        $this->tableName = $tableName;
+        $this->target = $target;
 
         return $this;
-    }
-
-    /**
-     * @param string $tableName
-     * @return $this
-     */
-    public function setTableName($tableName)
-    {
-        $this->tableName = $tableName;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTableName()
-    {
-        return $this->tableName;
     }
 }

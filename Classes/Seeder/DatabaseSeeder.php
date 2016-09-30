@@ -44,7 +44,12 @@ abstract class DatabaseSeeder extends AbstractSeeder
      */
     protected function before()
     {
-        $this->setConnection(GeneralUtility::makeInstance(DatabaseConnection::class, $GLOBALS['TYPO3_DB']));
+        $connection = GeneralUtility::makeInstance(
+            DatabaseConnection::class,
+            $GLOBALS['TYPO3_DB'],
+            GeneralUtility::makeInstance(\Dennis\Seeder\Message\FlashMessage::class)
+        );
+        $this->setConnection($connection);
     }
 
     /**

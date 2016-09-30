@@ -39,7 +39,7 @@ interface Connection
      *
      * @param string $target
      * @param array $data
-     * @return void
+     * @return bool
      */
     public function fetch($target, array $data);
 }

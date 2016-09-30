@@ -18,14 +18,13 @@
 			</f:if>
 		</div>
 		<div class="form-group">
-			<label for="tableName"><f:translate key="tableName" /></label>
-			<f:debug>{seed.tableName}</f:debug>
+			<label for="target"><f:translate key="tableName" /></label>
 			<f:if condition="{action} != 'create'">
 				<f:then>
-					<f:form.textfield class="form-control" id="tableName" value="{seed.tableName}" additionalAttributes="{readonly: 'readonly'}" />
+					<f:form.textfield class="form-control" id="target" property="target" additionalAttributes="{readonly: 'readonly'}" />
 				</f:then>
 				<f:else>
-					<f:form.select class="form-control" id="tableName" options="{tables}" property="tableName" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" />
+					<f:form.select class="form-control" id="target" options="{tables}" property="target" prependOptionLabel="{f:translate(key: 'pleaseChoose')}" />
 				</f:else>
 			</f:if>
 		</div>
