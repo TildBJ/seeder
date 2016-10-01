@@ -67,12 +67,13 @@ class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
      * createColumn
      *
      * @param string $tableName
-     * @param array $columnConfiguration
+     * @param array $columnName
      * @return Model\ColumnInterface
      */
-    public static function createColumn($tableName, $columnConfiguration)
+    public static function createColumn($tableName, $columnName)
     {
-        $columnName = key($columnConfiguration);
+        $tableConfiguration = new TableConfiguration($tableName);
+        $columnConfiguration = $tableConfiguration->getColumnConfiguration($columnName);
         $key = $tableName . '.' . key($columnConfiguration);
         if (!in_array($key, self::$columns)) {
             self::$columns[$key] = self::getColumn($columnName, $columnConfiguration[key($columnConfiguration)]);
