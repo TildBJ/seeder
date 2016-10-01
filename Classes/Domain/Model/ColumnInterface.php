@@ -39,6 +39,11 @@ interface ColumnInterface
     public function getName();
 
     /**
+     * @return bool
+     */
+    public function isForeignKey();
+
+    /**
      * @return string
      */
     public function __toString();

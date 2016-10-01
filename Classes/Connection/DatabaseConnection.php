@@ -53,9 +53,16 @@ class DatabaseConnection implements Connection
     /**
      * closures
      *
-     * @var array
+     * @var array $closures
      */
     protected $closures;
+
+    /**
+     * lastInsertId
+     *
+     * @var integer $lastInsertId
+     */
+    protected $lastInsertId;
 
     /**
      * DatabaseConnection constructor.
@@ -82,9 +89,7 @@ class DatabaseConnection implements Connection
     {
         foreach ($seed->getProperties() as $column => $property) {
             if (get_class($property) === 'Closure') {
-                echo ('<pre>');var_dump($column);echo __LINE__;die();
-                $this->closures[] = $property;
-                // Todo: $property unsetten, wenn insert fehlschlägt
+                $this->closures[$column] = $property;
             }
         }
         $this->connection->exec_INSERTquery($seed->getTarget(), $seed->getProperties());
@@ -93,11 +98,12 @@ class DatabaseConnection implements Connection
                 $this->connection->sql_error()
             );
         }
-        $lastInsertId = $this->connection->getDatabaseHandle()->insert_id;
+        $this->lastInsertId = $this->connection->getDatabaseHandle()->insert_id;
 
-        foreach ($this->closures as $closure) {
-            call_user_func($closure($lastInsertId, 'parent'));
-            $this->connection->exec_UPDATEquery($seed->getTarget(), 'uid = ' . $lastInsertId, ['$column' => '$lastInsertId']);
+        foreach ($this->closures as $column => $closure) {
+            $uid = $this->lastInsertId;
+            $count = $closure($uid, 'parent');
+            $this->connection->exec_UPDATEquery($seed->getTarget(), 'uid = ' . $uid, [$column => $count]);
         }
 
         return true;

@@ -25,6 +25,7 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Domain\Model\Column\OneToManyInterface;
 
 /**
  * Class Column
@@ -55,6 +56,19 @@ abstract class Column implements ColumnInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * isForeignKey
+     *
+     * @return bool
+     */
+    public function isForeignKey()
+    {
+        if ($this instanceof OneToManyInterface && $this->getForeignTable() !== null) {
+            return true;
+        }
+        return false;
     }
 
     /**

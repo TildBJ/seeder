@@ -27,6 +27,7 @@ namespace Dennis\Seeder\Factory;
  ***************************************************************/
 use Dennis\Seeder\Provider\TableConfiguration;
 use Dennis\Seeder\Domain\Model;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class TableFactory
@@ -49,11 +50,12 @@ class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
      * Provides a Table
      *
      * @param string $tableName
-     * @param TableConfiguration $tableConfiguration
      * @return Model\TableInterface
      */
-    public static function createTable($tableName, TableConfiguration $tableConfiguration)
+    public static function createTable($tableName)
     {
+        /** @var TableConfiguration $tableConfiguration */
+        $tableConfiguration = GeneralUtility::makeInstance(TableConfiguration::class, $tableName);
         if (!in_array($tableName, self::$tables)) {
             self::$tables[$tableName] = new Model\Table($tableConfiguration);
         }

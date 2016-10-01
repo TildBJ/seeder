@@ -86,10 +86,11 @@ abstract class AbstractSeeder implements Seeder
      * seed
      *
      * @param SeedCollection $seedCollection
+     * @param array $overrideProperties
      * @throws Connection\NotFoundException
      * @return bool
      */
-    final public function seed(SeedCollection $seedCollection)
+    final public function seed(SeedCollection $seedCollection, array $overrideProperties = [])
     {
         $this->before();
 
@@ -99,11 +100,17 @@ abstract class AbstractSeeder implements Seeder
 
         $this->run();
 
+        foreach ($overrideProperties as $column => $value) {
+            /** @var Seed $seed */
+            foreach ($seedCollection as $seed) {
+                $seed->set([$column => $value]);
+            }
+        }
+
         $success = false;
 
         /** @var Seed $seed */
         foreach ($seedCollection as $seed) {
-            print_r($seed->getTarget() . PHP_EOL);
             if ($seed->getProperties() === false) {
                 continue;
             }
@@ -112,8 +119,6 @@ abstract class AbstractSeeder implements Seeder
 
         $this->after();
 
-        $seedCollection->destroy();
-
         return $success;
     }
 
@@ -121,20 +126,18 @@ abstract class AbstractSeeder implements Seeder
      * @param $className
      * @return \Closure
      */
-    protected function call($className)
+    final protected function call($className)
     {
         /** @var self $class */
         $class = new $className;
 
         return function($lastInsertId, $column) use ($class) {
-            /** @var SeedCollection $seedCollection */
+            /** @var \Dennis\Seeder\Collection\SeedCollection $seedCollection */
             $seedCollection = GeneralUtility::makeInstance(\Dennis\Seeder\Collection\SeedCollection::class);
             $seedCollection->destroy();
-            $class->run();
-            /** @var Seed $seed */
-            foreach ($seedCollection as $seed) {
-                $seed->set([$column => $lastInsertId]);
-            }
+            $class->seed($seedCollection, [$column => $lastInsertId]);
+
+            return $seedCollection->count();
         };
     }
 }

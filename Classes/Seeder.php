@@ -53,8 +53,9 @@ interface Seeder
      * seed
      *
      * @param SeedCollection $seedCollection
+     * @param array $overrideProperties
      * @throws Connection\NotFoundException
      * @return bool
      */
-    public function seed(SeedCollection $seedCollection);
+    public function seed(SeedCollection $seedCollection, array $overrideProperties);
 }
