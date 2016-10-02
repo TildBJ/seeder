@@ -78,7 +78,6 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         /** @var \Dennis\Seeder\SeedCollection $seedCollection */
         $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
         $seeder->seed($seedCollection);
-        $seedCollection->destroy();
 
         return true;
     }

@@ -57,11 +57,4 @@ interface SeedCollection
      * @return void
      */
     public function detach(Seed $seed);
-
-    /**
-     * destroy
-     *
-     * @return void
-     */
-    public function destroy();
 }

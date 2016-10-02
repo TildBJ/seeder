@@ -12,11 +12,11 @@ class {ClassName} extends DatabaseSeeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return Seeder\SeedCollection
      */
     public function run()
     {
-        $this->factory->create('{TableName}')->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
+        return $this->factory->create('{TableName}')->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
             $seed->set([
                 'pid' => 1,
                 'crdate' => $faker->getUnixTime(),

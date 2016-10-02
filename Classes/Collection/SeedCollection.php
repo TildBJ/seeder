@@ -34,7 +34,7 @@ use Dennis\Seeder\Seed;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Countable, \TYPO3\CMS\Core\SingletonInterface
+class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Countable
 {
     /**
      * seeds
@@ -47,12 +47,15 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
      * each
      *
      * @param callable $function
+     * @return $this
      */
     public function each(callable $function)
     {
         foreach ($this->seeds as $key => $seed) {
             $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
         }
+
+        return $this;
     }
 
     /**
@@ -139,15 +142,5 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
     public function count()
     {
         return count($this->seeds);
-    }
-
-    /**
-     * destroy
-     *
-     * @return void
-     */
-    public function destroy()
-    {
-        $this->seeds = [];
     }
 }

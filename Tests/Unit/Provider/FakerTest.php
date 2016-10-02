@@ -207,6 +207,7 @@ class FakerTest extends UnitTestCase
             ['description', 'text'],
             ['middlename', 'name'],
             ['www', 'url'],
+            ['uri', 'url'],
             ['image', 'imageurl'],
             ['lastlogin', 'unixtime'],
             ['starttime', 'unixtime'],

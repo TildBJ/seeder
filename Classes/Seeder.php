@@ -45,7 +45,7 @@ interface Seeder
     /**
      * Runs the Seeder process.
      *
-     * @return void
+     * @return SeedCollection
      */
     public function run();
 
@@ -57,5 +57,5 @@ interface Seeder
      * @throws Connection\NotFoundException
      * @return bool
      */
-    public function seed(SeedCollection $seedCollection, array $overrideProperties);
+    public function seed(SeedCollection $seedCollection, array $overrideProperties = []);
 }

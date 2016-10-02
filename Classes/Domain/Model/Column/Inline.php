@@ -50,6 +50,11 @@ class Inline extends Column implements InlineInterface
     protected $foreignTableWhere;
 
     /**
+     * @var string
+     */
+    protected $foreignField;
+
+    /**
      * @return array
      */
     protected $items;
@@ -81,6 +86,7 @@ class Inline extends Column implements InlineInterface
         $this->foreignType = $configuration['foreign_type'];
         $this->foreignTable = $configuration['foreign_table'];
         $this->foreignTableWhere = $configuration['foreign_table_where'];
+        $this->foreignField = $configuration['foreign_field'];
         $this->items = $configuration['items'];
         $this->maxItems = $configuration['maxitems'];
         $this->minItems = $configuration['minitems'];
@@ -101,6 +107,16 @@ class Inline extends Column implements InlineInterface
     public function getForeignTable()
     {
         return $this->foreignTable;
+    }
+
+    /**
+     * getForeignField
+     *
+     * @return mixed
+     */
+    public function getForeignField()
+    {
+     return $this->foreignField;
     }
 
     /**

@@ -45,6 +45,11 @@ interface OneToManyInterface extends ColumnInterface
     public function getForeignTableWhere();
 
     /**
+     * @return string
+     */
+    public function getForeignField();
+
+    /**
      * @return array
      */
     public function getItems();

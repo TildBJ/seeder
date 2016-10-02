@@ -87,9 +87,9 @@ class DatabaseConnection implements Connection
      */
     public function fetch(Seed $seed)
     {
-        foreach ($seed->getProperties() as $column => $property) {
+        foreach ($seed->getProperties() as $columnName => $property) {
             if (get_class($property) === 'Closure') {
-                $this->closures[$column] = $property;
+                $this->closures[$columnName] = $property;
             }
         }
         $this->connection->exec_INSERTquery($seed->getTarget(), $seed->getProperties());
@@ -100,10 +100,11 @@ class DatabaseConnection implements Connection
         }
         $this->lastInsertId = $this->connection->getDatabaseHandle()->insert_id;
 
-        foreach ($this->closures as $column => $closure) {
+        foreach ($this->closures as $columnName => $closure) {
+            $column = \Dennis\Seeder\Factory\TableFactory::createColumn($seed->getTarget(), $columnName);
             $uid = $this->lastInsertId;
-            $count = $closure($uid, 'parent');
-            $this->connection->exec_UPDATEquery($seed->getTarget(), 'uid = ' . $uid, [$column => $count]);
+            $count = $closure($uid, $column->getForeignField());
+            $this->connection->exec_UPDATEquery($seed->getTarget(), 'uid = ' . $uid, [$columnName => $count]);
         }
 
         return true;

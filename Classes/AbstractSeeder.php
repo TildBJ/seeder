@@ -98,7 +98,7 @@ abstract class AbstractSeeder implements Seeder
             throw new Connection\NotFoundException('Connection not found.');
         }
 
-        $this->run();
+        $seedCollection = $this->run();
 
         foreach ($overrideProperties as $column => $value) {
             /** @var Seed $seed */
@@ -134,7 +134,6 @@ abstract class AbstractSeeder implements Seeder
         return function($lastInsertId, $column) use ($class) {
             /** @var \Dennis\Seeder\Collection\SeedCollection $seedCollection */
             $seedCollection = GeneralUtility::makeInstance(\Dennis\Seeder\Collection\SeedCollection::class);
-            $seedCollection->destroy();
             $class->seed($seedCollection, [$column => $lastInsertId]);
 
             return $seedCollection->count();

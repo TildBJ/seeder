@@ -212,6 +212,7 @@ class Faker implements \Dennis\Seeder\Faker
         'domainword' => 'domainWord',
         'tld' => 'tld',
         'url' => 'url',
+        'uri' => 'url',
         'slug' => 'slug',
         'ipv4' => 'ipv4',
         'ipv6' => 'ipv6',
