@@ -131,7 +131,7 @@ abstract class AbstractSeeder implements Seeder
         /** @var self $class */
         $class = new $className;
 
-        return function($lastInsertId, $column) use ($class) {
+        return function ($lastInsertId, $column) use ($class) {
             /** @var \Dennis\Seeder\Collection\SeedCollection $seedCollection */
             $seedCollection = GeneralUtility::makeInstance(\Dennis\Seeder\Collection\SeedCollection::class);
             $class->seed($seedCollection, [$column => $lastInsertId]);
