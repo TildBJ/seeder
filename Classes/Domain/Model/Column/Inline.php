@@ -116,7 +116,7 @@ class Inline extends Column implements InlineInterface
      */
     public function getForeignField()
     {
-     return $this->foreignField;
+        return $this->foreignField;
     }
 
     /**

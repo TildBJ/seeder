@@ -212,7 +212,6 @@ class Faker implements \Dennis\Seeder\Faker
         'domainword' => 'domainWord',
         'tld' => 'tld',
         'url' => 'url',
-        'uri' => 'url',
         'slug' => 'slug',
         'ipv4' => 'ipv4',
         'ipv6' => 'ipv6',
@@ -354,6 +353,7 @@ class Faker implements \Dennis\Seeder\Faker
                 return 'text';
             case 'middlename':
                 return 'name';
+            case 'uri':
             case 'www':
                 return 'url';
             case 'image':
