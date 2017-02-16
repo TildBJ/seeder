@@ -24,6 +24,7 @@ namespace Dennis\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Collection\SeedCollection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -54,7 +55,10 @@ abstract class AbstractSeeder implements Seeder
      */
     public function __construct()
     {
-        $this->factory = GeneralUtility::makeInstance(Factory\SeederFactory::class);
+        $this->factory = GeneralUtility::makeInstance(
+            Factory\SeederFactory::class,
+            \Dennis\Seeder\Factory\FakerFactory::createFaker()
+        );
     }
 
     /**
@@ -85,12 +89,10 @@ abstract class AbstractSeeder implements Seeder
     /**
      * seed
      *
-     * @param SeedCollection $seedCollection
-     * @param array $overrideProperties
      * @throws Connection\NotFoundException
      * @return bool
      */
-    final public function seed(SeedCollection $seedCollection, array $overrideProperties = [])
+    final public function seed()
     {
         $this->before();
 
@@ -98,45 +100,43 @@ abstract class AbstractSeeder implements Seeder
             throw new Connection\NotFoundException('Connection not found.');
         }
 
-        $seedCollection = $this->run();
+        /** @var SeedCollection $seedCollection */
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
 
-        foreach ($overrideProperties as $column => $value) {
-            /** @var Seed $seed */
-            foreach ($seedCollection as $seed) {
-                $seed->set([$column => $value]);
-            }
-        }
-
-        $success = false;
-
-        /** @var Seed $seed */
-        foreach ($seedCollection as $seed) {
-            if ($seed->getProperties() === false) {
-                continue;
-            }
-            $success = $this->connection->fetch($seed);
-        }
+        $success = $this->connection->fetch($seedCollection->toArray());
 
         $this->after();
 
         return $success;
     }
 
+    protected function getKeys()
+    {
+        /** @var SeedCollection $seedCollection */
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        $keyArray = $seedCollection->get($this);
+        if (!is_array($keyArray)) {
+            return '';
+        }
+        return implode(',', array_keys($keyArray));
+    }
+
     /**
      * @param $className
-     * @return \Closure
+     * @throws \TYPO3\CMS\Extbase\Object\InvalidClassException
+     * @return string
      */
     final protected function call($className)
     {
+        if ($className === get_class($this)) {
+            throw new \TYPO3\CMS\Extbase\Object\InvalidClassException('Invalid loop detected in ' . $className);
+        }
         /** @var self $class */
         $class = new $className;
+        $class->run();
+        $keys = $class->getKeys();
 
-        return function ($lastInsertId, $column) use ($class) {
-            /** @var \Dennis\Seeder\Collection\SeedCollection $seedCollection */
-            $seedCollection = GeneralUtility::makeInstance(\Dennis\Seeder\Collection\SeedCollection::class);
-            $class->seed($seedCollection, [$column => $lastInsertId]);
-
-            return $seedCollection->count();
-        };
+        return $keys;
     }
 }

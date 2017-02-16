@@ -25,7 +25,8 @@ namespace Dennis\Seeder\Connection;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Dennis\Seeder\Connection;
-use Dennis\Seeder\Seed;
+use Dennis\Seeder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * DatabaseConnection
@@ -72,7 +73,7 @@ class DatabaseConnection implements Connection
      */
     public function __construct(
         \TYPO3\CMS\Core\Database\DatabaseConnection $connection,
-        \Dennis\Seeder\Message $message
+        Seeder\Message $message
     ) {
         $this->connection = $connection;
         $this->message = $message;
@@ -81,31 +82,18 @@ class DatabaseConnection implements Connection
     /**
      * fetch
      *
-     * @param Seed $seed
-     * @throws \Dennis\Seeder\Exception
+     * @param array $seedArray
+     * @throws Seeder\Exception
      * @return bool
      */
-    public function fetch(Seed $seed)
+    public function fetch(array $seedArray)
     {
-        foreach ($seed->getProperties() as $columnName => $property) {
-            if (get_class($property) === 'Closure') {
-                $this->closures[$columnName] = $property;
-            }
-        }
-        $this->connection->exec_INSERTquery($seed->getTarget(), $seed->getProperties());
-        if ($this->connection->sql_error()) {
-            throw new \Dennis\Seeder\Exception(
-                $this->connection->sql_error()
-            );
-        }
-        $this->lastInsertId = $this->connection->getDatabaseHandle()->insert_id;
-
-        foreach ($this->closures as $columnName => $closure) {
-            $column = \Dennis\Seeder\Factory\TableFactory::createColumn($seed->getTarget(), $columnName);
-            $uid = $this->lastInsertId;
-            $count = $closure($uid, $column->getForeignField());
-            $this->connection->exec_UPDATEquery($seed->getTarget(), 'uid = ' . $uid, [$columnName => $count]);
-        }
+        /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler */
+        $dataHandler = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
+        $GLOBALS['BE_USER']->user['admin'] = true;
+        $dataHandler->start($seedArray, '');
+        $dataHandler->process_datamap();
+        $dataHandler->clear_cacheCmd('pages');
 
         return true;
     }

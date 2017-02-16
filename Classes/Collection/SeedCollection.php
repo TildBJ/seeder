@@ -26,6 +26,8 @@ namespace Dennis\Seeder\Collection;
  ***************************************************************/
 
 use Dennis\Seeder\Seed;
+use Dennis\Seeder\Seeder;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * SeedCollection
@@ -34,7 +36,7 @@ use Dennis\Seeder\Seed;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Countable
+class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Countable, SingletonInterface
 {
     /**
      * seeds
@@ -44,6 +46,66 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
     protected $seeds = [];
 
     /**
+     * Used Keys
+     *
+     * @var array
+     */
+    protected $used = [];
+
+    /**
+     * @var int
+     */
+    protected $i = 0;
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $return = [];
+
+        /** @var Seed $seed */
+        foreach ($this->seeds as $key => $seeds) {
+            foreach ($seeds as $seed) {
+                $return[$seed->getTarget()][$key] = $seed->getProperties();
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param Seeder $seed
+     * @return array
+     */
+    public function get(Seeder $seed)
+    {
+        $return = [];
+        foreach ($this->seeds as $key => $seeds) {
+            foreach ($seeds as $title => $test) {
+                if ($title === get_class($seed)) {
+                    if ($this->isUsed($key)) {
+                        continue;
+                    }
+                    $this->used[$key] = 1;
+                    $return[$key] = $test;
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function isUsed($key)
+    {
+        return isset($this->used[$key]);
+    }
+
+    /**
      * each
      *
      * @param callable $function
@@ -51,36 +113,34 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
      */
     public function each(callable $function)
     {
-        foreach ($this->seeds as $key => $seed) {
-            $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
+        foreach ($this->seeds as $key => $seeds) {
+            foreach ($seeds as $seed) {
+                $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
+            }
         }
 
         return $this;
     }
 
     /**
-     * attach
-     *
      * @param Seed $seed
-     * @return void
+     * @throws \Exception
      */
     public function attach(Seed $seed)
     {
-        if (!array_key_exists(spl_object_hash($seed), $this->seeds)) {
-            $this->seeds[spl_object_hash($seed)] = $seed;
-        }
+        $this->seeds['NEW' . ++$this->i][$seed->getTitle()] = $seed;
     }
 
     /**
      * detach
      *
-     * @param Seed $seed
+     * @param string $key
      * @return void
      */
-    public function detach(Seed $seed)
+    public function detach($key)
     {
-        if (array_key_exists($seed->getTitle(), $this->seeds)) {
-            unset($this->seeds[$seed->getTitle()]);
+        if (isset($this->seeds[$key])) {
+            unset($this->seeds[$key]);
         }
     }
 
@@ -142,5 +202,13 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
     public function count()
     {
         return count($this->seeds);
+    }
+
+    /**
+     * @return void
+     */
+    public function clear()
+    {
+        $this->seeds = [];
     }
 }

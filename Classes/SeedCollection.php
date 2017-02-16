@@ -38,7 +38,7 @@ interface SeedCollection
      * each
      *
      * @param callable $function
-     * @return void
+     * @return $this
      */
     public function each(callable $function);
 
@@ -53,8 +53,24 @@ interface SeedCollection
     /**
      * detach
      *
-     * @param Seed $seed
+     * @param string $key
      * @return void
      */
-    public function detach(Seed $seed);
+    public function detach($key);
+
+    /**
+     * @return array
+     */
+    public function toArray();
+
+    /**
+     * @param Seeder $seed
+     * @return array
+     */
+    public function get(Seeder $seed);
+
+    /**
+     * @return void
+     */
+    public function clear();
 }

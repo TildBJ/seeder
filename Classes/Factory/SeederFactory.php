@@ -40,9 +40,9 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
      */
     protected $faker;
 
-    public function __construct()
+    public function __construct(Seeder\Faker $faker)
     {
-        $this->faker = FakerFactory::createFaker();
+        $this->faker = $faker;
     }
 
     /**
@@ -64,32 +64,13 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
             foreach ($tableConfiguration->getColumns() as $column) {
                 $row[$column] = $this->faker->get($column);
             }
+
+            list(, $calledClass) = debug_backtrace(false, 2);
             /** @var Seeder\Seed $seed */
             $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
             $seed->setTarget($name)
+                ->setTitle($calledClass['class'])
                 ->setProperties($row);
-            $seedCollection->attach($seed);
-        }
-
-        return $seedCollection;
-    }
-
-    /**
-     * Creates a new SeedCollection
-     *
-     * @param string $name
-     * @param int $limit
-     * @return Seeder\SeedCollection
-     */
-    public function make($name, $limit = 1)
-    {
-        /** @var Seeder\SeedCollection $seedCollection */
-        $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
-        for ($i = 1; $i <= $limit; $i++) {
-            /** @var Seeder\Seed $seed */
-            $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
-            $seed =
-            $seed->setTarget($name);
             $seedCollection->attach($seed);
         }
 

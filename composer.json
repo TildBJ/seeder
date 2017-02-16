@@ -23,7 +23,8 @@
   "require-dev": {
     "typo3/cms": "~7.6",
     "phpunit/phpunit": "~4.8",
-    "squizlabs/php_codesniffer": "~2.6"
+    "squizlabs/php_codesniffer": "~2.6",
+    "symfony/var-dumper": "^3.2"
   },
   "autoload-dev": {
     "psr-4": {
@@ -48,5 +49,8 @@
               "partOfMinimalUsableSystem": true
           }
       }
+  },
+  "require": {
+    "fzaninotto/Faker": "^1.6"
   }
 }

@@ -37,8 +37,8 @@ interface Connection
     /**
      * fetch
      *
-     * @param Seed $seed
+     * @param array $seedArray
      * @return bool
      */
-    public function fetch(Seed $seed);
+    public function fetch(array $seedArray);
 }
