@@ -173,8 +173,8 @@ class SeedTest extends UnitTestCase
      */
     public function simpleRelation()
     {
-        /** @var \Dennis\Seeder\Seeder\User $userSeed */
-        $userSeed = GeneralUtility::makeInstance(\Dennis\Seeder\Seeder\User::class);
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
         $userSeed->run();
         $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
 

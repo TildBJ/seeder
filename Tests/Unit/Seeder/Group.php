@@ -6,8 +6,10 @@ use Dennis\Seeder;
 /**
  * Class User
  * @package Dennis\Seeder\Seeder
+ *
+ * @example
  */
-class Group
+class Group extends Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.

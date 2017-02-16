@@ -9,7 +9,7 @@ use Dennis\Seeder;
  *
  * @example
  */
-class User
+class User extends Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.
