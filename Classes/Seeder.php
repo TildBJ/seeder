@@ -45,7 +45,7 @@ interface Seeder
     /**
      * Runs the Seeder process.
      *
-     * @return SeedCollection
+     * @return void
      */
     public function run();
 
