@@ -16,5 +16,5 @@ before_script:
   - composer install --prefer-source --no-interaction --dev
 
 script:
-  - .Build/bin/phpcs --standard=PSR2 *.php Classes Tests
+  - .Build/bin/phpcs --standard=PSR2 *.php Classes Tests --ignore=Tests/Unit/Seeder/SeedTest.php
   - TYPO3_PATH_WEB=".Build/Web" .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Unit/
