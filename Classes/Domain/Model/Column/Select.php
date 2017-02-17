@@ -64,6 +64,11 @@ class Select extends Column implements SelectInterface
      */
     protected $size;
 
+    /*
+     * @var string
+     */
+    protected $foreignField;
+
     /**
      * Input constructor.
      *
@@ -74,6 +79,7 @@ class Select extends Column implements SelectInterface
     {
         parent::__construct($columnName);
         $this->foreignTable = $configuration['foreign_table'];
+        $this->foreignField = $configuration['foreign_field'];
         $this->foreignTableWhere = $configuration['foreign_table_where'];
         $this->items = $configuration['items'];
         $this->maxItems = $configuration['maxitems'];
@@ -127,5 +133,10 @@ class Select extends Column implements SelectInterface
     public function getSize()
     {
         return $this->size;
+    }
+
+    public function getForeignField()
+    {
+        return $this->foreignField;
     }
 }

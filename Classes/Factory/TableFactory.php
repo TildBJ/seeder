@@ -67,7 +67,7 @@ class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
      * createColumn
      *
      * @param string $tableName
-     * @param array $columnName
+     * @param string $columnName
      * @return Model\ColumnInterface
      */
     public static function createColumn($tableName, $columnName)

@@ -26,6 +26,7 @@ namespace Dennis\Seeder\Command;
  ***************************************************************/
 
 use Dennis\Seeder\Collection\SeedCollection;
+use Dennis\Seeder\Domain\Model\ColumnInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -81,6 +82,34 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         return true;
     }
 
+    protected function detectSeederInformations($tableName)
+    {
+        $informations = [];
+
+        $table = \Dennis\Seeder\Factory\TableFactory::createTable($tableName);
+        /** @var ColumnInterface $column */
+        foreach ($table->getColumns() as $column) {
+            switch ($column->getName()) {
+                case 'sys_language_uid':
+                    $informations['sys_language_uid'] = $this->output->ask('Enter Language uid <fg=yellow>[0]</>: ', 0);
+                    break;
+                case 'hidden':
+                    $informations['hidden'] = $this->output->select('Would you like to create hidden data? <fg=yellow>[0]</>: ', [0 => 'Only visible Data', 1 => 'Random', 2 => 'Only hidden Data'], 0);
+                    break;
+                case 'pid':
+                    while (!$informations['pid']) {
+                        $informations['pid'] = $this->output->ask('Enter an existing Page ID for your records: ');
+                    }
+                case 'crdate':
+                    $informations['crdate'] = $this->output->ask('Enter a type for crdate: ', 'datetime');
+                default:
+                    $this->output->ask($column->getName());
+                    break;
+            }
+        }
+        die();
+    }
+
     /**
      * This command allows you to create new Seeds.
      *
@@ -97,6 +126,11 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
             return false;
         }
 
+        if (!isset($GLOBALS['TCA'][$tableName])) {
+            $this->outputAndExit('Configuration for ' . $tableName . ' not Found!');
+        }
+        $informations = $this->detectSeederInformations($tableName);
+
         $seederClass = $this->getSeederClass($this->namespace, $className, $tableName);
         $file = fopen(__DIR__ . '/../../../' . $this->path . $className . '.php', 'w');
         fwrite($file, $seederClass);
@@ -107,6 +141,15 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         );
 
         return true;
+    }
+
+    /**
+     * @param $string
+     */
+    protected function outputAndExit($string)
+    {
+        $this->output->outputLine('<error> ' . $string . ' </error>');
+        exit;
     }
 
     /**

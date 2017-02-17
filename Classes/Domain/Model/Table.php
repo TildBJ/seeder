@@ -55,7 +55,7 @@ class Table implements TableInterface
         foreach ($tableConfiguration->getColumns() as $columnName) {
             $this->columns[] = TableFactory::createColumn(
                 $tableConfiguration->getName(),
-                $tableConfiguration->getColumnConfiguration($columnName)
+                $columnName
             );
         }
         $this->name = $tableConfiguration->getName();

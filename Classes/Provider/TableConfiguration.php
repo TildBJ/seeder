@@ -100,18 +100,24 @@ class TableConfiguration
     /**
      * getColumnConfiguration
      *
-     * @param $column
+     * @param string $columnName
      * @return array
      */
-    public function getColumnConfiguration($column)
+    public function getColumnConfiguration($columnName)
     {
-        if (!isset($this->tableConfiguration['columns'][$column])) {
+        if (!is_string($columnName)) {
             throw new \InvalidArgumentException(
-                'Column ' . $column . ' does not exist for table ' . $this->name
+                'Columns must be type of string. Type of ' . gettype($columnName) . ' given.'
+            );
+        }
+        if (!isset($this->tableConfiguration['columns'][$columnName])) {
+            dump($columnName);
+            throw new \InvalidArgumentException(
+                'Column' . $columnName . ' does not exist for table ' . $this->name
             );
         }
 
-        return array($column => $this->tableConfiguration['columns'][$column]['config']);
+        return array($columnName => $this->tableConfiguration['columns'][$columnName]['config']);
     }
 
     /**
