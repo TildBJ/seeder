@@ -1,11 +1,10 @@
 <?php
-namespace Dennis\Seeder\Factory;
-
+namespace Dennis\Seeder\Information;
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
+ *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
  *
  *  All rights reserved
  *
@@ -27,43 +26,42 @@ namespace Dennis\Seeder\Factory;
  ***************************************************************/
 
 /**
- * Class FakerFactory
+ * Class HiddenInformation
  *
- * @package Dennis\Seeder\Factory\TableFactory
+ * @package Dennis\Seeder\Information\HiddenInformation
  */
-class FakerFactory
+class HiddenInformation extends AbstractInformation
 {
     /**
-     * instance
-     *
-     * @var \Dennis\Seeder\Provider\Faker $instance
+     * @var string
      */
-    protected static $instance = null;
+    protected $question = 'Would you like to create hidden data? ';
 
-    protected function __construct()
+    /**
+     * @return int
+     */
+    public function getDefaultValue()
     {
-    }
-
-    protected function __clone()
-    {
+        return 0;
     }
 
     /**
-     * Provides a Faker
-     *
-     * @return \Dennis\Seeder\Provider\Faker
+     * @return array
      */
-    public static function createFaker()
+    public function getChoices()
     {
-        if (!is_null(self::$instance)) {
-            return self::$instance;
-        }
+        return [
+            0 => 'Only visible Data',
+            1 => 'Random',
+            2 => 'Only hidden Data'
+        ];
+    }
 
-        $generator = \Faker\Factory::create();
-        $faker = new \Dennis\Seeder\Provider\Faker($generator);
-
-        self::$instance = $faker;
-
-        return $faker;
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return self::INFORMATION_TYPE_SELECT;
     }
 }

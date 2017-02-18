@@ -25,7 +25,6 @@ namespace Dennis\Seeder\Command;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Dennis\Seeder\Collection\SeedCollection;
 use Dennis\Seeder\Domain\Model\ColumnInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -82,32 +81,114 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         return true;
     }
 
+    /**
+     * @param $tableName
+     * @return array
+     * @throws \Exception
+     */
     protected function detectSeederInformations($tableName)
     {
         $informations = [];
+        $faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
 
         $table = \Dennis\Seeder\Factory\TableFactory::createTable($tableName);
+
+        $skippingFields = [
+            'l10n_parent',
+            'l10n_diffsource',
+            'cruser_id',
+            'TSconfig',
+            'tx_extbase_type',
+            'felogin_redirectPid',
+            't3ver_label',
+        ];
         /** @var ColumnInterface $column */
         foreach ($table->getColumns() as $column) {
-            switch ($column->getName()) {
-                case 'sys_language_uid':
-                    $informations['sys_language_uid'] = $this->output->ask('Enter Language uid <fg=yellow>[0]</>: ', 0);
-                    break;
-                case 'hidden':
-                    $informations['hidden'] = $this->output->select('Would you like to create hidden data? <fg=yellow>[0]</>: ', [0 => 'Only visible Data', 1 => 'Random', 2 => 'Only hidden Data'], 0);
-                    break;
-                case 'pid':
-                    while (!$informations['pid']) {
-                        $informations['pid'] = $this->output->ask('Enter an existing Page ID for your records: ');
+            if (in_array($column->getName(), $skippingFields)) {
+                continue;
+            }
+            $provider = $faker->guessProvider($column->getName());
+            $informationClassName = 'Dennis\\Seeder\\Information\\' . ucfirst(GeneralUtility::underscoredToLowerCamelCase($column->getName()) . 'Information');
+            $relationInformationAvailable = false;
+            if (class_exists($informationClassName)) {
+                $information = GeneralUtility::makeInstance($informationClassName);
+            } elseif ($this->isRelation($column)) {
+                $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\RelationInformation::class);
+                $relationInformationAvailable = true;
+            } else {
+                $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\DefaultInformation::class);
+                $information->setDefaultValue($provider);
+            }
+            if (!$information instanceof \Dennis\Seeder\Information) {
+                throw new \Exception($informationClassName . ' must implement ' . \Dennis\Seeder\Information::class);
+            }
+
+            if ($this->isRelation($column) && $relationInformationAvailable) {
+                $createNewSeeder = $this->askOrSelect($information->getQuestion([$column->getName()]), 'n');
+                if (strtolower($createNewSeeder) === 'y' || strtolower($createNewSeeder) === 'yes' || $createNewSeeder == 1) {
+                    $className = '';
+                    while (!$className) {
+                        $className = $this->output->ask('<fg=yellow>Please specify the required argument "--class-name" (<fg=green>' . $column->getForeignTable() . '</>):</> ');
                     }
-                case 'crdate':
-                    $informations['crdate'] = $this->output->ask('Enter a type for crdate: ', 'datetime');
-                default:
-                    $this->output->ask($column->getName());
-                    break;
+                    $this->makeCommand($className, $column->getForeignTable());
+                    $informations[$column->getName()] = '$this->call(' . $className . '::class)';
+                }
+            } else {
+                switch ($information->getType()) {
+                    case \Dennis\Seeder\Information::INFORMATION_TYPE_ASK:
+                        if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue()))) {
+                            try {
+                                $informations[$column->getName()] = '$faker->get' . ucfirst($faker->getProviderNameByKey($response)) . '()';
+                            } catch (\TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException $e) {
+                                $informations[$column->getName()] = $response;
+                            }
+                        }
+                        break;
+                    case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECT:
+                    case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECTMULTIPLE:
+                        if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue(), $information->getChoices()))) {
+                            try {
+                                $informations[$column->getName()] = '$faker->get' . ucfirst($faker->getProviderNameByKey($response)) . '()';
+                            } catch (\TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException $e) {
+                                $informations[$column->getName()] = $response;
+                            }
+                        }
+                        break;
+                }
             }
         }
-        die();
+
+        return $informations;
+    }
+
+    /**
+     * @param ColumnInterface $column
+     * @return bool
+     */
+    protected function isRelation(ColumnInterface $column)
+    {
+        return (
+        (
+            $column instanceof \Dennis\Seeder\Domain\Model\Column\Select ||
+            $column instanceof \Dennis\Seeder\Domain\Model\Column\Inline ||
+            $column instanceof \Dennis\Seeder\Domain\Model\Column\Group
+        ) &&
+            $column->getForeignTable()
+        );
+    }
+
+    /**
+     * @param $question
+     * @param $defaultValue
+     * @param null $choices
+     * @return array|int|string
+     */
+    protected function askOrSelect($question, $defaultValue, $choices = null)
+    {
+        if (is_null($choices)) {
+            return $this->output->ask($question, $defaultValue);
+        }
+        return $this->output->select($question, $choices, $defaultValue);
     }
 
     /**
@@ -131,7 +212,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         }
         $informations = $this->detectSeederInformations($tableName);
 
-        $seederClass = $this->getSeederClass($this->namespace, $className, $tableName);
+        $seederClass = $this->getSeederClass($this->namespace, $className, $tableName, $informations);
         $file = fopen(__DIR__ . '/../../../' . $this->path . $className . '.php', 'w');
         fwrite($file, $seederClass);
         fclose($file);
@@ -157,15 +238,21 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      *
      * @param string $namespace
      * @param string $className
+     * @param array $informations
      * @return string
      */
-    protected function getSeederClass($namespace, $className, $tableName)
+    protected function getSeederClass($namespace, $className, $tableName, $informations)
     {
         $stub = file_get_contents(__DIR__ . '/../../../' . $this->stub);
 
         $stub = str_replace('{namespace}', $namespace, $stub);
         $stub = str_replace('{ClassName}', $className, $stub);
         $stub = str_replace('{TableName}', $tableName, $stub);
+        $informations = var_export($informations, true);
+        $pattern = '/(\'.*\'\s=>\s)\'(\$.+->\w+\(.*\))\'/';
+        $replacement = '${1}${2}';
+        $informations = preg_replace($pattern, $replacement, $informations);
+        $stub = str_replace('{informations}', $informations, $stub);
 
         return $stub;
     }

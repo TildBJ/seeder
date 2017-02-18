@@ -17,10 +17,9 @@ class {ClassName} extends DatabaseSeeder
     public function run()
     {
         $this->factory->create('{TableName}')->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
-            $seed->set([
-                'pid' => 1,
-                'crdate' => $faker->getUnixTime(),
-            ]);
+            $seed->set(
+                {informations}
+            );
         });
     }
 }

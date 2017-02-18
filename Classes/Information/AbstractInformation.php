@@ -1,11 +1,10 @@
 <?php
-namespace Dennis\Seeder\Factory;
-
+namespace Dennis\Seeder\Information;
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
+ *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
  *
  *  All rights reserved
  *
@@ -27,43 +26,37 @@ namespace Dennis\Seeder\Factory;
  ***************************************************************/
 
 /**
- * Class FakerFactory
+ * Class AbstractInformation
  *
- * @package Dennis\Seeder\Factory\TableFactory
+ * @package Dennis\Seeder\Information\AbstractInformation
  */
-class FakerFactory
+abstract class AbstractInformation implements \Dennis\Seeder\Information
 {
     /**
-     * instance
-     *
-     * @var \Dennis\Seeder\Provider\Faker $instance
+     * @var string
      */
-    protected static $instance = null;
+    protected $question;
 
-    protected function __construct()
-    {
-    }
+    /**
+     * @var string
+     */
+    protected $defaultValue;
 
-    protected function __clone()
+    /**
+     * @param string $defaultValue
+     * @return void
+     */
+    public function setDefaultValue($defaultValue)
     {
+        $this->defaultValue = $defaultValue;
     }
 
     /**
-     * Provides a Faker
-     *
-     * @return \Dennis\Seeder\Provider\Faker
+     * @param array $params
+     * @return string
      */
-    public static function createFaker()
+    public function getQuestion($params = [])
     {
-        if (!is_null(self::$instance)) {
-            return self::$instance;
-        }
-
-        $generator = \Faker\Factory::create();
-        $faker = new \Dennis\Seeder\Provider\Faker($generator);
-
-        self::$instance = $faker;
-
-        return $faker;
+        return vsprintf($this->question, $params) . ' <fg=yellow>[' . $this->getDefaultValue() . ']</>: ';
     }
 }

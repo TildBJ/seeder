@@ -1,11 +1,10 @@
 <?php
-namespace Dennis\Seeder\Factory;
-
+namespace Dennis\Seeder;
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
+ *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
  *
  *  All rights reserved
  *
@@ -27,43 +26,40 @@ namespace Dennis\Seeder\Factory;
  ***************************************************************/
 
 /**
- * Class FakerFactory
+ * Interface Information
  *
- * @package Dennis\Seeder\Factory\TableFactory
+ * @package Dennis\Seeder\Information
  */
-class FakerFactory
+interface Information
 {
-    /**
-     * instance
-     *
-     * @var \Dennis\Seeder\Provider\Faker $instance
-     */
-    protected static $instance = null;
-
-    protected function __construct()
-    {
-    }
-
-    protected function __clone()
-    {
-    }
+    const INFORMATION_TYPE_ASK = 1;
+    const INFORMATION_TYPE_SELECT = 2;
+    const INFORMATION_TYPE_SELECTMULTIPLE = 3;
 
     /**
-     * Provides a Faker
-     *
-     * @return \Dennis\Seeder\Provider\Faker
+     * @param array $params
+     * @return string
      */
-    public static function createFaker()
-    {
-        if (!is_null(self::$instance)) {
-            return self::$instance;
-        }
+    public function getQuestion($params = []);
 
-        $generator = \Faker\Factory::create();
-        $faker = new \Dennis\Seeder\Provider\Faker($generator);
+    /**
+     * @return mixed
+     */
+    public function getDefaultValue();
 
-        self::$instance = $faker;
+    /**
+     * @param $defaultValue
+     * @return void
+     */
+    public function setDefaultValue($defaultValue);
 
-        return $faker;
-    }
+    /**
+     * @return array
+     */
+    public function getChoices();
+
+    /**
+     * @return int
+     */
+    public function getType();
 }

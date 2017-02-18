@@ -1,11 +1,10 @@
 <?php
-namespace Dennis\Seeder\Factory;
-
+namespace Dennis\Seeder\Information;
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
+ *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
  *
  *  All rights reserved
  *
@@ -27,43 +26,38 @@ namespace Dennis\Seeder\Factory;
  ***************************************************************/
 
 /**
- * Class FakerFactory
+ * Class DefaultInformation
  *
- * @package Dennis\Seeder\Factory\TableFactory
+ * @package Dennis\Seeder\Information\DefaultInformation
  */
-class FakerFactory
+class DefaultInformation extends AbstractInformation
 {
     /**
-     * instance
-     *
-     * @var \Dennis\Seeder\Provider\Faker $instance
+     * @var string
      */
-    protected static $instance = null;
+    protected $question = 'Enter a type for %s';
 
-    protected function __construct()
+    /**
+     * @return int
+     */
+    public function getDefaultValue()
     {
-    }
-
-    protected function __clone()
-    {
+        return $this->defaultValue;
     }
 
     /**
-     * Provides a Faker
-     *
-     * @return \Dennis\Seeder\Provider\Faker
+     * @return array
      */
-    public static function createFaker()
+    public function getChoices()
     {
-        if (!is_null(self::$instance)) {
-            return self::$instance;
-        }
+        return null;
+    }
 
-        $generator = \Faker\Factory::create();
-        $faker = new \Dennis\Seeder\Provider\Faker($generator);
-
-        self::$instance = $faker;
-
-        return $faker;
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return self::INFORMATION_TYPE_SELECT;
     }
 }
