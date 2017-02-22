@@ -7,13 +7,31 @@ For this version it's up to you to install fzaninotto/faker via composer since s
 
 ## Installation
 
+### via composer
+
 ```sh
-composer require typo3-ter/seeder
+composer require tildbj/seeder
+```
+
+### via Extensionmanager:
+
+```sh
+tbd
 ```
 
 ## Usage
 
-TODO: Write usage instructions
+### Create Seed via commandline:
+
+```sh
+/path/to/typo3/phpsh extbase seeder:make --class-name=Example --table-name=tx_myextension_domain_model_mymodel
+```
+
+### Execute Seed:
+
+```sh
+/path/to/typo3/phpsh extbase seeder:seed --class-name=Example
+```
 
 ## Contributing
 
