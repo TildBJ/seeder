@@ -111,9 +111,8 @@ class TableConfiguration
             );
         }
         if (!isset($this->tableConfiguration['columns'][$columnName])) {
-            dump($columnName);
             throw new \InvalidArgumentException(
-                'Column' . $columnName . ' does not exist for table ' . $this->name
+                'Column ' . $columnName . ' does not exist for table ' . $this->name
             );
         }
 
