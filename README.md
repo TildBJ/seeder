@@ -24,7 +24,7 @@ If you install seeder via Extensionmanager it's up to you to install fzaninotto/
 ### Create Seed via commandline:
 
 ```sh
-/path/to/typo3/phpsh extbase seeder:make --class-name=Example --table-name=tx_myextension_domain_model_mymodel
+/path/to/typo3/cli_dispatch.phpsh extbase seeder:make --class-name=Example --table-name=tx_myextension_domain_model_mymodel
 ```
 
 ### Customize Seed:
@@ -35,7 +35,7 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
 ### Execute Seed:
 
 ```sh
-/path/to/typo3/phpsh extbase seeder:seed --class-name=Example
+/path/to/typo3/cli_dispatch.phpsh extbase seeder:seed --class-name=Example
 ```
 
 ## Contributing
