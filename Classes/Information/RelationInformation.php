@@ -1,5 +1,6 @@
 <?php
 namespace Dennis\Seeder\Information;
+
 /***************************************************************
  *
  *  Copyright notice

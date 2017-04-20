@@ -1,5 +1,6 @@
 <?php
 namespace Dennis\Seeder\Information;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -50,7 +51,7 @@ class SysLanguageUidInformation extends AbstractInformation
      */
     public function getChoices()
     {
-        return null;;
+        return null;
     }
 
     /**
