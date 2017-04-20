@@ -1,5 +1,5 @@
 # seeder
-[![Build Status](https://travis-ci.org/TildBJ/seeder.svg?branch=develop)](https://travis-ci.org/TildBJ/seeder.svg)
+[![Build Status](https://travis-ci.org/TildBJ/seeder.svg)](https://travis-ci.org/TildBJ/seeder)
 
 Seeder is a TYPO3 Extension that generates fake data for your TYPO3 testsystem.
 
