@@ -9,7 +9,7 @@ use Dennis\Seeder;
  *
  * @example
  */
-class Group extends Seeder\Seeder\DatabaseSeeder
+class SubGroup extends Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.
@@ -18,10 +18,8 @@ class Group extends Seeder\Seeder\DatabaseSeeder
      */
     public function run()
     {
-        $this->factory->create('fe_groups', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
-            $seed->set([
-                'subgroup' => $this->call(SubGroup::class)
-            ]);
+        $this->factory->create('fe_groups', 1)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
+
         });
     }
 }
