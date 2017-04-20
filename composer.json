@@ -52,6 +52,7 @@
       }
   },
   "require": {
-    "fzaninotto/Faker": "^1.6"
+    "fzaninotto/Faker": "^1.6",
+    "php": ">=5.5.0"
   }
 }
