@@ -2,22 +2,22 @@
 [![Build Status](https://travis-ci.org/TildBJ/seeder.svg?branch=develop)](https://travis-ci.org/TildBJ/seeder.svg)
 
 Seeder is a TYPO3 Extension that generates fake data for your TYPO3 testsystem.
-Faker requires [fzaninotto/faker](https://packagist.org/packages/fzaninotto/faker).
-For this version it's up to you to install fzaninotto/faker via composer since seeder is based on it.
 
 ## Installation
 
 ### via composer
 
+The recommended way to install seeder is by using composer.
+1. Get seeder by running
 ```sh
 composer require tildbj/seeder
 ```
+2. Activate seeder in your Extension Manager
 
 ### via Extensionmanager:
 
-```sh
-tbd
-```
+Faker requires [fzaninotto/faker](https://packagist.org/packages/fzaninotto/faker).
+If you install seeder via Extensionmanager it's up to you to install fzaninotto/faker yourself.
 
 ## Usage
 
@@ -26,6 +26,11 @@ tbd
 ```sh
 /path/to/typo3/phpsh extbase seeder:make --class-name=Example --table-name=tx_myextension_domain_model_mymodel
 ```
+
+### Customize Seed:
+
+You can find your generated seed at: Classes/Seeder/Example.php
+Feel free to customize it to your wishes. (A possiblity to configure the path is coming soon!!!)
 
 ### Execute Seed:
 
