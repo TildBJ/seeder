@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'Seeder',
-    'description' => 'Database Seeder for TYPO3',
+    'description' => 'Seeder is a TYPO3 Extension that generates fake data for your TYPO3 dev environment. This Version is an experimental version for internal use only!',
     'category' => 'backend',
     'author' => 'Dennis Römmich',
     'author_email' => 'dennis@roemmich.eu',
