@@ -274,6 +274,23 @@ class Faker implements \Dennis\Seeder\Faker
     ];
 
     /**
+     * Fields we don't take care of
+     *
+     * @var array $skippedProvider
+     */
+    public static $skippedProvider = [
+        'l10n_parent',
+        'l10n_diffsource',
+        'cruser_id',
+        'TSconfig',
+        'tx_extbase_type',
+        'felogin_redirectPid',
+        't3ver_label',
+        'starttime',
+        'endtime',
+    ];
+
+    /**
      * Faker constructor.
      */
     public function __construct(\Faker\Generator $generator)
@@ -359,10 +376,8 @@ class Faker implements \Dennis\Seeder\Faker
             case 'image':
                 return 'imageurl';
             case 'lastlogin':
-            case 'starttime':
             case 'crdate':
             case 'tstamp':
-            case 'endtime':
                 return 'unixtime';
             case 'disable':
                 return 'boolean';
