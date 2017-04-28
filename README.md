@@ -1,7 +1,7 @@
 # seeder
 [![Build Status](https://travis-ci.org/TildBJ/seeder.svg?branch=master)](https://travis-ci.org/TildBJ/seeder)
 
-Seeder is a TYPO3 Extension that generates fake data for your TYPO3 dev environment. This Version is an experimental version for internal use only!
+Seeder is a TYPO3 Extension that generates fake data for your TYPO3 Extension. Its intended for developers only!!! This Version is an experimental version!
 
 ## Installation
 
@@ -48,7 +48,12 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
 
 ## History
 
-TODO: Write history
+<table>
+    <tr>
+        <td>0.1.0</td>
+        <td>First experimental release</td>
+    </tr>
+</table>
 
 ## License
 
