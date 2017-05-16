@@ -50,6 +50,10 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
 
 <table>
     <tr>
+        <td>0.1.2</td>
+        <td>Add TYPO3 8.7 support</td>
+    </tr>
+    <tr>
         <td>0.1.1</td>
         <td>Skip start and enddate because usually we don't want to test a typo3 core feature so each record will be available in frontend</td>
     </tr>
