@@ -19,7 +19,6 @@ class Group extends Seeder\Seeder\DatabaseSeeder
     public function run()
     {
         $this->factory->create('fe_groups', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
-
         });
     }
 }

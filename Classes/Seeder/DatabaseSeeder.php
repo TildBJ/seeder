@@ -59,6 +59,5 @@ abstract class DatabaseSeeder extends AbstractSeeder
      */
     protected function after()
     {
-
     }
 }
