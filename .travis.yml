@@ -10,6 +10,12 @@ matrix:
     - php: 7.0
       env: TYPO3_VERSION=^7.6
     - php: 7.0
+      env: TYPO3_VERSION=~8.0.0
+    - php: 7.0
+      env: TYPO3_VERSION=~8.1.0
+    - php: 7.0
+      env: TYPO3_VERSION=~8.2.0
+    - php: 7.0
       env: TYPO3_VERSION=~8.3.0
     - php: 7.0
       env: TYPO3_VERSION=~8.4.0
@@ -18,21 +24,32 @@ matrix:
     - php: 7.0
       env: TYPO3_VERSION=~8.6.0
     - php: 7.0
-      env: TYPO3_VERSION="dev-master as 8.6.0"
+      env: TYPO3_VERSION=~8.7.0
     - php: 7.1
       env: TYPO3_VERSION=^7.6
     - php: 7.1
-      env: TYPO3_VERSION=^8
+      env: TYPO3_VERSION=~8.0.0
     - php: 7.1
-      env: TYPO3_VERSION="dev-master as 8.6.0"
-  allow_failures:
-    - env: TYPO3_VERSION="dev-master as 8.6.0"
+      env: TYPO3_VERSION=~8.1.0
+    - php: 7.1
+      env: TYPO3_VERSION=~8.2.0
+    - php: 7.1
+      env: TYPO3_VERSION=~8.3.0
+    - php: 7.1
+      env: TYPO3_VERSION=~8.4.0
+    - php: 7.1
+      env: TYPO3_VERSION=~8.5.0
+    - php: 7.1
+      env: TYPO3_VERSION=~8.6.0
+    - php: 7.1
+      env: TYPO3_VERSION=~8.7.0
 
 sudo: false
 
 before_script:
   - composer require typo3/cms="$TYPO3_VERSION"
   - composer require fzaninotto/faker 1.6
+  - if [ -d .Build/vendor/typo3/cms/components/testing_framework/Resources/Core/Build ]; then export TYPO3_BUILD_DIR=".Build/vendor/typo3/cms/components/testing_framework/Resources/Core/Build"; else export TYPO3_BUILD_DIR=".Build/vendor/typo3/cms/typo3/sysext/core/Build"; fi
 
 script:
   - .Build/bin/phpcs -n --standard=PSR2 --extensions=php --ignore=Tests/Unit/Seeder/SeedTest.php *
