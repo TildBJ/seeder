@@ -1,7 +1,6 @@
 {
   "name": "tildbj/seeder",
   "description": "Database seeder for TYPO3",
-  "version": "0.1.2",
   "type": "typo3-cms-extension",
   "keywords": ["dummy data", "test data", "database seeder", "seeding"],
   "homepage": "http://seeder.roemmich.eu",
