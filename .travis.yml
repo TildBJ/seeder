@@ -21,7 +21,7 @@ sudo: false
 before_script:
   - composer require typo3/cms="$TYPO3_VERSION"
   - composer require fzaninotto/faker 1.6
-  - composer require nimut/testing-framework 1.0
+  - composer require nimut/testing-framework 1.1
   - if [ -d .Build/vendor/typo3/cms/components/testing_framework/Resources/Core/Build ]; then export TYPO3_BUILD_DIR=".Build/vendor/typo3/cms/components/testing_framework/Resources/Core/Build"; else export TYPO3_BUILD_DIR=".Build/vendor/typo3/cms/typo3/sysext/core/Build"; fi
 
 script:
