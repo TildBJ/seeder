@@ -22,8 +22,7 @@ before_script:
   - composer require typo3/cms="$TYPO3_VERSION"
   - composer require fzaninotto/faker 1.6
   - composer require nimut/testing-framework 1.1
-  - if [ -d .Build/vendor/typo3/cms/components/testing_framework/Resources/Core/Build ]; then export TYPO3_BUILD_DIR=".Build/vendor/typo3/cms/components/testing_framework/Resources/Core/Build"; else export TYPO3_BUILD_DIR=".Build/vendor/typo3/cms/typo3/sysext/core/Build"; fi
 
 script:
   - .Build/bin/phpcs -n --standard=PSR2 --extensions=php --ignore=Tests/Unit/Seeder/SeedTest.php *
-  - TYPO3_PATH_WEB=".Build/Web" .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Unit/
+  - TYPO3_PATH_WEB=".Build/Web" .Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
