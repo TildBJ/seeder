@@ -63,6 +63,10 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
     </tr>
 </table>
 
+## Need Support?
+
+Feel free to ask your questions on [Slack](https://typo3.slack.com/messages/C3R182EUX)
+
 ## License
 
 Seeder is released under GNU General Public License, version 3 or later. See the bundled LICENSE file for details.
