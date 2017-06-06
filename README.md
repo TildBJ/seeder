@@ -65,7 +65,7 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
 
 ## Need Support?
 
-Feel free to ask your questions on [Slack](https://typo3.slack.com/messages/C3R182EUX)
+Feel free to ask your questions on [Slack](https://typo3.slack.com/messages/C5P9XJ45A)
 
 ## License
 
