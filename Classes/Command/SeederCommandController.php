@@ -59,6 +59,12 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     protected $stub = 'seeder/Classes/Seeder/stubs/seeder.stub';
 
     /**
+     * @var \Dennis\Seeder\Utility\OutputUtility
+     * @inject
+     */
+    protected $outputUtility;
+
+    /**
      * This command allows you to run predifined Seeds
      *
      * @param string $className
@@ -69,7 +75,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         $class = $this->namespace . '\\' . $className;
 
         if (!class_exists($class)) {
-            $this->output->outputLine('<error>Class ' . $class . ' does not exist.</error>');
+            $this->outputUtility->error('Class ' . $class . ' does not exist.');
             return false;
         }
 
@@ -119,7 +125,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                 if (strtolower($createNewSeeder) === 'y' || strtolower($createNewSeeder) === 'yes' || $createNewSeeder == 1) {
                     $className = '';
                     while (!$className) {
-                        $className = $this->output->ask('<fg=yellow>Please specify the required argument "--class-name" (<fg=green>' . $column->getForeignTable() . '</>):</> ');
+                        $className = $this->outputUtility->ask('<fg=yellow>Please specify the required argument "--class-name" (<fg=green>' . $column->getForeignTable() . '</>):</> ');
                     }
                     $this->makeCommand($className, $column->getForeignTable());
                     $informations[$column->getName()] = '$this->call(' . $className . '::class)';
@@ -177,9 +183,9 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     protected function askOrSelect($question, $defaultValue, $choices = null)
     {
         if (is_null($choices)) {
-            return $this->output->ask($question, $defaultValue);
+            return $this->outputUtility->ask($question, $defaultValue);
         }
-        return $this->output->select($question, $choices, $defaultValue);
+        return $this->outputUtility->select($question, $choices, $defaultValue);
     }
 
     /**
@@ -194,7 +200,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         $class = $this->namespace . '\\' . $className;
 
         if (class_exists($class)) {
-            $this->output->outputLine('<error>Class ' . $class . ' already exists.</error>');
+            $this->outputUtility->error('Class ' . $class . ' already exists.');
             return false;
         }
 
@@ -208,8 +214,8 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         fwrite($file, $seederClass);
         fclose($file);
 
-        $this->output->outputLine(
-            '<fg=green>' . __DIR__ . '/../../../' . $this->path . $className . '.php' . ' successfully created</>'
+        $this->outputUtility->success(
+            __DIR__ . '/../../../' . $this->path . $className . '.php' . ' successfully created</>'
         );
 
         return true;
@@ -220,7 +226,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      */
     protected function outputAndExit($string)
     {
-        $this->output->outputLine('<error> ' . $string . ' </error>');
+        $this->outputUtility->error($string);
         exit;
     }
 
