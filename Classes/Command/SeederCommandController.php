@@ -93,18 +93,9 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
 
         $table = \Dennis\Seeder\Factory\TableFactory::createTable($tableName);
 
-        $skippingFields = [
-            'l10n_parent',
-            'l10n_diffsource',
-            'cruser_id',
-            'TSconfig',
-            'tx_extbase_type',
-            'felogin_redirectPid',
-            't3ver_label',
-        ];
         /** @var ColumnInterface $column */
         foreach ($table->getColumns() as $column) {
-            if (in_array($column->getName(), $skippingFields)) {
+            if (in_array($column->getName(), \Dennis\Seeder\Provider\Faker::$skippedProvider)) {
                 continue;
             }
             $provider = $faker->guessProvider($column->getName());

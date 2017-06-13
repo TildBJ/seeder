@@ -1,7 +1,6 @@
 {
   "name": "tildbj/seeder",
   "description": "Database seeder for TYPO3",
-  "version": "0.0.0",
   "type": "typo3-cms-extension",
   "keywords": ["dummy data", "test data", "database seeder", "seeding"],
   "homepage": "http://seeder.roemmich.eu",
@@ -20,9 +19,20 @@
     "issues": "https://github.com/TildBJ/seeder/issues",
     "source": "https://github.com/TildBJ/seeder"
   },
+  "require": {
+    "php": ">=5.5.0",
+    "fzaninotto/faker": "^1.6",
+
+    "typo3/cms-core": "^7.6 || ^8.7",
+    "typo3/cms-backend": "^7.6 || ^8.7",
+    "typo3/cms-extbase": "^7.6 || ^8.7",
+    "typo3/cms-extensionmanager": "^7.6 || ^8.7",
+    "typo3/cms-install": "^7.6 || ^8.7",
+    "typo3/cms-scheduler": "^7.6 || ^8.7"
+  },
   "require-dev": {
-    "typo3/cms": "~7.6",
     "phpunit/phpunit": "~4.8",
+    "nimut/testing-framework": "^1.1",
     "squizlabs/php_codesniffer": "~2.6",
     "symfony/var-dumper": "^3.2"
   },
@@ -38,6 +48,9 @@
       "Dennis\\Seeder\\": "Classes"
     }
   },
+  "replace": {
+    "typo3-ter/seeder": "self.version"
+  },
   "config": {
       "vendor-dir": ".Build/vendor",
       "bin-dir": ".Build/bin"
@@ -50,9 +63,5 @@
               "partOfMinimalUsableSystem": true
           }
       }
-  },
-  "require": {
-    "fzaninotto/Faker": "^1.6",
-    "php": ">=5.5.0"
   }
 }
