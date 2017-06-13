@@ -101,7 +101,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
             $provider = $faker->guessProvider($column->getName());
             $informationClassName = 'Dennis\\Seeder\\Information\\' . ucfirst(GeneralUtility::underscoredToLowerCamelCase($column->getName()) . 'Information');
             $relationInformationAvailable = false;
-            if (class_exists($informationClassName)) {
+            if ($column->getName() !== 'abstract' && class_exists($informationClassName)) {
                 $information = GeneralUtility::makeInstance($informationClassName);
             } elseif ($this->isRelation($column)) {
                 $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\RelationInformation::class);
