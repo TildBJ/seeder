@@ -20,7 +20,8 @@ class Group extends Seeder\Seeder\DatabaseSeeder
     {
         $this->factory->create('fe_groups', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
             $seed->set([
-                'subgroup' => $this->call(SubGroup::class)
+                'title' => 'Group',
+                'subgroup' => $this->call(SubGroup::class),
             ]);
         });
     }

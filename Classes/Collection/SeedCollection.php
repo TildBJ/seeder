@@ -75,20 +75,20 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
     }
 
     /**
-     * @param Seeder $seed
+     * @param Seeder $seeder
      * @return array
      */
-    public function get(Seeder $seed)
+    public function get(Seeder $seeder)
     {
         $return = [];
-        foreach ($this->seeds as $key => $seeds) {
-            foreach ($seeds as $title => $test) {
-                if ($title === get_class($seed)) {
+        foreach ($this->seeds as $title => $seeds) {
+            foreach ($seeds as $key => $seed) {
+                if ($title === get_class($seeder)) {
                     if ($this->isUsed($key)) {
                         continue;
                     }
                     $this->used[$key] = 1;
-                    $return[$key] = $test;
+                    $return[$key] = $seed;
                 }
             }
         }
@@ -116,6 +116,9 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
         $reflection = new \ReflectionFunction($function);
         $className = get_class($reflection->getClosureThis());
         foreach ($this->seeds[$className] as $key => $seed) {
+            if ($this->isUsed($key)) {
+                continue;
+            }
             $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
         }
 

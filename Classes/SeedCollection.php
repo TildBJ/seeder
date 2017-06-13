@@ -64,10 +64,10 @@ interface SeedCollection
     public function toArray();
 
     /**
-     * @param Seeder $seed
+     * @param Seeder $seeder
      * @return array
      */
-    public function get(Seeder $seed);
+    public function get(Seeder $seeder);
 
     /**
      * @return void

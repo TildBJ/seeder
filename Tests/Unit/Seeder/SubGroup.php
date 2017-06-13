@@ -19,7 +19,9 @@ class SubGroup extends Seeder\Seeder\DatabaseSeeder
     public function run()
     {
         $this->factory->create('fe_groups', 1)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
-
+            $seed->set([
+                'title' => 'SubGroup',
+            ]);
         });
     }
 }
