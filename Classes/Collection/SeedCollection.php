@@ -65,8 +65,8 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
         $return = [];
 
         /** @var Seed $seed */
-        foreach ($this->seeds as $key => $seeds) {
-            foreach ($seeds as $seed) {
+        foreach ($this->seeds as $seeds) {
+            foreach ($seeds as $key => $seed) {
                 $return[$seed->getTarget()][$key] = $seed->getProperties();
             }
         }
@@ -113,10 +113,10 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
      */
     public function each(callable $function)
     {
-        foreach ($this->seeds as $key => $seeds) {
-            foreach ($seeds as $seed) {
-                $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
-            }
+        $reflection = new \ReflectionFunction($function);
+        $className = get_class($reflection->getClosureThis());
+        foreach ($this->seeds[$className] as $key => $seed) {
+            $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
         }
 
         return $this;
@@ -128,7 +128,7 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
      */
     public function attach(Seed $seed)
     {
-        $this->seeds['NEW' . ++$this->i][$seed->getTitle()] = $seed;
+        $this->seeds[$seed->getTitle()]['NEW' . ++$this->i] = $seed;
     }
 
     /**
