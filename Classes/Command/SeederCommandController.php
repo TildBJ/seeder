@@ -155,6 +155,12 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
             }
         }
 
+        if (!isset($informations['pid'])) {
+            /** @var \Dennis\Seeder\Information $information */
+            $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\PidInformation::class);
+            $informations['pid'] = $this->outputUtility->ask($information->getQuestion(), $information->getDefaultValue());
+        }
+
         return $informations;
     }
 
