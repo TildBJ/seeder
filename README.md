@@ -63,6 +63,13 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
     </tr>
 </table>
 
+## Troubleshooting
+
+Seeder does not create any data. What am i doing wrong?
+
+* Make sure your seed has a pid that exists in your TYPO3 installation. Otherwise the extension is not able to generate any data.
+* Checkout the Logmodule in the TYPO3 backend if there is any SQL error. It can help a lot to detect wrong configuration of your seed.
+
 ## Need Support?
 
 Feel free to ask your questions on [Slack](https://typo3.slack.com/messages/C5P9XJ45A)
