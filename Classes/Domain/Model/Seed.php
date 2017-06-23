@@ -96,6 +96,11 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
      */
     public function getProperties()
     {
+        foreach ($this->properties as $key => $property) {
+            if (empty($property)) {
+                unset($this->properties[$key]);
+            }
+        }
         return $this->properties;
     }
 

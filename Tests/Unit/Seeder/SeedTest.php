@@ -220,4 +220,27 @@ class SeedTest extends UnitTestCase
 
         $this->assertSame($this->expected, $seedCollection->toArray());
     }
+
+    /**
+     * When the seeder has empty values it can cause errors when inserting data
+     *
+     * @test
+     */
+    public function seederMustNotHaveEmptyValues()
+    {
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
+        $userSeed->run();
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        foreach($seedCollection->toArray() as $dataArray) {
+            foreach ($dataArray as $data) {
+                foreach ($data as $key => $value) {
+                    if (!$value) {
+                        $this->assertNotEmpty($value, 'Value for ' . $key . ' is empty!!!');
+                    }
+                }
+            }
+        }
+    }
 }
