@@ -237,7 +237,7 @@ class SeedTest extends UnitTestCase
             foreach ($dataArray as $data) {
                 foreach ($data as $key => $value) {
                     if (!$value) {
-                        $this->assertNotEmpty($value, 'Value for ' . $key . ' is empty!!!');
+                        $this->assertNotNull($value, 'Value for ' . $key . ' is null!!!');
                     }
                 }
             }
