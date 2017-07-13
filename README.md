@@ -50,6 +50,20 @@ Feel free to customize it to your wishes. (A possiblity to configure the path is
 
 <table>
     <tr>
+        <td>0.1.4</td>
+        <td>Don't return empty properties</td>
+    </tr>
+    <tr>
+        <td>0.1.3</td>
+        <td>
+            * Don't override Properties anymore when calling subseeds
+            * Removes a Bug which leads to exponentially seeder calls
+            * Don't instanciate abstract class, if field is called abstract
+            * Add output decorator
+            * Always ask for a pid even if there is no TCA configuration
+        </td>
+    </tr>
+    <tr>
         <td>0.1.2</td>
         <td>Add TYPO3 8.7 support</td>
     </tr>
