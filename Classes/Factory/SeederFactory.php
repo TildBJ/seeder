@@ -60,7 +60,6 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
         $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
 
         for ($i = 1; $i <= $limit; $i++) {
-
             list(, $calledClass) = debug_backtrace(false, 2);
             /** @var Seeder\Seed $seed */
             $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);

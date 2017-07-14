@@ -134,6 +134,7 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
      */
     public function set(array $properties)
     {
+        $this->properties = [];
         foreach ($properties as $property => $value) {
             $this->properties[$property] = $value;
         }
