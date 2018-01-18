@@ -18,9 +18,10 @@ matrix:
 
 sudo: false
 
-install:
-- travis_retry composer install --no-interaction --prefer-source
-- travis_retry composer require typo3/cms="$TYPO3_VERSION"
+before_script:
+- composer require typo3/cms="$TYPO3_VERSION"
+- composer require fzaninotto/faker 1.6
+- composer require nimut/testing-framework 1.1
 
 script:
   - .Build/bin/phpcs -n --standard=PSR2 --extensions=php --ignore=Tests/Unit/Seeder/SeedTest.php ./Classes/ ./Tests/
