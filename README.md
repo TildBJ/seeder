@@ -50,7 +50,7 @@ class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
 }
 ```
 
-Add column information to your seed by passing an array to $seed->set([//your columns]).
+Add column information to your seed by passing an array to ```php $seed->set([//your columns]) ```.
 It's mandatory to provide the pid information, otherwise seeder is not able to generate any data.
 
 ### Create Seed via commandline:
@@ -70,7 +70,7 @@ Attention: This command creates a seed within the directory Classes/Seeder. It's
 
 ### Alias:
 
-Create an alias in ext_localconf.php ($GLOBALS[['TYPO3_CONF_VARS']][['EXTCONF']][['seeder']][['alias']][['myseed']] = \Dennis\Seeder\Seeder\Example::class;) for running seed like this:
+Create an alias in ext_localconf.php ```php  ($GLOBALS[['TYPO3_CONF_VARS']][['EXTCONF']][['seeder']][['alias']][['myseed']] = \Dennis\Seeder\Seeder\Example::class;) ``` for running seed like this:
 ```sh
 /path/to/typo3/cli_dispatch.phpsh extbase seeder:seed myseed
 ```
