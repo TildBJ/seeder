@@ -67,17 +67,12 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     /**
      * This command allows you to run predifined Seeds
      *
-     * @param string $className
+     * @param string $seed ClassName or Alias defined in $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias'] of your seed
      * @return boolean
      */
-    public function seedCommand($className)
+    public function seedCommand($seed)
     {
-        $class = $this->namespace . '\\' . $className;
-
-        if (!class_exists($class)) {
-            $this->outputUtility->error('Class ' . $class . ' does not exist.');
-            return false;
-        }
+        $class = $this->resolveSeederClass($seed);
 
         /** @var \Dennis\Seeder\Seeder $seeder */
         $seeder = new $class;
@@ -258,5 +253,28 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         $stub = str_replace('{informations}', $informations, $stub);
 
         return $stub;
+    }
+
+    /**
+     * @param string $className
+     * @return bool|string
+     */
+    protected function resolveSeederClass($className)
+    {
+        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias'][$className])) {
+            $className = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias'][$className];
+            if (!is_string($className)) {
+                $this->outputUtility->error('$className must be type of string. Type of  ' . gettype($className) . ' given.');
+                $this->sendAndExit(1);
+                return false;
+            }
+        }
+        if (!class_exists($className)) {
+            $this->outputUtility->error('Class ' . $className . ' does not exist.');
+            $this->sendAndExit(1);
+            return false;
+        }
+
+        return $className;
     }
 }

@@ -21,21 +21,58 @@ If you install seeder via Extensionmanager it's up to you to install fzaninotto/
 
 ## Usage
 
+### Seeder class
+
+Create a class wherever you want. Only make sure it's available via autoloader. Your class should look like this:
+```php
+<?php
+namespace Dennis\Seeder\Seeder;
+
+use Dennis\Seeder;
+
+class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
+{
+    public function run()
+    {
+        $this->factory->create('tx_myextension_domain_model_mymodel')->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
+            $seed->set(
+                array (
+                  'pid' => 1,
+                  'sys_language_uid' => 0,
+                  'hidden' => 0,
+                  'title' => $faker->getTitle(),
+                  'description' => $faker->getText(),
+                  'relation' => $this->call(\Dennis\Seeder\Seeder\RelationExample::class),
+                )
+            );
+        });
+    }
+}
+```
+
+Add column information to your seed by passing an array to $seed->set([//your columns]).
+It's mandatory to provide the pid information, otherwise seeder is not able to generate any data.
+
 ### Create Seed via commandline:
 
+It's also possible to create a class via cli. Just execute the following command:
 ```sh
 /path/to/typo3/cli_dispatch.phpsh extbase seeder:make --class-name=Example --table-name=tx_myextension_domain_model_mymodel
 ```
 
-### Customize Seed:
-
-You can find your generated seed at: Classes/Seeder/Example.php
-Feel free to customize it to your wishes. (A possiblity to configure the path is coming soon!!!)
+Attention: This command creates a seed within the directory Classes/Seeder. It's recommended to move this class outside this extensions otherwise it could get lost after an extension update.
 
 ### Execute Seed:
 
 ```sh
-/path/to/typo3/cli_dispatch.phpsh extbase seeder:seed --class-name=Example
+/path/to/typo3/cli_dispatch.phpsh extbase seeder:seed \\Vendor\\Seeder\\Seeder\\Example
+```
+
+### Alias:
+
+Create an alias in ext_localconf.php ($GLOBALS[['TYPO3_CONF_VARS']][['EXTCONF']][['seeder']][['alias']][['myseed']] = \Dennis\Seeder\Seeder\Example::class;) for running seed like this:
+```sh
+/path/to/typo3/cli_dispatch.phpsh extbase seeder:seed myseed
 ```
 
 ## Contributing

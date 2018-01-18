@@ -7,7 +7,7 @@ use Dennis\Seeder;
  * Class {ClassName}
  * @package {namespace}
  */
-class {ClassName} extends DatabaseSeeder
+class {ClassName} extends \Dennis\Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.
