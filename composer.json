@@ -5,7 +5,7 @@
   "keywords": ["dummy data", "test data", "database seeder", "seeding"],
   "homepage": "http://seeder.roemmich.eu",
   "time": "2016-04-18",
-  "license": "GNU",
+  "license": "GPL-3.0+",
   "authors": [
     {
       "name": "Dennis Römmich",
