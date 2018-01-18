@@ -52,7 +52,7 @@ class Input extends Column implements InputInterface
     /**
      * Input constructor.
      *
-     * @param array $columnName
+     * @param string $columnName
      * @param $configuration
      */
     public function __construct($columnName, $configuration)

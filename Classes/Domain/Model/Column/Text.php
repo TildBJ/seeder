@@ -47,7 +47,7 @@ class Text extends Column implements TextInterface
     /**
      * Input constructor.
      *
-     * @param array $columnName
+     * @param string $columnName
      * @param $configuration
      */
     public function __construct($columnName, $configuration)

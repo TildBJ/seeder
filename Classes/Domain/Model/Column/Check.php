@@ -47,7 +47,7 @@ class Check extends Column implements CheckInterface
     /**
      * Input constructor.
      *
-     * @param array $columnName
+     * @param string $columnName
      * @param $configuration
      */
     public function __construct($columnName, $configuration)

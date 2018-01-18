@@ -42,7 +42,7 @@ class Radio extends Column implements RadioInterface
     /**
      * Input constructor.
      *
-     * @param array $columnName
+     * @param string $columnName
      * @param $configuration
      */
     public function __construct($columnName, $configuration)

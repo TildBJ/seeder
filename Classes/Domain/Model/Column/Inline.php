@@ -77,7 +77,7 @@ class Inline extends Column implements InlineInterface
     /**
      * Input constructor.
      *
-     * @param array $columnName
+     * @param string $columnName
      * @param $configuration
      */
     public function __construct($columnName, $configuration)
