@@ -342,6 +342,7 @@ class Faker implements \Dennis\Seeder\Faker
             return $name;
         }
         switch ($name) {
+            case 'mail':
             case 'emailaddress':
                 return 'email';
             case 'phone':

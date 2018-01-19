@@ -189,6 +189,8 @@ class FakerTest extends UnitTestCase
     {
         return [
             ['emailaddress', 'email'],
+            ['mail', 'email'],
+            ['email', 'email'],
             ['phone', 'phonenumber'],
             ['telephone', 'phonenumber'],
             ['telnumber', 'phonenumber'],
