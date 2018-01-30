@@ -26,6 +26,7 @@ namespace Dennis\Seeder\Command;
  ***************************************************************/
 
 use Dennis\Seeder\Domain\Model\ColumnInterface;
+use Dennis\Seeder\Generator\MethodNameGenerator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -59,10 +60,21 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     protected $stub = 'seeder/Classes/Seeder/stubs/seeder.stub';
 
     /**
+     * @var MethodNameGenerator
+     */
+    protected $methodNameGenerator;
+
+    /**
      * @var \Dennis\Seeder\Utility\OutputUtility
      * @inject
      */
     protected $outputUtility;
+
+    public function __construct()
+    {
+        $faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
+        $this->methodNameGenerator = GeneralUtility::makeInstance(MethodNameGenerator::class, $faker);
+    }
 
     /**
      * This command allows you to run predifined Seeds
@@ -91,7 +103,6 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     {
         $informations = [];
         $faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
-
         $table = \Dennis\Seeder\Factory\TableFactory::createTable($tableName);
 
         /** @var ColumnInterface $column */
@@ -108,7 +119,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                 $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\RelationInformation::class);
                 $relationInformationAvailable = true;
             } else {
-                $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\DefaultInformation::class);
+                $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\NullInformation::class);
                 $information->setDefaultValue($provider);
             }
             if (!$information instanceof \Dennis\Seeder\Information) {
@@ -129,23 +140,23 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                 switch ($information->getType()) {
                     case \Dennis\Seeder\Information::INFORMATION_TYPE_ASK:
                         if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue()))) {
-                            try {
-                                $informations[$column->getName()] = '$faker->get' . ucfirst($response) . '()';
-                            } catch (\TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException $e) {
-                                $informations[$column->getName()] = $response;
+                            if ($this->methodNameGenerator->generate($response)) {
+                                $informations[$column->getName()] = $this->methodNameGenerator->generate($response);
                             }
                         }
                         break;
                     case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECT:
                     case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECTMULTIPLE:
                         if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue(), $information->getChoices()))) {
-                            try {
-                                $informations[$column->getName()] = '$faker->get' . ucfirst($response) . '()';
-                            } catch (\TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException $e) {
-                                $informations[$column->getName()] = $response;
+                            if ($this->methodNameGenerator->generate($response)) {
+                                $informations[$column->getName()] = $this->methodNameGenerator->generate($response);
                             }
                         }
                         break;
+                    default:
+                        if ($this->methodNameGenerator->generate($column->getName())) {
+                            $informations[$column->getName()] = $this->methodNameGenerator->generate($column->getName());
+                        }
                 }
             }
         }
