@@ -59,8 +59,7 @@ class FakerFactory
             return self::$instance;
         }
 
-        $generator = \Faker\Factory::create();
-        $faker = new \Dennis\Seeder\Provider\Faker($generator);
+        $faker = new \Dennis\Seeder\Provider\Faker(\Faker\Factory::create());
 
         self::$instance = $faker;
 

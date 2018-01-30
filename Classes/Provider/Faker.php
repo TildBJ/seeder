@@ -155,125 +155,6 @@ class Faker implements \Dennis\Seeder\Faker
     protected $guesser = null;
 
     /**
-     * @var array
-     */
-    protected $supportedProviders = [
-        'name' => 'name',
-        'firstname' => 'firstName',
-        'firstnamemale' => 'firstNameMale',
-        'firstnamefemale' => 'firstNameFemale',
-        'lastname' => 'lastName',
-        'title' => 'title',
-        'titlemale' => 'titleMale',
-        'titlefemale' => 'titleFemale',
-        'citysuffix' => 'citySuffix',
-        'streetsuffix' => 'streetSuffix',
-        'buildingnumber' => 'buildingNumber',
-        'city' => 'city',
-        'streetname' => 'streetName',
-        'streetaddress' => 'streetAddress',
-        'postcode' => 'postcode',
-        'address' => 'address',
-        'country' => 'country',
-        'latitude' => 'latitude',
-        'longitude' => 'longitude',
-        'ean13' => 'ean13',
-        'ean8' => 'ean8',
-        'isbn13' => 'isbn13',
-        'isbn10' => 'isbn10',
-        'phonenumber' => 'phoneNumber',
-        'company' => 'company',
-        'companysuffix' => 'companySuffix',
-        'jobtitle' => 'jobTitle',
-        'creditcardtype' => 'creditCardType',
-        'creditcardnumber' => 'creditCardNumber',
-        'creditcardexpirationdate' => 'creditCardExpirationDate',
-        'creditcardexpirationdatestring' => 'creditCardExpirationDateString',
-        'creditcarddetails' => 'creditCardDetails',
-        'bankaccountnumber' => 'bankAccountNumber',
-        'iban' => 'iban',
-        'swiftbicnumber' => 'swiftBicNumber',
-        'vat' => 'vat',
-        'word' => 'word',
-        'words' => 'words',
-        'sentence' => 'sentence',
-        'paragraph' => 'paragraph',
-        'text' => 'text',
-        'realtext' => 'realText',
-        'email' => 'email',
-        'safeemail' => 'safeEmail',
-        'freeemail' => 'freeEmail',
-        'companyemail' => 'companyEmail',
-        'freeEmaildomain' => 'freeEmailDomain',
-        'safeEmaildomain' => 'safeEmailDomain',
-        'username' => 'userName',
-        'password' => 'password',
-        'domainname' => 'domainName',
-        'domainword' => 'domainWord',
-        'tld' => 'tld',
-        'url' => 'url',
-        'slug' => 'slug',
-        'ipv4' => 'ipv4',
-        'ipv6' => 'ipv6',
-        'localipv4' => 'localIpv4',
-        'macaddress' => 'macAddress',
-        'unixtime' => 'unixTime',
-        'datetime' => 'dateTime',
-        'datetimead' => 'dateTimeAD',
-        'iso8601' => 'iso8601',
-        'datetimethiscentury' => 'dateTimeThisCentury',
-        'datetimethisdecade' => 'dateTimeThisDecade',
-        'datetimethisyear' => 'dateTimeThisYear',
-        'datetimethismonth' => 'dateTimeThisMonth',
-        'ampm' => 'amPm',
-        'dayofmonth' => 'dayOfMonth',
-        'dayofweek' => 'dayOfWeek',
-        'month' => 'month',
-        'monthname' => 'monthName',
-        'year' => 'year',
-        'century' => 'century',
-        'timezone' => 'timezone',
-        'date' => 'date',
-        'time' => 'time',
-        'md5' => 'md5',
-        'sha1' => 'sha1',
-        'sha256' => 'sha256',
-        'locale' => 'locale',
-        'countrycode' => 'countryCode',
-        'countryisoalpha3' => 'countryISOAlpha3',
-        'languagecode' => 'languageCode',
-        'currencycode' => 'currencyCode',
-        'boolean' => 'boolean',
-        'randomdigit' => 'randomDigit',
-        'randomdigitnotnull' => 'randomDigitNotNull',
-        'randomletter' => 'randomLetter',
-        'randomascii' => 'randomAscii',
-        'randomnumber' => 'randomNumber',
-        'randomfloat' => 'randomFloat',
-        'macprocessor' => 'macProcessor',
-        'linuxprocessor' => 'linuxProcessor',
-        'useragent' => 'userAgent',
-        'chrome' => 'chrome',
-        'firefox' => 'firefox',
-        'safari' => 'safari',
-        'opera' => 'opera',
-        'internetexplorer' => 'internetExplorer',
-        'windowsplatformtoken' => 'windowsPlatformToken',
-        'macplatformtoken' => 'macPlatformToken',
-        'linuxplatformtoken' => 'linuxPlatformToken',
-        'uuid' => 'uuid',
-        'mimetype' => 'mimeType',
-        'fileextension' => 'fileExtension',
-        'imageurl' => 'imageUrl',
-        'hexcolor' => 'hexColor',
-        'safehexcolor' => 'safeHexColor',
-        'rgbcolor' => 'rgbColor',
-        'rgbcsscolor' => 'rgbCssColor',
-        'safecolorname' => 'safeColorName',
-        'colorname' => 'colorName',
-    ];
-
-    /**
      * Fields we don't take care of
      *
      * @var array $skippedProvider
@@ -303,17 +184,21 @@ class Faker implements \Dennis\Seeder\Faker
      *
      * @param string $property
      * @return mixed
+     * @throws NotFoundException
      */
     public function get($property)
     {
-        $provider = $this->guessProvider($property);
-        $providerName = $this->getProviderNameByKey($provider);
-
-        if ($providerName === null) {
-            return '';
+        if (!$provider = $this->guessProviderName($property)) {
+            $provider = $property;
         }
 
-        return $this->generator->$providerName;
+        if (!$this->hasProvider($provider)) {
+            throw new \Dennis\Seeder\Provider\NotFoundException(
+                'No provider found for ' . $provider
+            );
+        }
+
+        return $this->generate($provider);
     }
 
     /**
@@ -321,15 +206,47 @@ class Faker implements \Dennis\Seeder\Faker
      */
     public function getSupportedProviders()
     {
-        return $this->supportedProviders;
+        return $this->generator->getProviders();
     }
 
     /**
-     * @param $name
-     * @return string ProviderName
+     * @param string $providerName
+     * @return mixed
      */
-    public function guessProvider($name)
+    private function generate($providerName)
     {
+        return $this->generator->$providerName;
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    private function hasProvider($name)
+    {
+        if (empty($name)) {
+            return false;
+        }
+        try {
+            if ($this->generator->getFormatter($name)) {
+                return true;
+            }
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     * @throws \Dennis\Seeder\Provider\NotFoundException
+     */
+    public function guessProviderName($name)
+    {
+        if (empty($name)) {
+            throw new \Dennis\Seeder\Provider\NotFoundException();
+        }
         if (preg_match('/^is[_A-Z]/', $name)) {
             return 'boolean';
         }
@@ -338,7 +255,7 @@ class Faker implements \Dennis\Seeder\Faker
         }
         $name = GeneralUtility::strtolower($name);
         $name = str_replace('_', '', $name);
-        if (array_key_exists($name, $this->supportedProviders)) {
+        if ($this->hasProvider($name)) {
             return $name;
         }
         switch ($name) {
@@ -389,29 +306,11 @@ class Faker implements \Dennis\Seeder\Faker
     }
 
     /**
-     * @param $key
+     * @param $name
+     * @param $value
      * @return mixed
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException
+     * @throws NotFoundException
      */
-    public function getProviderNameByKey($key = null)
-    {
-        if (is_null($key)) {
-            return null;
-        }
-        if ($key === '') {
-            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
-                '$key must be set'
-            );
-        }
-        if (!array_key_exists($key, $this->supportedProviders)) {
-            throw new \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException(
-                sprintf('%s is not a supported key', $key)
-            );
-        }
-
-        return $this->supportedProviders[$key];
-    }
-
     public function __call($name, $value)
     {
         $propertyArray = explode('get', $name);

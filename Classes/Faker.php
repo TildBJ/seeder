@@ -156,17 +156,10 @@ interface Faker
     public function get($property);
 
     /**
-     * Returns all supported providers
-     *
-     * @return array
-     */
-    public function getSupportedProviders();
-
-    /**
      * Guesses which provider will be returned by given property name
      *
      * @param $name
      * @return string
      */
-    public function guessProvider($name);
+    public function guessProviderName($name);
 }

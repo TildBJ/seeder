@@ -99,7 +99,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
             if (in_array($column->getName(), \Dennis\Seeder\Provider\Faker::$skippedProvider)) {
                 continue;
             }
-            $provider = $faker->guessProvider($column->getName());
+            $provider = $faker->guessProviderName($column->getName());
             $informationClassName = 'Dennis\\Seeder\\Information\\' . ucfirst(GeneralUtility::underscoredToLowerCamelCase($column->getName()) . 'Information');
             $relationInformationAvailable = false;
             if ($column->getName() !== 'abstract' && class_exists($informationClassName)) {
@@ -130,7 +130,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                     case \Dennis\Seeder\Information::INFORMATION_TYPE_ASK:
                         if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue()))) {
                             try {
-                                $informations[$column->getName()] = '$faker->get' . ucfirst($faker->getProviderNameByKey($response)) . '()';
+                                $informations[$column->getName()] = '$faker->get' . ucfirst($response) . '()';
                             } catch (\TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException $e) {
                                 $informations[$column->getName()] = $response;
                             }
@@ -140,7 +140,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                     case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECTMULTIPLE:
                         if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue(), $information->getChoices()))) {
                             try {
-                                $informations[$column->getName()] = '$faker->get' . ucfirst($faker->getProviderNameByKey($response)) . '()';
+                                $informations[$column->getName()] = '$faker->get' . ucfirst($response) . '()';
                             } catch (\TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException $e) {
                                 $informations[$column->getName()] = $response;
                             }
