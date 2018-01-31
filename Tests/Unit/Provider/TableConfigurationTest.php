@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Provider;
+namespace Dennis\Seeder\Tests\Unit\Provider;
 
 /***************************************************************
  *  Copyright notice
@@ -24,11 +24,10 @@ namespace Dennis\Seeder\Tests\Provider;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Tests\AccessibleTraitForTest;
+use Dennis\Seeder\Tests\Unit\AccessibleTraitForTest;
 use Dennis\Seeder\Traits\Language;
 use Dennis\Seeder\Provider\TableConfiguration;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
-use Dennis\Seeder\Traits;
 
 /**
  * Test case for class \Dennis\Seeder\Tests\Provider\TableConfigurationTest

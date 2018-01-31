@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Seeder;
+namespace Dennis\Seeder\Tests\Unit\Seeder;
 
 use Dennis\Seeder;
 

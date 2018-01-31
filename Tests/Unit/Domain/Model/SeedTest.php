@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Domain\Model;
+namespace Dennis\Seeder\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice

@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Traits;
+namespace Dennis\Seeder\Tests\Unit\Traits;
 
 /***************************************************************
  *  Copyright notice
@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Tests\Traits;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Tests\AccessibleTraitForTest;
+use Dennis\Seeder\Tests\Unit\AccessibleTraitForTest;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use Dennis\Seeder\Traits;
 use TYPO3\CMS\Lang\LanguageService;

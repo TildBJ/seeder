@@ -1,6 +1,6 @@
 <?php
 
-namespace Dennis\Seeder\Tests\Generator;
+namespace Dennis\Seeder\Tests\Unit\Generator;
 
 use Dennis\Seeder\Generator;
 use Dennis\Seeder\Generator\MethodNameGenerator;
