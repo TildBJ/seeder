@@ -30,6 +30,9 @@ class MethodNameGenerator implements \Dennis\Seeder\Generator
         if (is_numeric($parameter)) {
             return (int) $parameter;
         }
+        if ($this->faker->guessProviderName($parameter)) {
+            $parameter = $this->faker->guessProviderName($parameter);
+        }
         try {
             $this->faker->get($parameter);
             return self::PREFIX . ucfirst($parameter) . self::SUFFIX;
