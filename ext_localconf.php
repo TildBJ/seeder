@@ -5,3 +5,6 @@ if (!defined('TYPO3_MODE')) {
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
     \Dennis\Seeder\Command\SeederCommandController::class;
+
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider']['image'] =
+    \Dennis\Seeder\Provider\Provider\Image::class;
