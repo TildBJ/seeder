@@ -84,6 +84,16 @@ Create an alias in ext_localconf.php ``` ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
 
 <table>
     <tr>
+        <td>0.2.0</td>
+        <td>
+            * Seeds can now be available in custom namespaces
+            * You can register own provider by extending global array in ext_localconf.php
+            * When generating seeds cli won't ask for a fieldtype for every field
+            * Update 3rd party extension
+            * Several Bugfixes
+        </td>
+    </tr>
+    <tr>
         <td>0.1.4</td>
         <td>Don't return empty properties</td>
     </tr>
