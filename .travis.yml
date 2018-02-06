@@ -20,7 +20,7 @@ sudo: false
 
 before_script:
   - composer require typo3/cms="$TYPO3_VERSION"
-  - composer require fzaninotto/faker 1.6
+  - composer require fzaninotto/faker 1.7
   - composer require nimut/testing-framework 1.1
 
 script:
