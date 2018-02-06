@@ -43,6 +43,7 @@ class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
                   'title' => $faker->getTitle(),
                   'description' => $faker->getText(),
                   'relation' => $this->call(\Dennis\Seeder\Seeder\RelationExample::class),
+                  'fal_image' => $this->call(\Dennis\Seeder\Seeder\Image::class),
                 )
             );
         });
