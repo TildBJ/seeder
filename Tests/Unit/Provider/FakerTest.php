@@ -45,6 +45,13 @@ class FakerTest extends UnitTestCase
         $faker = \Faker\Factory::create();
         $faker->seed(1234);
         $this->subject = new Faker($faker);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider']['customdata'] =
+            \Dennis\Seeder\Tests\Unit\Provider\CustomDataProvider::class;
+    }
+
+    protected function tearDown()
+    {
+        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider']['customdata']);
     }
 
     /**
@@ -150,5 +157,14 @@ class FakerTest extends UnitTestCase
     {
         $skippedFieldName = 'l10n_parent';
         $this->assertSame(null, $this->subject->guessProviderName($skippedFieldName));
+    }
+
+    /**
+     * @method __call
+     * @test
+     */
+    public function returnCustomDataIfCustomProviderIsAvailable()
+    {
+        $this->assertSame('customData', $this->subject->getCustomData());
     }
 }

@@ -227,6 +227,9 @@ class Faker implements \Dennis\Seeder\Faker
         if (empty($name)) {
             return false;
         }
+        if ($this->hasCustomProvider($name)) {
+            return true;
+        }
         try {
             if ($this->generator->getFormatter($name)) {
                 return true;
@@ -238,9 +241,36 @@ class Faker implements \Dennis\Seeder\Faker
     }
 
     /**
+     * @param string $className
+     * @return mixed
+     * @throws \Exception
+     */
+    private function callCustomProvider($className)
+    {
+        /** @var \Dennis\Seeder\Provider $providerClass */
+        $providerClass = GeneralUtility::makeInstance($className, $this);
+        if (!$providerClass instanceof \Dennis\Seeder\Provider) {
+            throw new \Exception(get_class($providerClass) . ' must implement ' . \Dennis\Seeder\Provider::class);
+        }
+        return $providerClass->generate();
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    private function hasCustomProvider($name)
+    {
+        return (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider'][$name]) && class_exists(
+                $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider'][$name]
+            ));
+    }
+
+    /**
      * @param string $name
      * @return string
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws NotFoundException
+     * @throws \Exception
      */
     public function guessProviderName($name)
     {
@@ -310,11 +340,15 @@ class Faker implements \Dennis\Seeder\Faker
      * @param $value
      * @return mixed
      * @throws NotFoundException
+     * @throws \Exception
      */
     public function __call($name, $value)
     {
         $propertyArray = explode('get', $name);
         $property = strtolower($propertyArray[1]);
+        if ($this->hasCustomProvider($property)) {
+            return $this->callCustomProvider($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider'][$property]);
+        }
 
         return $this->get($property);
     }
