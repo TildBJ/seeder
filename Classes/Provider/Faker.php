@@ -262,8 +262,8 @@ class Faker implements \Dennis\Seeder\Faker
     private function hasCustomProvider($name)
     {
         return (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider'][$name]) && class_exists(
-                $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider'][$name]
-            ));
+            $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider'][$name]
+        ));
     }
 
     /**

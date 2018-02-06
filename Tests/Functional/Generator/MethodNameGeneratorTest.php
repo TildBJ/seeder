@@ -4,7 +4,6 @@ namespace Dennis\Seeder\Tests\Functional;
 
 use Dennis\Seeder\Generator\MethodNameGenerator;
 
-
 /**
  * Class MethodNameGeneratorTest
  * This class tests the functionality between MethodNameGenerator and Faker

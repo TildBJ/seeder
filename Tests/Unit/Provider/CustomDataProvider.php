@@ -2,7 +2,6 @@
 
 namespace Dennis\Seeder\Tests\Unit\Provider;
 
-
 /**
  * Class CustomDataProvider
  *
