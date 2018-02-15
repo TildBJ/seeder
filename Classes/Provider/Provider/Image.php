@@ -53,7 +53,7 @@ class Image implements \Dennis\Seeder\Provider
         }
 
         $url = $this->faker->getImageUrl();
-        $fileName = time() . '.jpg';
+        $fileName = uniqid() . '.jpg';
         if ($storage->hasFile($folder->getIdentifier() . $fileName)) {
             $file = $storage->getFile($folder->getIdentifier() . $fileName);
         } else {
