@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Unit\Seeder;
+namespace Dennis\Seeder\Tests\Functional\Seeder;
 
 /***************************************************************
  *
