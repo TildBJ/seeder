@@ -27,7 +27,6 @@ namespace Dennis\Seeder\Collection;
 
 use Dennis\Seeder\Seed;
 use Dennis\Seeder\Seeder;
-use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * SeedCollection
@@ -36,7 +35,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Countable, SingletonInterface
+class SeedCollection implements \Dennis\Seeder\SeedCollection
 {
     /**
      * seeds
@@ -56,6 +55,11 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
      * @var int
      */
     protected $i = 0;
+
+    /**
+     * @var int
+     */
+    public $amount = 0;
 
     /**
      * @return array
@@ -81,12 +85,15 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
     public function get(Seeder $seeder)
     {
         $return = [];
+        $i = 1;
+        $this->used = [];
         foreach ($this->seeds as $title => $seeds) {
             foreach ($seeds as $key => $seed) {
                 if ($title === get_class($seeder)) {
-                    if ($this->isUsed($key)) {
+                    if ($this->isUsed($key) || $i > $this->amount) {
                         continue;
                     }
+                    $i++;
                     $this->used[$key] = 1;
                     $return[$key] = $seed;
                 }
@@ -131,7 +138,35 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection, \Iterator, \Count
      */
     public function attach(Seed $seed)
     {
-        $this->seeds[$seed->getTitle()]['NEW' . ++$this->i] = $seed;
+        $attached = false;
+        if (!is_array($this->seeds[$seed->getTitle()])) {
+            $this->seeds[$seed->getTitle()]['NEW' . ++$this->i] = $seed;
+            return null;
+        }
+        foreach ($this->seeds[$seed->getTitle()] as $attachedSeed) {
+            if ($attachedSeed === $seed) {
+                $attached = true;
+            }
+        }
+        if ($attached === false) {
+            $this->seeds[$seed->getTitle()]['NEW' . ++$this->i] = $seed;
+        }
+    }
+
+    /**
+     * Returns a random seed. Returns null if there is no seed or there are less seeds than you want to create
+     * In this case you may $this->attach a new Seed.
+     *
+     * @param string $className
+     * @return Seed
+     */
+    public function random($className, $i)
+    {
+        if (!isset($this->seeds[$className]) || count($this->seeds[$className]) < $i) {
+            return null;
+        }
+        $random = array_rand($this->seeds[$className]);
+        return $this->seeds[$className][$random];
     }
 
     /**

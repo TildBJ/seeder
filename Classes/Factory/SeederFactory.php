@@ -54,19 +54,42 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
      */
     public function create($name, $limit = 1)
     {
+        return $this->makeOrCreate($name, $limit);
+    }
+
+    /**
+     * @param $name
+     * @param int $limit
+     * @return Seeder\SeedCollection|mixed
+     */
+    public function make($name, $limit = 1)
+    {
+        return $this->makeOrCreate($name, $limit, false);
+    }
+
+    /**
+     * @param $name
+     * @param int $limit
+     * @param bool $create
+     */
+    protected function makeOrCreate($name, $limit = 1, $create = true)
+    {
         /** @var Seeder\Provider\TableConfiguration $tableConfiguration */
         $tableConfiguration = GeneralUtility::makeInstance(Seeder\Provider\TableConfiguration::class, $name);
         /** @var Seeder\SeedCollection $seedCollection */
         $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
 
         for ($i = 1; $i <= $limit; $i++) {
-            list(, $calledClass) = debug_backtrace(false, 2);
-            /** @var Seeder\Seed $seed */
-            $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
-            $seed->setTarget($name)
-                ->setTitle($calledClass['class'])
-                ->setProperties($tableConfiguration->getColumns());
+            $calledClass = debug_backtrace(false, 3)[2];
+            if ($create || !$seed = $seedCollection->random($calledClass['class'], $i)) {
+                /** @var Seeder\Seed $seed */
+                $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
+                $seed->setTarget($name)
+                    ->setTitle($calledClass['class'])
+                    ->setProperties($tableConfiguration->getColumns());
+            }
             $seedCollection->attach($seed);
+            $seedCollection->amount = $limit;
         }
 
         return $seedCollection;

@@ -41,4 +41,11 @@ interface SeederFactory
      * @return SeedCollection
      */
     public function create($name, $limit = 1);
+
+    /**
+     * @param $name
+     * @param int $limit
+     * @return mixed
+     */
+    public function make($name, $limit = 1);
 }
