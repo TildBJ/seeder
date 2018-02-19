@@ -151,7 +151,7 @@ class SeedTest extends UnitTestCase
         $userSeed->run();
         $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
 
-        foreach($seedCollection->toArray() as $dataArray) {
+        foreach ($seedCollection->toArray() as $dataArray) {
             foreach ($dataArray as $data) {
                 foreach ($data as $key => $value) {
                     if (!$value) {
