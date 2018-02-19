@@ -72,4 +72,10 @@ interface Seed
      * @return mixed
      */
     public function set(array $properties);
+
+    /**
+     * @param bool $isExecuted
+     * @return mixed
+     */
+    public function isExecuted($isExecuted);
 }

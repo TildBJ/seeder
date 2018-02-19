@@ -123,13 +123,21 @@ abstract class AbstractSeeder implements Seeder
     }
 
     /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return get_class($this);
+    }
+
+    /**
      * @param $className
      * @throws \TYPO3\CMS\Extbase\Object\InvalidClassException
      * @return string
      */
     final protected function call($className)
     {
-        if ($className === get_class($this)) {
+        if ($className === $this->getClass()) {
             throw new \TYPO3\CMS\Extbase\Object\InvalidClassException('Invalid loop detected in ' . $className);
         }
         /** @var self $class */

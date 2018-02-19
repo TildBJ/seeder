@@ -57,11 +57,6 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
     protected $i = 0;
 
     /**
-     * @var int
-     */
-    public $amount = 0;
-
-    /**
      * @return array
      */
     public function toArray()
@@ -89,8 +84,8 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
         $this->used = [];
         foreach ($this->seeds as $title => $seeds) {
             foreach ($seeds as $key => $seed) {
-                if ($title === get_class($seeder)) {
-                    if ($this->isUsed($key) || $i > $this->amount) {
+                if ($title === $seeder->getClass()) {
+                    if ($this->isUsed($key) || $i > $this->count()) {
                         continue;
                     }
                     $i++;
@@ -123,9 +118,10 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
         $reflection = new \ReflectionFunction($function);
         $className = get_class($reflection->getClosureThis());
         foreach ($this->seeds[$className] as $key => $seed) {
-            if ($this->isUsed($key)) {
+            if ($seed->isExecuted()) {
                 continue;
             }
+            $seed->isExecuted(true);
             $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
         }
 
@@ -248,5 +244,6 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
     public function clear()
     {
         $this->seeds = [];
+        $this->i = 0;
     }
 }

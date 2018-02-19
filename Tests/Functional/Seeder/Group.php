@@ -18,7 +18,7 @@ class Group extends Seeder\Seeder\DatabaseSeeder
      */
     public function run()
     {
-        $this->factory->create('fe_groups', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
+        $this->factory->make('fe_groups', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
             $seed->set([
                 'title' => 'Group',
                 'subgroup' => $this->call(SubGroup::class),

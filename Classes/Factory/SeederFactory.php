@@ -89,7 +89,6 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
                     ->setProperties($tableConfiguration->getColumns());
             }
             $seedCollection->attach($seed);
-            $seedCollection->amount = $limit;
         }
 
         return $seedCollection;

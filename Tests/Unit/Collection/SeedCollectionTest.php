@@ -24,7 +24,9 @@ namespace Dennis\Seeder\Tests\Unit\Collection;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Dennis\Seeder\Collection\SeedCollection;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * SeedCollectionTest
@@ -42,7 +44,7 @@ class SeedCollectionTest extends UnitTestCase
 
     public function setUp()
     {
-        $this->subject = new \Dennis\Seeder\Collection\SeedCollection();
+        $this->subject = new SeedCollection();
     }
 
     /**
@@ -77,12 +79,172 @@ class SeedCollectionTest extends UnitTestCase
     public function attachAttachesMultipleSeedsIfSeedsAreDifferent()
     {
         $seed = $this->getMock(\Dennis\Seeder\Seed::class);
-        $differentSeed = $this->getMock(\Dennis\Seeder\Seed::class);
         $this->subject->attach($seed);
-        $this->subject->attach($differentSeed);
+        $this->subject->attach(clone $seed);
         $this->assertSame([
             0 => 'NEW1',
             1 => 'NEW2',
         ], array_keys($this->subject->current()));
+    }
+
+    /**
+     * @param $name
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function mockSeed($name)
+    {
+        $seed = $this->getMock(\Dennis\Seeder\Seed::class);
+        $seed->method('getTitle')->willReturn($name);
+        $seed->method('getTarget')->willReturn(strtolower(preg_replace('/\B([A-Z])/', '_$1', $name)));
+        $seed->method('getProperties')->willReturn(['pid' => 123]);
+
+        return $seed;
+    }
+
+    /**
+     * @test
+     * @method get
+     */
+    public function getReturnsArrayWithTwoKeysWhenClassNameFooBar()
+    {
+        $seeder = $this->getMock(\Dennis\Seeder\Seeder::class);
+        $seeder->method('getClass')->willReturn('FooBar');
+        $fooBarSeed = $this->mockSeed('FooBar');
+        $fooSeed = $this->mockSeed('Foo');
+        $barSeed = $this->mockSeed('Bar');
+
+        // NEW1
+        $this->subject->attach($fooBarSeed);
+        // NEW2
+        $this->subject->attach($fooSeed);
+        // NEW3
+        $this->subject->attach(clone $fooBarSeed);
+        // NEW4
+        $this->subject->attach($barSeed);
+
+        $this->subject->amount = 4;
+        $this->assertSame([
+            0 => 'NEW1',
+            1 => 'NEW3',
+        ], array_keys($this->subject->get($seeder)));
+    }
+
+    /**
+     * @test
+     * @method get
+     */
+    public function getReturnsArrayWithOneKeyWhenClassNameFoo()
+    {
+        $seeder = $this->getMock(\Dennis\Seeder\Seeder::class);
+        $seeder->method('getClass')->willReturn('Foo');
+        $fooBarSeed = $this->mockSeed('FooBar');
+        $fooSeed = $this->mockSeed('Foo');
+        $barSeed = $this->mockSeed('Bar');
+
+        // NEW1
+        $this->subject->attach($fooBarSeed);
+        // NEW2
+        $this->subject->attach($fooSeed);
+        // NEW3
+        $this->subject->attach($fooBarSeed);
+        // NEW4
+        $this->subject->attach($barSeed);
+
+        $this->subject->amount = 4;
+        $this->assertSame([
+            0 => 'NEW2',
+        ], array_keys($this->subject->get($seeder)));
+    }
+
+    /**
+     * @test
+     * @method get
+     */
+    public function getReturnsArrayWithOneKeyWhenClassNameFooBar()
+    {
+        $seeder = $this->getMock(\Dennis\Seeder\Seeder::class);
+        $seeder->method('getClass')->willReturn('FooBar');
+        $fooBarSeed = $this->mockSeed('FooBar');
+        $fooSeed = $this->mockSeed('Foo');
+        $barSeed = $this->mockSeed('Bar');
+
+        // NEW1
+        $this->subject->attach($fooBarSeed);
+        // NEW2
+        $this->subject->attach($fooSeed);
+        // NEW3
+        $this->subject->attach($fooBarSeed);
+        // NEW4
+        $this->subject->attach($barSeed);
+
+        $this->subject->amount = 4;
+        $this->assertSame([
+            0 => 'NEW1',
+        ], array_keys($this->subject->get($seeder)));
+    }
+
+    /**
+     * @method clear
+     * @test
+     */
+    public function clearSeedCollectionRemovesAllSeeds()
+    {
+        $seed = $this->getMock(\Dennis\Seeder\Seed::class);
+        $this->subject->attach($seed);
+        $this->subject->clear();
+
+        $this->assertSame([], $this->subject->toArray());
+        $this->assertSame(0, $this->subject->count());
+        $this->assertSame(false, $this->subject->current());
+        $this->assertSame(false, $this->subject->valid());
+        $this->assertSame(false, $this->subject->next());
+        $this->assertSame(null, $this->subject->key());
+        $this->assertSame(false, $this->subject->rewind());
+    }
+
+    /**
+     * @method clear
+     * @test
+     */
+    public function clearSeedCollectionSetCounterToZero()
+    {
+        $seed = $this->getMock(\Dennis\Seeder\Seed::class);
+        $this->subject->attach($seed);
+        $this->subject->clear();
+        $this->subject->attach($seed);
+        $this->subject->attach(clone $seed);
+        $this->assertSame([
+            0 => 'NEW1',
+            1 => 'NEW2',
+        ], array_keys($this->subject->current()));
+    }
+
+    /**
+     * @method toArray
+     * @test
+     */
+    public function toArrayReturnsCorrectArray()
+    {
+        $seed = $this->getMock(\Dennis\Seeder\Seed::class);
+        $seed->method('getTitle')->willReturn('FooBar');
+        $seed->method('getTarget')->willReturn('foo_bar');
+        $seed->method('getProperties')->willReturn(['pid' => 123]);
+        $this->subject->attach($seed);
+        $this->subject->attach(clone $seed);
+        $this->assertSame([
+            'foo_bar' => [
+                'NEW1' => [
+                    'pid' => 123
+                ],
+                'NEW2' => [
+                    'pid' => 123
+                ],
+            ],
+        ], $this->subject->toArray());
+    }
+
+    public function tearDown()
+    {
+        $this->subject->clear();
     }
 }

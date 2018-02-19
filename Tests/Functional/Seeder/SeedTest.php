@@ -39,52 +39,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class SeedTest extends UnitTestCase
 {
     /**
-     * @var array
-     */
-    protected $expected = [
-        'fe_users' => [
-            'NEW1' => [
-                'email' => 'mail@example.org',
-                'usergroup' => 'NEW3,NEW4',
-            ],
-            'NEW2' => [
-                'email' => 'mail@example.org',
-                'usergroup' => 'NEW7,NEW8',
-            ],
-        ],
-        'fe_groups' => [
-            'NEW3' => [
-                'title' => 'Group',
-                'subgroup' => 'NEW5',
-            ],
-            'NEW4' => [
-                'title' => 'Group',
-                'subgroup' => 'NEW6',
-            ],
-            'NEW7' => [
-                'title' => 'Group',
-                'subgroup' => 'NEW9',
-            ],
-            'NEW8' => [
-                'title' => 'Group',
-                'subgroup' => 'NEW10',
-            ],
-            'NEW5' => [
-                'title' => 'SubGroup',
-            ],
-            'NEW6' => [
-                'title' => 'SubGroup',
-            ],
-            'NEW9' => [
-                'title' => 'SubGroup',
-            ],
-            'NEW10' => [
-                'title' => 'SubGroup',
-            ],
-        ]
-    ];
-
-    /**
      * factory
      *
      * @var SeederFactory $factory
@@ -105,18 +59,84 @@ class SeedTest extends UnitTestCase
     }
 
     /**
-     * Test, if simple relation can be created
-     *
      * @test
      */
-    public function simpleRelation()
+    public function seedCollectionContainTwoUsers()
     {
         /** @var User $userSeed */
         $userSeed = GeneralUtility::makeInstance(User::class);
         $userSeed->run();
         $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
 
-        $this->assertSame($this->expected, $seedCollection->toArray());
+        $feUsers = $seedCollection->toArray()['fe_users'];
+        $this->assertSame([
+            0 => 'NEW1',
+            1 => 'NEW2',
+        ], array_keys($feUsers));
+    }
+
+    /**
+     * @test
+     */
+    public function seedCollectionContainsTwoGroups()
+    {
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
+        $userSeed->run();
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        $groups = [];
+        foreach ($seedCollection->toArray()['fe_groups'] as $key => $group) {
+            if ($group['title'] === 'Group') {
+                $groups[$key] = $group;
+            }
+        }
+        $this->assertSame([
+            0 => 'NEW3',
+            1 => 'NEW4',
+        ], array_keys($groups));
+    }
+
+    /**
+     * @test
+     */
+    public function seedCollectionContainsTwoSubGroups()
+    {
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
+        $userSeed->run();
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        $groups = [];
+        foreach ($seedCollection->toArray()['fe_groups'] as $key => $group) {
+            if ($group['title'] === 'SubGroup') {
+                $groups[$key] = $group;
+            }
+        }
+        $this->assertSame([
+            0 => 'NEW5',
+            1 => 'NEW6',
+        ], array_keys($groups));
+    }
+
+    /**
+     * @test
+     */
+    public function userHasRelationToTwoGroups()
+    {
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
+        $userSeed->run();
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        $users = [];
+        foreach ($seedCollection->toArray()['fe_users'] as $key => $user) {
+            $users[$key] = $user['usergroup'];
+        }
+        $this->assertSame([
+            0 => 'NEW3,NEW4',
+            1 => 'NEW3,NEW4',
+        ], array_values($users));
     }
 
     /**
@@ -140,5 +160,11 @@ class SeedTest extends UnitTestCase
                 }
             }
         }
+    }
+
+    public function tearDown()
+    {
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+        $seedCollection->clear();
     }
 }

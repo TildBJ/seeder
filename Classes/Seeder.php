@@ -56,4 +56,9 @@ interface Seeder
      * @return bool
      */
     public function seed();
+
+    /**
+     * @return string
+     */
+    public function getClass();
 }

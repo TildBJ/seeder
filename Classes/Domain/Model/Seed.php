@@ -58,6 +58,11 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
     protected $properties;
 
     /**
+     * @var bool
+     */
+    protected $executed = false;
+
+    /**
      * @return string
      */
     public function getTitle()
@@ -138,5 +143,18 @@ final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject imp
         foreach ($properties as $property => $value) {
             $this->properties[$property] = $value;
         }
+    }
+
+    /**
+     * @param bool $isExecuted
+     * @return bool
+     */
+    public function isExecuted($isExecuted = null)
+    {
+        if ($isExecuted) {
+            $this->executed = $isExecuted;
+            return $this->executed;
+        }
+        return $this->executed;
     }
 }
