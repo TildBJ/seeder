@@ -4,10 +4,10 @@ namespace Dennis\Seeder\Tests\Functional\Seeder;
 use Dennis\Seeder;
 
 /**
- * Class Group
+ * Class Pages
  * @package Dennis\Seeder\Tests\Functional\Seeder
  */
-class Group extends Seeder\Seeder\DatabaseSeeder
+class Pages extends Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +16,10 @@ class Group extends Seeder\Seeder\DatabaseSeeder
      */
     public function run()
     {
-        $this->factory->make('fe_groups', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
+        $this->factory->create('pages', 2)->each(function (Seeder\Seed $seed, Seeder\Faker $faker) {
             $seed->set([
-                'title' => 'Group',
-                'subgroup' => $this->call(SubGroup::class),
+                'title' => 'foobar',
+                'media' => $this->call(Seeder\Seeder\Image::class)
             ]);
         });
     }

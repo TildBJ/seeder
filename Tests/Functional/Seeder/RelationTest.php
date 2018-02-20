@@ -32,11 +32,12 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case
+ * This Test checks if seeder is able to generate relations
+ * with the given tca informations
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */
-class SeedTest extends UnitTestCase
+class RelationTest extends UnitTestCase
 {
     /**
      * factory
@@ -61,7 +62,7 @@ class SeedTest extends UnitTestCase
     /**
      * @test
      */
-    public function seedCollectionContainTwoUsers()
+    public function seedCollectionContainsTwoUsers()
     {
         /** @var User $userSeed */
         $userSeed = GeneralUtility::makeInstance(User::class);
@@ -116,6 +117,8 @@ class SeedTest extends UnitTestCase
         $this->assertSame([
             0 => 'NEW5',
             1 => 'NEW6',
+            2 => 'NEW7',
+            3 => 'NEW8',
         ], array_keys($groups));
     }
 
@@ -137,6 +140,53 @@ class SeedTest extends UnitTestCase
             0 => 'NEW3,NEW4',
             1 => 'NEW3,NEW4',
         ], array_values($users));
+    }
+
+    /**
+     * @test
+     */
+    public function seedCollectionContainsFourSubGroups()
+    {
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
+        $userSeed->run();
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        $groups = [];
+        foreach ($seedCollection->toArray()['fe_groups'] as $key => $group) {
+            if ($group['title'] === 'SubGroup') {
+                $groups[$key] = $group;
+            }
+        }
+        $this->assertSame([
+            0 => 'NEW5',
+            1 => 'NEW6',
+            2 => 'NEW7',
+            3 => 'NEW8',
+        ], array_keys($groups));
+    }
+
+    /**
+     * @test
+     * @group failing
+     */
+    public function eachGroupHasTwoDifferentSubGroups()
+    {
+        /** @var User $userSeed */
+        $userSeed = GeneralUtility::makeInstance(User::class);
+        $userSeed->run();
+        $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
+
+        $groups = [];
+        foreach ($seedCollection->toArray()['fe_groups'] as $key => $group) {
+            if ($group['title'] === 'Group') {
+                $groups[$key] = $group['subgroup'];
+            }
+        }
+        $this->assertSame([
+            'NEW3' => 'NEW5,NEW6',
+            'NEW4' => 'NEW7,NEW8',
+        ], $groups);
     }
 
     /**

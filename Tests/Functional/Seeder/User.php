@@ -5,9 +5,7 @@ use Dennis\Seeder;
 
 /**
  * Class User
- * @package Dennis\Seeder\Seeder
- *
- * @example
+ * @package Dennis\Seeder\Tests\Functional\Seeder
  */
 class User extends Seeder\Seeder\DatabaseSeeder
 {
