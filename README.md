@@ -84,6 +84,19 @@ Create an alias in ext_localconf.php ``` ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
 
 <table>
     <tr>
+        <td>0.2.2</td>
+        <td>
+            * Possibility to choose between creating new data and get date which is created just now
+            * Bugfix with recursive call
+        </td>
+    </tr>
+    <tr>
+        <td>0.2.1</td>
+        <td>
+            * Images will be created with a more unique filename so we don't have duplicates anymore
+        </td>
+    </tr>
+    <tr>
         <td>0.2.0</td>
         <td>
             * Seeds can now be available in custom namespaces
