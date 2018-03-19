@@ -84,6 +84,14 @@ Create an alias in ext_localconf.php ``` ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
 
 <table>
     <tr>
+        <td>0.3.0</td>
+        <td>
+            * Fixes a Bug with wrong amount of relations
+            * Feature: Possibility to configer the locale
+            * Defined a more unique vendor name
+        </td>
+    </tr>
+    <tr>
         <td>0.2.2</td>
         <td>
             * Possibility to choose between creating new data and get date which is created just now
