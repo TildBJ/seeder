@@ -59,7 +59,8 @@ class FakerFactory
             return self::$instance;
         }
 
-        $faker = new \Dennis\Seeder\Provider\Faker(\Faker\Factory::create());
+        $locale = \Dennis\Seeder\Utility\EmConfiguration::get('locale');
+        $faker = new \Dennis\Seeder\Provider\Faker(\Faker\Factory::create($locale));
 
         self::$instance = $faker;
 

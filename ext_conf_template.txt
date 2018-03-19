@@ -1,2 +1,5 @@
 	# cat=basic
 pathToFaker = vendor/fzaninotto/faker/
+
+	# cat=basic
+locale = en_US

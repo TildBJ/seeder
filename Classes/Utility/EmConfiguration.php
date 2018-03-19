@@ -41,6 +41,11 @@ class EmConfiguration
     public $pathToFaker = 'vendor/fzaninotto/faker/';
 
     /**
+     * @var array $configuration
+     */
+    protected static $configuration = [];
+
+    /**
      * EmConfiguration constructor.
      */
     public function __construct()
@@ -50,5 +55,20 @@ class EmConfiguration
         if (isset($extConf['pathToFaker'])) {
             $this->pathToFaker = $extConf['pathToFaker'];
         }
+    }
+
+    /**
+     * @param $key
+     * @return mixed|string
+     */
+    public static function get($key)
+    {
+        if (empty(self::$configuration)) {
+            self::$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seeder']);
+        }
+        if (isset(self::$configuration[$key])) {
+            return self::$configuration[$key];
+        }
+        return '';
     }
 }
