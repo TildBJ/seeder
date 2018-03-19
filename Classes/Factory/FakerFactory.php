@@ -60,6 +60,9 @@ class FakerFactory
         }
 
         $locale = \Dennis\Seeder\Utility\EmConfiguration::get('locale');
+        if (!$locale) {
+            $locale = 'en_US';
+        }
         $faker = new \Dennis\Seeder\Provider\Faker(\Faker\Factory::create($locale));
 
         self::$instance = $faker;
