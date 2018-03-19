@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Unit\Domain\Model;
+namespace TildBJ\Seeder\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Tests\Unit\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Domain\Model\Seed;
+use TildBJ\Seeder\Domain\Model\Seed;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**

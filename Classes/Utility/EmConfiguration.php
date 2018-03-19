@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Utility;
+namespace TildBJ\Seeder\Utility;
 
 /***************************************************************
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder\Utility;
 /**
  * Class EmConfiguration
  *
- * @package Dennis\Seeder\Utility
+ * @package TildBJ\Seeder\Utility
  */
 class EmConfiguration
 {

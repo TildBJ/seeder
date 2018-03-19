@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Connection;
+namespace TildBJ\Seeder\Connection;
 
 /***************************************************************
  *  Copyright notice

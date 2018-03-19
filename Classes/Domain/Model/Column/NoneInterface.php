@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model\Column;
+namespace TildBJ\Seeder\Domain\Model\Column;
 
 /***************************************************************
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder\Domain\Model\Column;
 /**
  * Interface NoneInterface
  *
- * @package Dennis\Seeder\Domain\Model\Column\NoneInterface
+ * @package TildBJ\Seeder\Domain\Model\Column\NoneInterface
  */
 interface NoneInterface extends TextInterface
 {

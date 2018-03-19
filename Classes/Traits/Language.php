@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Traits;
+namespace TildBJ\Seeder\Traits;
 
 /***************************************************************
  *  Copyright notice

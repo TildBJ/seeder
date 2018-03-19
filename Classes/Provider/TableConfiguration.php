@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Provider;
+namespace TildBJ\Seeder\Provider;
 
 /***************************************************************
  *  Copyright notice
@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Provider;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Traits;
+use TildBJ\Seeder\Traits;
 
 /**
  * TableConfiguration

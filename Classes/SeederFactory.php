@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder;
+namespace TildBJ\Seeder;
 
 /***************************************************************
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder;
 /**
  * Interface SeederFactory
  *
- * @package Dennis\Seeder
+ * @package TildBJ\Seeder
  */
 interface SeederFactory
 {

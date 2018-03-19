@@ -1,23 +1,23 @@
 <?php
 
-namespace Dennis\Seeder\Generator;
+namespace TildBJ\Seeder\Generator;
 
 /**
  * Class MethodNameGenerator
  *
- * @package Dennis\Seeder\Generator
+ * @package TildBJ\Seeder\Generator
  */
-class MethodNameGenerator implements \Dennis\Seeder\Generator
+class MethodNameGenerator implements \TildBJ\Seeder\Generator
 {
     /**
-     * @var \Dennis\Seeder\Faker $faker
+     * @var \TildBJ\Seeder\Faker $faker
      */
     protected $faker;
 
     /**
      * MethodNameGenerator constructor.
      */
-    public function __construct(\Dennis\Seeder\Faker $faker)
+    public function __construct(\TildBJ\Seeder\Faker $faker)
     {
         $this->faker = $faker;
     }
@@ -36,7 +36,7 @@ class MethodNameGenerator implements \Dennis\Seeder\Generator
         try {
             $this->faker->get($parameter);
             return self::PREFIX . ucfirst($parameter) . self::SUFFIX;
-        } catch (\Dennis\Seeder\Provider\NotFoundException $exception) {
+        } catch (\TildBJ\Seeder\Provider\NotFoundException $exception) {
             return null;
         }
     }

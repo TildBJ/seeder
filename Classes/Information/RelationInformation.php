@@ -1,11 +1,11 @@
 <?php
-namespace Dennis\Seeder\Information;
+namespace TildBJ\Seeder\Information;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder\Information;
 /**
  * Class RelationInformation
  *
- * @package Dennis\Seeder\Information\RelationInformation
+ * @package TildBJ\Seeder\Information\RelationInformation
  */
 class RelationInformation extends AbstractInformation
 {

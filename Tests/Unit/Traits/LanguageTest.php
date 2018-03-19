@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Unit\Traits;
+namespace TildBJ\Seeder\Tests\Unit\Traits;
 
 /***************************************************************
  *  Copyright notice
@@ -24,13 +24,13 @@ namespace Dennis\Seeder\Tests\Unit\Traits;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Tests\Unit\AccessibleTraitForTest;
+use TildBJ\Seeder\Tests\Unit\AccessibleTraitForTest;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
-use Dennis\Seeder\Traits;
+use TildBJ\Seeder\Traits;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
- * Test case for class \Dennis\Seeder\Tests\Traits\LanguageTest
+ * Test case for class \TildBJ\Seeder\Tests\Traits\LanguageTest
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */

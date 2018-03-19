@@ -1,13 +1,13 @@
 <?php
 
-namespace Dennis\Seeder\Tests\Unit\Provider;
+namespace TildBJ\Seeder\Tests\Unit\Provider;
 
 /**
  * Class CustomDataProvider
  *
- * @package Dennis\Seeder\Tests\Unit\Provider
+ * @package TildBJ\Seeder\Tests\Unit\Provider
  */
-class CustomDataProvider implements \Dennis\Seeder\Provider
+class CustomDataProvider implements \TildBJ\Seeder\Provider
 {
     /**
      * @return string

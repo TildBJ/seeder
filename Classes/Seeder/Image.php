@@ -1,14 +1,14 @@
 <?php
 
-namespace Dennis\Seeder\Seeder;
+namespace TildBJ\Seeder\Seeder;
 
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
 /**
  * Class Image
- * @package Dennis\Seeder\Seeder
+ * @package TildBJ\Seeder\Seeder
  */
-class Image extends \Dennis\Seeder\Seeder\DatabaseSeeder
+class Image extends \TildBJ\Seeder\Seeder\DatabaseSeeder
 {
     public function run()
     {

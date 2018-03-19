@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Command;
+namespace TildBJ\Seeder\Command;
 
 /***************************************************************
  *  Copyright notice
@@ -25,8 +25,8 @@ namespace Dennis\Seeder\Command;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Dennis\Seeder\Domain\Model\ColumnInterface;
-use Dennis\Seeder\Generator\MethodNameGenerator;
+use TildBJ\Seeder\Domain\Model\ColumnInterface;
+use TildBJ\Seeder\Generator\MethodNameGenerator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -43,7 +43,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      *
      * @var string $namespace
      */
-    protected $namespace = 'Dennis\Seeder\Seeder';
+    protected $namespace = 'TildBJ\Seeder\Seeder';
 
     /**
      * path
@@ -65,14 +65,14 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     protected $methodNameGenerator;
 
     /**
-     * @var \Dennis\Seeder\Utility\OutputUtility
+     * @var \TildBJ\Seeder\Utility\OutputUtility
      * @inject
      */
     protected $outputUtility;
 
     public function __construct()
     {
-        $faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
+        $faker = \TildBJ\Seeder\Factory\FakerFactory::createFaker();
         $this->methodNameGenerator = GeneralUtility::makeInstance(MethodNameGenerator::class, $faker);
     }
 
@@ -86,7 +86,7 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     {
         $class = $this->resolveSeederClass($seed);
 
-        /** @var \Dennis\Seeder\Seeder $seeder */
+        /** @var \TildBJ\Seeder\Seeder $seeder */
         $seeder = new $class;
         $seeder->run();
         $seeder->seed();
@@ -102,28 +102,28 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     protected function detectSeederInformations($tableName)
     {
         $informations = [];
-        $faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
-        $table = \Dennis\Seeder\Factory\TableFactory::createTable($tableName);
+        $faker = \TildBJ\Seeder\Factory\FakerFactory::createFaker();
+        $table = \TildBJ\Seeder\Factory\TableFactory::createTable($tableName);
 
         /** @var ColumnInterface $column */
         foreach ($table->getColumns() as $column) {
-            if (in_array($column->getName(), \Dennis\Seeder\Provider\Faker::$skippedProvider)) {
+            if (in_array($column->getName(), \TildBJ\Seeder\Provider\Faker::$skippedProvider)) {
                 continue;
             }
             $provider = $faker->guessProviderName($column->getName());
-            $informationClassName = 'Dennis\\Seeder\\Information\\' . ucfirst(GeneralUtility::underscoredToLowerCamelCase($column->getName()) . 'Information');
+            $informationClassName = 'TildBJ\\Seeder\\Information\\' . ucfirst(GeneralUtility::underscoredToLowerCamelCase($column->getName()) . 'Information');
             $relationInformationAvailable = false;
             if ($column->getName() !== 'abstract' && class_exists($informationClassName)) {
                 $information = GeneralUtility::makeInstance($informationClassName);
             } elseif ($this->isRelation($column)) {
-                $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\RelationInformation::class);
+                $information = GeneralUtility::makeInstance(\TildBJ\Seeder\Information\RelationInformation::class);
                 $relationInformationAvailable = true;
             } else {
-                $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\NullInformation::class);
+                $information = GeneralUtility::makeInstance(\TildBJ\Seeder\Information\NullInformation::class);
                 $information->setDefaultValue($provider);
             }
-            if (!$information instanceof \Dennis\Seeder\Information) {
-                throw new \Exception($informationClassName . ' must implement ' . \Dennis\Seeder\Information::class);
+            if (!$information instanceof \TildBJ\Seeder\Information) {
+                throw new \Exception($informationClassName . ' must implement ' . \TildBJ\Seeder\Information::class);
             }
 
             if ($this->isRelation($column) && $relationInformationAvailable) {
@@ -138,15 +138,15 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                 }
             } else {
                 switch ($information->getType()) {
-                    case \Dennis\Seeder\Information::INFORMATION_TYPE_ASK:
+                    case \TildBJ\Seeder\Information::INFORMATION_TYPE_ASK:
                         if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue()))) {
                             if ($this->methodNameGenerator->generate($response)) {
                                 $informations[$column->getName()] = $this->methodNameGenerator->generate($response);
                             }
                         }
                         break;
-                    case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECT:
-                    case \Dennis\Seeder\Information::INFORMATION_TYPE_SELECTMULTIPLE:
+                    case \TildBJ\Seeder\Information::INFORMATION_TYPE_SELECT:
+                    case \TildBJ\Seeder\Information::INFORMATION_TYPE_SELECTMULTIPLE:
                         if (!is_null($response = $this->askOrSelect($information->getQuestion([$column->getName(), $provider]), $information->getDefaultValue(), $information->getChoices()))) {
                             if ($this->methodNameGenerator->generate($response)) {
                                 $informations[$column->getName()] = $this->methodNameGenerator->generate($response);
@@ -162,8 +162,8 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         }
 
         if (!isset($informations['pid'])) {
-            /** @var \Dennis\Seeder\Information $information */
-            $information = GeneralUtility::makeInstance(\Dennis\Seeder\Information\PidInformation::class);
+            /** @var \TildBJ\Seeder\Information $information */
+            $information = GeneralUtility::makeInstance(\TildBJ\Seeder\Information\PidInformation::class);
             $informations['pid'] = $this->outputUtility->ask($information->getQuestion(), $information->getDefaultValue());
         }
 
@@ -178,9 +178,9 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     {
         return (
         (
-            $column instanceof \Dennis\Seeder\Domain\Model\Column\Select ||
-            $column instanceof \Dennis\Seeder\Domain\Model\Column\Inline ||
-            $column instanceof \Dennis\Seeder\Domain\Model\Column\Group
+            $column instanceof \TildBJ\Seeder\Domain\Model\Column\Select ||
+            $column instanceof \TildBJ\Seeder\Domain\Model\Column\Inline ||
+            $column instanceof \TildBJ\Seeder\Domain\Model\Column\Group
         ) &&
             $column->getForeignTable()
         );

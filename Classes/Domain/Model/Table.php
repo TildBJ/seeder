@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace TildBJ\Seeder\Domain\Model;
 
 /***************************************************************
  *
@@ -25,13 +25,13 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Factory\TableFactory;
-use Dennis\Seeder\Provider\TableConfiguration;
+use TildBJ\Seeder\Factory\TableFactory;
+use TildBJ\Seeder\Provider\TableConfiguration;
 
 /**
  * Class Table
  *
- * @package Dennis\Seeder\Domain\Model\Table
+ * @package TildBJ\Seeder\Domain\Model\Table
  */
 class Table implements TableInterface
 {

@@ -1,25 +1,25 @@
 <?php
 
-namespace Dennis\Seeder\Provider\Provider;
+namespace TildBJ\Seeder\Provider\Provider;
 
 /**
  * Class Image
  *
- * @package Dennis\Seeder\Provider\Provider
+ * @package TildBJ\Seeder\Provider\Provider
  */
-class Image implements \Dennis\Seeder\Provider
+class Image implements \TildBJ\Seeder\Provider
 {
 
     /**
-     * @var \Dennis\Seeder\Faker $faker
+     * @var \TildBJ\Seeder\Faker $faker
      */
     protected $faker;
 
     /**
      * Image constructor.
-     * @param \Dennis\Seeder\Faker $faker
+     * @param \TildBJ\Seeder\Faker $faker
      */
-    public function __construct(\Dennis\Seeder\Faker $faker)
+    public function __construct(\TildBJ\Seeder\Faker $faker)
     {
         $this->faker = $faker;
     }

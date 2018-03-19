@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder;
+namespace TildBJ\Seeder;
 
 /***************************************************************
  *
@@ -143,7 +143,7 @@ namespace Dennis\Seeder;
  * @method string getSafeColorName()
  * @method string getColorName()
  *
- * @package Dennis\Seeder
+ * @package TildBJ\Seeder
  */
 interface Faker
 {

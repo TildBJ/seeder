@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Message;
+namespace TildBJ\Seeder\Message;
 
 /***************************************************************
  *  Copyright notice
@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Message;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
 /**
  * FlashMessage

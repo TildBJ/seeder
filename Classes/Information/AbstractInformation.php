@@ -1,11 +1,11 @@
 <?php
-namespace Dennis\Seeder\Information;
+namespace TildBJ\Seeder\Information;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -29,9 +29,9 @@ namespace Dennis\Seeder\Information;
 /**
  * Class AbstractInformation
  *
- * @package Dennis\Seeder\Information\AbstractInformation
+ * @package TildBJ\Seeder\Information\AbstractInformation
  */
-abstract class AbstractInformation implements \Dennis\Seeder\Information
+abstract class AbstractInformation implements \TildBJ\Seeder\Information
 {
     /**
      * @var string

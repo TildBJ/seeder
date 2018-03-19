@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Unit\Provider;
+namespace TildBJ\Seeder\Tests\Unit\Provider;
 
 /***************************************************************
  *
@@ -25,11 +25,11 @@ namespace Dennis\Seeder\Tests\Unit\Provider;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Provider\Faker;
+use TildBJ\Seeder\Provider\Faker;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Test case for class \Dennis\Seeder\Provider\Faker
+ * Test case for class \TildBJ\Seeder\Provider\Faker
  *
  * @author Dennis Römmich <dennis@roemmich.eu>
  */
@@ -46,7 +46,7 @@ class FakerTest extends UnitTestCase
         $faker->seed(1234);
         $this->subject = new Faker($faker);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['provider']['customdata'] =
-            \Dennis\Seeder\Tests\Unit\Provider\CustomDataProvider::class;
+            \TildBJ\Seeder\Tests\Unit\Provider\CustomDataProvider::class;
     }
 
     protected function tearDown()
@@ -57,12 +57,12 @@ class FakerTest extends UnitTestCase
     /**
      * @method guessProviderName
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function guessProviderNameByKeyWithEmptyArgumentThrowsNotFoundException()
     {
         $this->setExpectedException(
-            \Dennis\Seeder\Provider\NotFoundException::class
+            \TildBJ\Seeder\Provider\NotFoundException::class
         );
         $this->subject->guessProviderName('');
     }
@@ -70,7 +70,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method guessProviderName
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function guessProviderNameReturnsProvidername()
     {
@@ -80,7 +80,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method guessProviderNameByKey
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function guessProviderNameByKeyReturnsNullIfNotFound()
     {
@@ -90,18 +90,18 @@ class FakerTest extends UnitTestCase
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function getThrowsExceptionIfNoProviderWasFound()
     {
-        $this->setExpectedException(\Dennis\Seeder\Provider\NotFoundException::class);
+        $this->setExpectedException(\TildBJ\Seeder\Provider\NotFoundException::class);
         $this->subject->get('doesnotexist');
     }
 
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function getZipReturnsPostcode()
     {
@@ -111,7 +111,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function getPostcodeReturnsPostcode()
     {
@@ -121,7 +121,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function getPostcodeWithUnderscoreReturnsPostcode()
     {
@@ -131,7 +131,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function getPostcodeWithWeiredCaseReturnsPostcode()
     {
@@ -141,7 +141,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function getPostcodeWithUpperCaseReturnsPostcode()
     {
@@ -151,7 +151,7 @@ class FakerTest extends UnitTestCase
     /**
      * @method get
      * @test
-     * @throws \Dennis\Seeder\Provider\NotFoundException
+     * @throws \TildBJ\Seeder\Provider\NotFoundException
      */
     public function guessProviderNameReturnsNullWithSkippedFieldName()
     {

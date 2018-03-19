@@ -1,6 +1,6 @@
 <?php
 
-namespace Dennis\Seeder\Connection;
+namespace TildBJ\Seeder\Connection;
 
 /***************************************************************
  *  Copyright notice
@@ -25,8 +25,8 @@ namespace Dennis\Seeder\Connection;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Connection;
-use Dennis\Seeder;
+use TildBJ\Seeder\Connection;
+use TildBJ\Seeder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -48,7 +48,7 @@ class DatabaseConnection implements Connection
     /**
      * output
      *
-     * @var \Dennis\Seeder\Message $message
+     * @var \TildBJ\Seeder\Message $message
      */
     protected $message;
 
@@ -70,7 +70,7 @@ class DatabaseConnection implements Connection
      * DatabaseConnection constructor.
      *
      * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
-     * @param \Dennis\Seeder\Message $message
+     * @param \TildBJ\Seeder\Message $message
      */
     public function __construct(
         \TYPO3\CMS\Core\Database\DatabaseConnection $connection,

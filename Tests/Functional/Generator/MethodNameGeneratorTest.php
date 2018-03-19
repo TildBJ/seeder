@@ -1,14 +1,14 @@
 <?php
 
-namespace Dennis\Seeder\Tests\Functional;
+namespace TildBJ\Seeder\Tests\Functional;
 
-use Dennis\Seeder\Generator\MethodNameGenerator;
+use TildBJ\Seeder\Generator\MethodNameGenerator;
 
 /**
  * Class MethodNameGeneratorTest
  * This class tests the functionality between MethodNameGenerator and Faker
  *
- * @package Dennis\Seeder\Tests\Functional
+ * @package TildBJ\Seeder\Tests\Functional
  */
 class MethodNameGeneratorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
@@ -19,7 +19,7 @@ class MethodNameGeneratorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     public function setUp()
     {
-        $faker = \Dennis\Seeder\Factory\FakerFactory::createFaker();
+        $faker = \TildBJ\Seeder\Factory\FakerFactory::createFaker();
         $this->subject = new MethodNameGenerator($faker);
     }
 

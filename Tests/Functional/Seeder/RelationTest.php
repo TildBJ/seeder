@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Functional\Seeder;
+namespace TildBJ\Seeder\Tests\Functional\Seeder;
 
 /***************************************************************
  *
@@ -25,9 +25,9 @@ namespace Dennis\Seeder\Tests\Functional\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Collection\SeedCollection;
-use Dennis\Seeder\Factory\SeederFactory;
-use Dennis\Seeder\Faker;
+use TildBJ\Seeder\Collection\SeedCollection;
+use TildBJ\Seeder\Factory\SeederFactory;
+use TildBJ\Seeder\Faker;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

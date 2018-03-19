@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model\Column;
+namespace TildBJ\Seeder\Domain\Model\Column;
 
 /***************************************************************
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder\Domain\Model\Column;
 /**
  * Interface InlineInterface
  *
- * @package Dennis\Seeder\Domain\Model\Column\InlineInterface
+ * @package TildBJ\Seeder\Domain\Model\Column\InlineInterface
  */
 interface InlineInterface extends OneToManyInterface
 {

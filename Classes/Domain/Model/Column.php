@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace TildBJ\Seeder\Domain\Model;
 
 /***************************************************************
  *
@@ -25,12 +25,12 @@ namespace Dennis\Seeder\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Domain\Model\Column\OneToManyInterface;
+use TildBJ\Seeder\Domain\Model\Column\OneToManyInterface;
 
 /**
  * Class Column
  *
- * @package Dennis\Seeder\Domain\Model\Column
+ * @package TildBJ\Seeder\Domain\Model\Column
  */
 abstract class Column implements ColumnInterface
 {

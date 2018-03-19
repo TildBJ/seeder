@@ -1,10 +1,10 @@
 <?php
-namespace Dennis\Seeder;
+namespace TildBJ\Seeder;
 
 /**
  * Interface Generator
  *
- * @package Dennis\Seeder\Information
+ * @package TildBJ\Seeder\Information
  */
 interface Generator
 {

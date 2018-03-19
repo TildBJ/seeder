@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace TildBJ\Seeder\Domain\Model;
 
 /***************************************************************
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder\Domain\Model;
 /**
  * Class ColumnInterface
  *
- * @package Dennis\Seeder\Domain\Model\ColumnInterface
+ * @package TildBJ\Seeder\Domain\Model\ColumnInterface
  */
 interface ColumnInterface
 {

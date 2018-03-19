@@ -1,12 +1,12 @@
 <?php
 
-namespace Dennis\Seeder;
+namespace TildBJ\Seeder;
 
 /**
  * Interface Provider
  *
- * @package Dennis\Seeder
- * Dennis\Seeder;
+ * @package TildBJ\Seeder
+ * TildBJ\Seeder;
  */
 interface Provider
 {

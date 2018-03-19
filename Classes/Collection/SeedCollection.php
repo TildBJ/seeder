@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Collection;
+namespace TildBJ\Seeder\Collection;
 
 /***************************************************************
  *  Copyright notice
@@ -25,8 +25,8 @@ namespace Dennis\Seeder\Collection;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Dennis\Seeder\Seed;
-use Dennis\Seeder\Seeder;
+use TildBJ\Seeder\Seed;
+use TildBJ\Seeder\Seeder;
 
 /**
  * SeedCollection
@@ -35,7 +35,7 @@ use Dennis\Seeder\Seeder;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SeedCollection implements \Dennis\Seeder\SeedCollection
+class SeedCollection implements \TildBJ\Seeder\SeedCollection
 {
     /**
      * seeds
@@ -109,7 +109,7 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
                 continue;
             }
             $seed->isExecuted(true);
-            $function($seed, \Dennis\Seeder\Factory\FakerFactory::createFaker());
+            $function($seed, \TildBJ\Seeder\Factory\FakerFactory::createFaker());
         }
 
         return $this;

@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Seeder;
+namespace TildBJ\Seeder\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -24,8 +24,8 @@ namespace Dennis\Seeder\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\AbstractSeeder;
-use Dennis\Seeder\Connection\DatabaseConnection;
+use TildBJ\Seeder\AbstractSeeder;
+use TildBJ\Seeder\Connection\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -47,7 +47,7 @@ abstract class DatabaseSeeder extends AbstractSeeder
         $connection = GeneralUtility::makeInstance(
             DatabaseConnection::class,
             $GLOBALS['TYPO3_DB'],
-            GeneralUtility::makeInstance(\Dennis\Seeder\Message\FlashMessage::class)
+            GeneralUtility::makeInstance(\TildBJ\Seeder\Message\FlashMessage::class)
         );
         $this->setConnection($connection);
     }

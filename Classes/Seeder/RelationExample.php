@@ -1,14 +1,14 @@
 <?php
 
-namespace Dennis\Seeder\Seeder;
+namespace TildBJ\Seeder\Seeder;
 
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
 /**
  * Class RelationExample
- * @package Dennis\Seeder\Seeder
+ * @package TildBJ\Seeder\Seeder
  */
-class RelationExample extends \Dennis\Seeder\Seeder\DatabaseSeeder
+class RelationExample extends \TildBJ\Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.

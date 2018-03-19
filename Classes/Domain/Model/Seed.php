@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model;
+namespace TildBJ\Seeder\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -32,7 +32,7 @@ namespace Dennis\Seeder\Domain\Model;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject implements \Dennis\Seeder\Seed
+final class Seed extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject implements \TildBJ\Seeder\Seed
 {
     /**
      * title

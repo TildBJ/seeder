@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Factory;
+namespace TildBJ\Seeder\Factory;
 
 /***************************************************************
  *
@@ -29,14 +29,14 @@ namespace Dennis\Seeder\Factory;
 /**
  * Class FakerFactory
  *
- * @package Dennis\Seeder\Factory\TableFactory
+ * @package TildBJ\Seeder\Factory\TableFactory
  */
 class FakerFactory
 {
     /**
      * instance
      *
-     * @var \Dennis\Seeder\Provider\Faker $instance
+     * @var \TildBJ\Seeder\Provider\Faker $instance
      */
     protected static $instance = null;
 
@@ -51,7 +51,7 @@ class FakerFactory
     /**
      * Provides a Faker
      *
-     * @return \Dennis\Seeder\Provider\Faker
+     * @return \TildBJ\Seeder\Provider\Faker
      */
     public static function createFaker()
     {
@@ -59,11 +59,11 @@ class FakerFactory
             return self::$instance;
         }
 
-        $locale = \Dennis\Seeder\Utility\EmConfiguration::get('locale');
+        $locale = \TildBJ\Seeder\Utility\EmConfiguration::get('locale');
         if (!$locale) {
             $locale = 'en_US';
         }
-        $faker = new \Dennis\Seeder\Provider\Faker(\Faker\Factory::create($locale));
+        $faker = new \TildBJ\Seeder\Provider\Faker(\Faker\Factory::create($locale));
 
         self::$instance = $faker;
 

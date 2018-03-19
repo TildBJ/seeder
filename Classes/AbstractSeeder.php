@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder;
+namespace TildBJ\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -24,7 +24,7 @@ namespace Dennis\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Collection\SeedCollection;
+use TildBJ\Seeder\Collection\SeedCollection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -57,7 +57,7 @@ abstract class AbstractSeeder implements Seeder
     {
         $this->factory = GeneralUtility::makeInstance(
             Factory\SeederFactory::class,
-            \Dennis\Seeder\Factory\FakerFactory::createFaker()
+            \TildBJ\Seeder\Factory\FakerFactory::createFaker()
         );
     }
 

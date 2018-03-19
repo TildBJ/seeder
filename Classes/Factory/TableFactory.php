@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Factory;
+namespace TildBJ\Seeder\Factory;
 
 /***************************************************************
  *
@@ -25,14 +25,14 @@ namespace Dennis\Seeder\Factory;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Provider\TableConfiguration;
-use Dennis\Seeder\Domain\Model;
+use TildBJ\Seeder\Provider\TableConfiguration;
+use TildBJ\Seeder\Domain\Model;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class TableFactory
  *
- * @package Dennis\Seeder\Factory\TableFactory
+ * @package TildBJ\Seeder\Factory\TableFactory
  */
 class TableFactory implements \TYPO3\CMS\Core\SingletonInterface
 {

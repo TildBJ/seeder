@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Seeder;
+namespace TildBJ\Seeder\Seeder;
 
 /***************************************************************
  *  Copyright notice
@@ -24,7 +24,7 @@ namespace Dennis\Seeder\Seeder;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\AbstractSeeder;
+use TildBJ\Seeder\AbstractSeeder;
 
 /**
  * FileSeeder

@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Provider;
+namespace TildBJ\Seeder\Provider;
 
 /***************************************************************
  *
@@ -144,9 +144,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @method string getSafeColorName()
  * @method string getColorName()
  *
- * @package Dennis\Seeder\Provider\Faker
+ * @package TildBJ\Seeder\Provider\Faker
  */
-class Faker implements \Dennis\Seeder\Faker
+class Faker implements \TildBJ\Seeder\Faker
 {
     /** @var \Faker\Generator $generator */
     protected $generator = null;
@@ -193,7 +193,7 @@ class Faker implements \Dennis\Seeder\Faker
         }
 
         if (!$this->hasProvider($provider)) {
-            throw new \Dennis\Seeder\Provider\NotFoundException(
+            throw new \TildBJ\Seeder\Provider\NotFoundException(
                 'No provider found for ' . $provider
             );
         }
@@ -247,10 +247,10 @@ class Faker implements \Dennis\Seeder\Faker
      */
     private function callCustomProvider($className)
     {
-        /** @var \Dennis\Seeder\Provider $providerClass */
+        /** @var \TildBJ\Seeder\Provider $providerClass */
         $providerClass = GeneralUtility::makeInstance($className, $this);
-        if (!$providerClass instanceof \Dennis\Seeder\Provider) {
-            throw new \Exception(get_class($providerClass) . ' must implement ' . \Dennis\Seeder\Provider::class);
+        if (!$providerClass instanceof \TildBJ\Seeder\Provider) {
+            throw new \Exception(get_class($providerClass) . ' must implement ' . \TildBJ\Seeder\Provider::class);
         }
         return $providerClass->generate();
     }
@@ -275,7 +275,7 @@ class Faker implements \Dennis\Seeder\Faker
     public function guessProviderName($name)
     {
         if (empty($name)) {
-            throw new \Dennis\Seeder\Provider\NotFoundException();
+            throw new \TildBJ\Seeder\Provider\NotFoundException();
         }
         if (preg_match('/^is[_A-Z]/', $name)) {
             return 'boolean';

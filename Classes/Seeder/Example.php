@@ -1,14 +1,14 @@
 <?php
 
-namespace Dennis\Seeder\Seeder;
+namespace TildBJ\Seeder\Seeder;
 
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
 /**
  * Class Example
- * @package Dennis\Seeder\Seeder
+ * @package TildBJ\Seeder\Seeder
  */
-class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
+class Example extends \TildBJ\Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +25,7 @@ class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
                   'hidden' => 0,
                   'title' => $faker->getTitle(),
                   'description' => $faker->getText(),
-                  'relation' => $this->call(\Dennis\Seeder\Seeder\RelationExample::class),
+                  'relation' => $this->call(\TildBJ\Seeder\Seeder\RelationExample::class),
                 )
             );
         });

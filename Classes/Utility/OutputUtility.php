@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Utility;
+namespace TildBJ\Seeder\Utility;
 
 use TYPO3\CMS\Extbase\Mvc\Cli\ConsoleOutput;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  *  Copyright notice
  *
- *  (c) 2017 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2017 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *

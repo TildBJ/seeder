@@ -1,11 +1,11 @@
 <?php
-namespace Dennis\Seeder;
+namespace TildBJ\Seeder;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016 Dennis Römmich <dennis.roemmich@sunzinet.com>, sunzinet AG
+ *  (c) 2016 Dennis Römmich <dennis@roemmich.eu>
  *
  *  All rights reserved
  *
@@ -29,7 +29,7 @@ namespace Dennis\Seeder;
 /**
  * Interface Information
  *
- * @package Dennis\Seeder\Information
+ * @package TildBJ\Seeder\Information
  */
 interface Information
 {

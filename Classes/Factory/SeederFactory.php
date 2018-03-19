@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Factory;
+namespace TildBJ\Seeder\Factory;
 
 /***************************************************************
  *
@@ -25,15 +25,15 @@ namespace Dennis\Seeder\Factory;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder;
+use TildBJ\Seeder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class SeederFactory
  *
- * @package Dennis\Seeder\Factory\SeederFactory
+ * @package TildBJ\Seeder\Factory\SeederFactory
  */
-class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\SingletonInterface
+class SeederFactory implements \TildBJ\Seeder\SeederFactory, \TYPO3\CMS\Core\SingletonInterface
 {
     /**
      * @var Seeder\Faker

@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model\Column;
+namespace TildBJ\Seeder\Domain\Model\Column;
 
 /***************************************************************
  *
@@ -25,12 +25,12 @@ namespace Dennis\Seeder\Domain\Model\Column;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Dennis\Seeder\Domain\Model\Column;
+use TildBJ\Seeder\Domain\Model\Column;
 
 /**
  * Class Check
  *
- * @package Dennis\Seeder\Domain\Model\Check
+ * @package TildBJ\Seeder\Domain\Model\Check
  */
 class Check extends Column implements CheckInterface
 {

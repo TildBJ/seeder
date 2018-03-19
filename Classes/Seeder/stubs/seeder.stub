@@ -1,13 +1,13 @@
 <?php
 namespace {namespace};
 
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
 /**
  * Class {ClassName}
  * @package {namespace}
  */
-class {ClassName} extends \Dennis\Seeder\Seeder\DatabaseSeeder
+class {ClassName} extends \TildBJ\Seeder\Seeder\DatabaseSeeder
 {
     /**
      * Run the database seeds.

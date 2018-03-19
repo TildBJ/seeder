@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Tests\Unit;
+namespace TildBJ\Seeder\Tests\Unit;
 
 /***************************************************************
  *

@@ -1,15 +1,15 @@
 <?php
 
-namespace Dennis\Seeder\Tests\Unit\Generator;
+namespace TildBJ\Seeder\Tests\Unit\Generator;
 
-use Dennis\Seeder\Generator;
-use Dennis\Seeder\Generator\MethodNameGenerator;
+use TildBJ\Seeder\Generator;
+use TildBJ\Seeder\Generator\MethodNameGenerator;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
  * Class MethodNameGeneratorTest
  *
- * @package Dennis\Seeder\Tests\Generator
+ * @package TildBJ\Seeder\Tests\Generator
  */
 class MethodNameGeneratorTest extends UnitTestCase
 {
@@ -20,7 +20,7 @@ class MethodNameGeneratorTest extends UnitTestCase
 
     public function setUp()
     {
-        $faker = $this->getMock(\Dennis\Seeder\Faker::class);
+        $faker = $this->getMock(\TildBJ\Seeder\Faker::class);
         $this->subject = new MethodNameGenerator($faker);
     }
 
@@ -57,8 +57,8 @@ class MethodNameGeneratorTest extends UnitTestCase
      */
     public function generateReturnsNullWithInvalidParameter()
     {
-        $faker = $this->getMock(\Dennis\Seeder\Faker::class);
-        $faker->method('get')->willThrowException(new \Dennis\Seeder\Provider\NotFoundException());
+        $faker = $this->getMock(\TildBJ\Seeder\Faker::class);
+        $faker->method('get')->willThrowException(new \TildBJ\Seeder\Provider\NotFoundException());
         $generator = new MethodNameGenerator($faker);
         $this->assertSame(null, $generator->generate('InvalidParameter'));
     }

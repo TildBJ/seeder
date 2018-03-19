@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Domain\Model\Column;
+namespace TildBJ\Seeder\Domain\Model\Column;
 
 /***************************************************************
  *
@@ -30,7 +30,7 @@ namespace Dennis\Seeder\Domain\Model\Column;
  * Interface SelectInterface
  *
  * @TODO: Support MM Relations
- * @package Dennis\Seeder\Domain\Model\Column\SelectInterface
+ * @package TildBJ\Seeder\Domain\Model\Column\SelectInterface
  */
 interface SelectInterface extends OneToManyInterface
 {

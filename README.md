@@ -26,11 +26,11 @@ If you install seeder via Extensionmanager it's up to you to install fzaninotto/
 Create a class wherever you want. Only make sure it's available via autoloader. Your class should look like this:
 ```php
 <?php
-namespace Dennis\Seeder\Seeder;
+namespace TildBJ\Seeder\Seeder;
 
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
-class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
+class Example extends \TildBJ\Seeder\Seeder\DatabaseSeeder
 {
     public function run()
     {
@@ -42,8 +42,8 @@ class Example extends \Dennis\Seeder\Seeder\DatabaseSeeder
                   'hidden' => 0,
                   'title' => $faker->getTitle(),
                   'description' => $faker->getText(),
-                  'relation' => $this->call(\Dennis\Seeder\Seeder\RelationExample::class),
-                  'fal_image' => $this->call(\Dennis\Seeder\Seeder\Image::class),
+                  'relation' => $this->call(\TildBJ\Seeder\Seeder\RelationExample::class),
+                  'fal_image' => $this->call(\TildBJ\Seeder\Seeder\Image::class),
                 )
             );
         });
@@ -71,7 +71,7 @@ Attention: This command creates a seed within the directory Classes/Seeder. It's
 
 ### Alias:
 
-Create an alias in ext_localconf.php ``` ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias']['myseed'] = \Dennis\Seeder\Seeder\Example::class;) ``` for running seed like this:
+Create an alias in ext_localconf.php ``` ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias']['myseed'] = \TildBJ\Seeder\Seeder\Example::class;) ``` for running seed like this:
 ```sh
 /path/to/typo3/cli_dispatch.phpsh extbase seeder:seed myseed
 ```

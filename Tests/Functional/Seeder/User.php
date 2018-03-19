@@ -1,11 +1,11 @@
 <?php
-namespace Dennis\Seeder\Tests\Functional\Seeder;
+namespace TildBJ\Seeder\Tests\Functional\Seeder;
 
-use Dennis\Seeder;
+use TildBJ\Seeder;
 
 /**
  * Class User
- * @package Dennis\Seeder\Tests\Functional\Seeder
+ * @package TildBJ\Seeder\Tests\Functional\Seeder
  */
 class User extends Seeder\Seeder\DatabaseSeeder
 {

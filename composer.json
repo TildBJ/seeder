@@ -39,12 +39,12 @@
     "psr-4": {
       "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/",
       "TYPO3\\CMS\\Core\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Classes/",
-      "Dennis\\Seeder\\Tests\\": "Tests/"
+      "TildBJ\\Seeder\\Tests\\": "Tests/"
     }
   },
   "autoload": {
     "psr-4": {
-      "Dennis\\Seeder\\": "Classes"
+      "TildBJ\\Seeder\\": "Classes"
     }
   },
   "replace": {

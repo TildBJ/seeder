@@ -1,10 +1,10 @@
 <?php
-namespace Dennis\Seeder\Information;
+namespace TildBJ\Seeder\Information;
 
 /**
  * Class DefaultInformation
  *
- * @package Dennis\Seeder\Information\DefaultInformation
+ * @package TildBJ\Seeder\Information\DefaultInformation
  */
 class NullInformation extends AbstractInformation
 {

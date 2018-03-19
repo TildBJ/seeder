@@ -1,5 +1,5 @@
 <?php
-namespace Dennis\Seeder\Provider;
+namespace TildBJ\Seeder\Provider;
 
 /**
  * NotFoundException
