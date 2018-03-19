@@ -69,20 +69,6 @@ class SeedCollectionTest extends UnitTestCase
         $this->subject->attach($seed);
         $this->assertSame([
             0 => 'NEW1',
-        ], array_keys($this->subject->current()));
-    }
-
-    /**
-     * @method attach
-     * @test
-     */
-    public function attachAttachesMultipleSeedsIfSeedsAreDifferent()
-    {
-        $seed = $this->getMock(\Dennis\Seeder\Seed::class);
-        $this->subject->attach($seed);
-        $this->subject->attach(clone $seed);
-        $this->assertSame([
-            0 => 'NEW1',
             1 => 'NEW2',
         ], array_keys($this->subject->current()));
     }
@@ -180,6 +166,7 @@ class SeedCollectionTest extends UnitTestCase
         $this->subject->amount = 4;
         $this->assertSame([
             0 => 'NEW1',
+            1 => 'NEW3',
         ], array_keys($this->subject->get($seeder)));
     }
 

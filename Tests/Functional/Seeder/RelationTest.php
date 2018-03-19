@@ -168,7 +168,6 @@ class RelationTest extends UnitTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function eachGroupHasTwoDifferentSubGroups()
     {

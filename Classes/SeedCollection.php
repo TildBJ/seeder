@@ -70,6 +70,12 @@ interface SeedCollection extends \Iterator, \Countable, \TYPO3\CMS\Core\Singleto
     public function get(Seeder $seeder);
 
     /**
+     * @param string $name
+     * @return int
+     */
+    public function countByName($name);
+
+    /**
      * @return void
      */
     public function clear();

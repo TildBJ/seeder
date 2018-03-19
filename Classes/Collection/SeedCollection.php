@@ -45,11 +45,9 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
     protected $seeds = [];
 
     /**
-     * Used Keys
-     *
-     * @var array
+     * @var array $temp
      */
-    protected $used = [];
+    protected $temp = [];
 
     /**
      * @var int
@@ -79,32 +77,21 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
      */
     public function get(Seeder $seeder)
     {
+        if (isset($this->temp[$seeder->getClass()])) {
+            $return = $this->temp[$seeder->getClass()];
+            unset($this->temp[$seeder->getClass()]);
+            return $return;
+        }
         $return = [];
-        $i = 1;
-        $this->used = [];
         foreach ($this->seeds as $title => $seeds) {
             foreach ($seeds as $key => $seed) {
                 if ($title === $seeder->getClass()) {
-                    if ($this->isUsed($key) || $i > $this->count()) {
-                        continue;
-                    }
-                    $i++;
-                    $this->used[$key] = 1;
                     $return[$key] = $seed;
                 }
             }
         }
 
         return $return;
-    }
-
-    /**
-     * @param string $key
-     * @return bool
-     */
-    public function isUsed($key)
-    {
-        return isset($this->used[$key]);
     }
 
     /**
@@ -134,19 +121,9 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
      */
     public function attach(Seed $seed)
     {
-        $attached = false;
-        if (!is_array($this->seeds[$seed->getTitle()])) {
-            $this->seeds[$seed->getTitle()]['NEW' . ++$this->i] = $seed;
-            return null;
-        }
-        foreach ($this->seeds[$seed->getTitle()] as $attachedSeed) {
-            if ($attachedSeed === $seed) {
-                $attached = true;
-            }
-        }
-        if ($attached === false) {
-            $this->seeds[$seed->getTitle()]['NEW' . ++$this->i] = $seed;
-        }
+        $identifier = 'NEW' . ++$this->i;
+        $this->seeds[$seed->getTitle()][$identifier] = $seed;
+        $this->temp[$seed->getTitle()][$identifier] = $identifier;
     }
 
     /**
@@ -236,6 +213,15 @@ class SeedCollection implements \Dennis\Seeder\SeedCollection
     public function count()
     {
         return count($this->seeds);
+    }
+
+    /**
+     * @param string $name
+     * @return int
+     */
+    public function countByName($name)
+    {
+        return count($this->seeds[$name]);
     }
 
     /**

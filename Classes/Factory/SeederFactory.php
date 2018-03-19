@@ -54,7 +54,9 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
      */
     public function create($name, $limit = 1)
     {
-        return $this->makeOrCreate($name, $limit);
+        $calledClass = debug_backtrace(false, 2)[1]['class'];
+
+        return $this->fillSeedCollection($calledClass, $name, $limit, true);
     }
 
     /**
@@ -64,31 +66,44 @@ class SeederFactory implements \Dennis\Seeder\SeederFactory, \TYPO3\CMS\Core\Sin
      */
     public function make($name, $limit = 1)
     {
-        return $this->makeOrCreate($name, $limit, false);
+        $calledClass = debug_backtrace(false, 2)[1]['class'];
+
+        return $this->fillSeedCollection($calledClass, $name, $limit);
     }
 
     /**
+     * @param $calledClass
      * @param $name
      * @param int $limit
-     * @param bool $create
+     * @return Seeder\SeedCollection
      */
-    protected function makeOrCreate($name, $limit = 1, $create = true)
+    protected function fillSeedCollection($calledClass, $name, $limit = 1, $force = false)
     {
         /** @var Seeder\Provider\TableConfiguration $tableConfiguration */
         $tableConfiguration = GeneralUtility::makeInstance(Seeder\Provider\TableConfiguration::class, $name);
+
         /** @var Seeder\SeedCollection $seedCollection */
         $seedCollection = GeneralUtility::makeInstance(Seeder\Collection\SeedCollection::class);
 
+        $seeds = [];
         for ($i = 1; $i <= $limit; $i++) {
-            $calledClass = debug_backtrace(false, 3)[2];
-            if ($create || !$seed = $seedCollection->random($calledClass['class'], $i)) {
-                /** @var Seeder\Seed $seed */
-                $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
-                $seed->setTarget($name)
-                    ->setTitle($calledClass['class'])
-                    ->setProperties($tableConfiguration->getColumns());
+            /** @var Seeder\Seed $seed */
+            $seed = GeneralUtility::makeInstance(Seeder\Domain\Model\Seed::class);
+            $seed->setTarget($name)
+                ->setTitle($calledClass)
+                ->setProperties($tableConfiguration->getColumns());
+            $seeds[$i] = $seed;
+        }
+
+        if ($force) {
+            foreach ($seeds as $seed) {
+                $seedCollection->attach($seed);
             }
-            $seedCollection->attach($seed);
+        } else {
+            $amount = count($seeds) - $seedCollection->countByName($calledClass);
+            for ($i = 1; $i <= $amount; $i++) {
+                $seedCollection->attach($seeds[$i]);
+            }
         }
 
         return $seedCollection;
