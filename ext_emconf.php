@@ -31,12 +31,12 @@ $EM_CONF[$_EXTKEY] = array(
     ),
     'autoload' => array(
         'psr-4' => array(
-            'Dennis\\Seeder\\' => 'Classes'
+            'TildBJ\\Seeder\\' => 'Classes'
         ),
     ),
     'autoload-dev' => array(
         'psr-4' => array(
-            'Dennis\\Seeder\\Tests\\' => 'Tests',
+            'TildBJ\\Seeder\\Tests\\' => 'Tests',
         ),
     ),
 );

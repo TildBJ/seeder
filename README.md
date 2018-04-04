@@ -84,6 +84,10 @@ Create an alias in ext_localconf.php ``` ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
 
 <table>
     <tr>
+        <td>0.3.1</td>
+        <td>Fix wrong vendorname in ext_emconf.php</td>
+    </tr>
+    <tr>
         <td>0.3.0</td>
         <td>
             * Fixes a Bug with wrong amount of relations
