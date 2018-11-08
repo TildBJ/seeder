@@ -1,5 +1,8 @@
 # seeder
 [![Build Status](https://travis-ci.org/TildBJ/seeder.svg?branch=master)](https://travis-ci.org/TildBJ/seeder)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/TildBJ/seeder/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/TildBJ/seeder/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/TildBJ/seeder/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/TildBJ/seeder/?branch=master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/TildBJ/seeder/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
 Seeder is a TYPO3 Extension that generates fake data for your TYPO3 Extension. Its intended for developers only!!! This Version is an experimental version!
 
