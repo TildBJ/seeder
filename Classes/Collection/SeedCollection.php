@@ -221,6 +221,9 @@ class SeedCollection implements \TildBJ\Seeder\SeedCollection
      */
     public function countByName($name)
     {
+        if (!is_array($this->seeds[$name])) {
+            return 0;
+        }
         return count($this->seeds[$name]);
     }
 

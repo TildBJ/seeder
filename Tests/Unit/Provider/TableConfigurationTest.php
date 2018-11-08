@@ -27,7 +27,7 @@ namespace TildBJ\Seeder\Tests\Unit\Provider;
 use TildBJ\Seeder\Tests\Unit\AccessibleTraitForTest;
 use TildBJ\Seeder\Traits\Language;
 use TildBJ\Seeder\Provider\TableConfiguration;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for class \TildBJ\Seeder\Tests\Provider\TableConfigurationTest
@@ -151,7 +151,7 @@ class TableConfigurationTest extends UnitTestCase
     public function getColumnConfigurationThrowsExceptionWhenTableNotExist()
     {
         $column = 'FooBar';
-        $this->setExpectedException(
+        $this->expectException(
             'InvalidArgumentException',
             'Column ' . $column . ' does not exist for table ' . self::TABLE
         );

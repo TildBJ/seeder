@@ -1,27 +1,21 @@
 language: php
 
 php:
-  - 5.5
-  - 5.6
   - 7.0
   - 7.1
+  - 7.2
 env:
   - TYPO3_VERSION=^7.6
   - TYPO3_VERSION=^8.7
 matrix:
   fast_finish: true
-  exclude:
-    - php: 5.5
-      env: TYPO3_VERSION=^8.7
-    - php: 5.6
-      env: TYPO3_VERSION=^8.7
 
 sudo: false
 
 before_script:
   - composer require typo3/cms="$TYPO3_VERSION"
-  - composer require fzaninotto/faker 1.7
-  - composer require nimut/testing-framework 1.1
+  - composer install
+  - git checkout composer.json
 
 script:
   - .Build/bin/phpcs -n --standard=PSR2 --extensions=php --ignore=Tests/Unit/Seeder/SeedTest.php ./Classes/ ./Tests/

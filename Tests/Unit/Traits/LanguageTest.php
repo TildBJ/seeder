@@ -25,7 +25,7 @@ namespace TildBJ\Seeder\Tests\Unit\Traits;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TildBJ\Seeder\Tests\Unit\AccessibleTraitForTest;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TildBJ\Seeder\Traits;
 use TYPO3\CMS\Lang\LanguageService;
 
