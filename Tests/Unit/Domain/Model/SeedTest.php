@@ -25,7 +25,7 @@ namespace TildBJ\Seeder\Tests\Unit\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TildBJ\Seeder\Domain\Model\Seed;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * SeedTest

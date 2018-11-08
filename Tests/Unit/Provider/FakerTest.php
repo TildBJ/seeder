@@ -26,7 +26,7 @@ namespace TildBJ\Seeder\Tests\Unit\Provider;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TildBJ\Seeder\Provider\Faker;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for class \TildBJ\Seeder\Provider\Faker
@@ -61,7 +61,7 @@ class FakerTest extends UnitTestCase
      */
     public function guessProviderNameByKeyWithEmptyArgumentThrowsNotFoundException()
     {
-        $this->setExpectedException(
+        $this->expectException(
             \TildBJ\Seeder\Provider\NotFoundException::class
         );
         $this->subject->guessProviderName('');
@@ -94,7 +94,7 @@ class FakerTest extends UnitTestCase
      */
     public function getThrowsExceptionIfNoProviderWasFound()
     {
-        $this->setExpectedException(\TildBJ\Seeder\Provider\NotFoundException::class);
+        $this->expectException(\TildBJ\Seeder\Provider\NotFoundException::class);
         $this->subject->get('doesnotexist');
     }
 

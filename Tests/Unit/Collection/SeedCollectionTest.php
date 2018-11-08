@@ -25,7 +25,7 @@ namespace TildBJ\Seeder\Tests\Unit\Collection;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TildBJ\Seeder\Collection\SeedCollection;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -53,7 +53,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function attachAttachesNewItemIfItNotExist()
     {
-        $seed = $this->getMock(\TildBJ\Seeder\Seed::class);
+        $seed = $this->createMock(\TildBJ\Seeder\Seed::class);
         $this->subject->attach($seed);
         $this->assertSame($seed, $this->subject->current()['NEW1']);
     }
@@ -64,7 +64,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function attachAttachesOnlyOneSeedIfSeedsAreIdentical()
     {
-        $seed = $this->getMock(\TildBJ\Seeder\Seed::class);
+        $seed = $this->createMock(\TildBJ\Seeder\Seed::class);
         $this->subject->attach($seed);
         $this->subject->attach($seed);
         $this->assertSame([
@@ -79,7 +79,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     protected function mockSeed($name)
     {
-        $seed = $this->getMock(\TildBJ\Seeder\Seed::class);
+        $seed = $this->createMock(\TildBJ\Seeder\Seed::class);
         $seed->method('getTitle')->willReturn($name);
         $seed->method('getTarget')->willReturn(strtolower(preg_replace('/\B([A-Z])/', '_$1', $name)));
         $seed->method('getProperties')->willReturn(['pid' => 123]);
@@ -93,7 +93,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function getReturnsArrayWithTwoKeysWhenClassNameFooBar()
     {
-        $seeder = $this->getMock(\TildBJ\Seeder\Seeder::class);
+        $seeder = $this->createMock(\TildBJ\Seeder\Seeder::class);
         $seeder->method('getClass')->willReturn('FooBar');
         $fooBarSeed = $this->mockSeed('FooBar');
         $fooSeed = $this->mockSeed('Foo');
@@ -121,7 +121,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function getReturnsArrayWithOneKeyWhenClassNameFoo()
     {
-        $seeder = $this->getMock(\TildBJ\Seeder\Seeder::class);
+        $seeder = $this->createMock(\TildBJ\Seeder\Seeder::class);
         $seeder->method('getClass')->willReturn('Foo');
         $fooBarSeed = $this->mockSeed('FooBar');
         $fooSeed = $this->mockSeed('Foo');
@@ -148,7 +148,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function getReturnsArrayWithOneKeyWhenClassNameFooBar()
     {
-        $seeder = $this->getMock(\TildBJ\Seeder\Seeder::class);
+        $seeder = $this->createMock(\TildBJ\Seeder\Seeder::class);
         $seeder->method('getClass')->willReturn('FooBar');
         $fooBarSeed = $this->mockSeed('FooBar');
         $fooSeed = $this->mockSeed('Foo');
@@ -176,7 +176,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function clearSeedCollectionRemovesAllSeeds()
     {
-        $seed = $this->getMock(\TildBJ\Seeder\Seed::class);
+        $seed = $this->createMock(\TildBJ\Seeder\Seed::class);
         $this->subject->attach($seed);
         $this->subject->clear();
 
@@ -195,7 +195,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function clearSeedCollectionSetCounterToZero()
     {
-        $seed = $this->getMock(\TildBJ\Seeder\Seed::class);
+        $seed = $this->createMock(\TildBJ\Seeder\Seed::class);
         $this->subject->attach($seed);
         $this->subject->clear();
         $this->subject->attach($seed);
@@ -212,7 +212,7 @@ class SeedCollectionTest extends UnitTestCase
      */
     public function toArrayReturnsCorrectArray()
     {
-        $seed = $this->getMock(\TildBJ\Seeder\Seed::class);
+        $seed = $this->createMock(\TildBJ\Seeder\Seed::class);
         $seed->method('getTitle')->willReturn('FooBar');
         $seed->method('getTarget')->willReturn('foo_bar');
         $seed->method('getProperties')->willReturn(['pid' => 123]);

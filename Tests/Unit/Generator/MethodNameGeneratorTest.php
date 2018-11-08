@@ -4,7 +4,7 @@ namespace TildBJ\Seeder\Tests\Unit\Generator;
 
 use TildBJ\Seeder\Generator;
 use TildBJ\Seeder\Generator\MethodNameGenerator;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class MethodNameGeneratorTest
@@ -20,7 +20,7 @@ class MethodNameGeneratorTest extends UnitTestCase
 
     public function setUp()
     {
-        $faker = $this->getMock(\TildBJ\Seeder\Faker::class);
+        $faker = $this->createMock(\TildBJ\Seeder\Faker::class);
         $this->subject = new MethodNameGenerator($faker);
     }
 
@@ -57,7 +57,7 @@ class MethodNameGeneratorTest extends UnitTestCase
      */
     public function generateReturnsNullWithInvalidParameter()
     {
-        $faker = $this->getMock(\TildBJ\Seeder\Faker::class);
+        $faker = $this->createMock(\TildBJ\Seeder\Faker::class);
         $faker->method('get')->willThrowException(new \TildBJ\Seeder\Provider\NotFoundException());
         $generator = new MethodNameGenerator($faker);
         $this->assertSame(null, $generator->generate('InvalidParameter'));

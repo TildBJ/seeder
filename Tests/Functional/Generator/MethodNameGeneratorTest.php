@@ -10,7 +10,7 @@ use TildBJ\Seeder\Generator\MethodNameGenerator;
  *
  * @package TildBJ\Seeder\Tests\Functional
  */
-class MethodNameGeneratorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class MethodNameGeneratorTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
 {
     /**
      * @var MethodNameGenerator $subject
