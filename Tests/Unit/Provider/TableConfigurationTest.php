@@ -39,8 +39,6 @@ class TableConfigurationTest extends UnitTestCase
     use Language, AccessibleTraitForTest;
 
     /**
-     * subject
-     *
      * @var TableConfiguration $subject
      */
     protected $subject;
@@ -51,8 +49,6 @@ class TableConfigurationTest extends UnitTestCase
     const TABLE = 'pages';
 
     /**
-     * setUp
-     *
      * @return void
      */
     public function setUp()
@@ -92,8 +88,24 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * tableConfigurationContainsArray
-     *
+     * @test
+     */
+    public function createTableConfigurationThrowsExceptionWhenTableNameNotExist()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new TableConfiguration('LoremIpsum');
+    }
+
+    /**
+     * @test
+     */
+    public function createTableConfigurationThrowsExceptionWhenArgumentIsNoString()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->subject->getColumnConfiguration(123);
+    }
+
+    /**
      * @test
      */
     public function tableConfigurationContainsArray()
@@ -103,8 +115,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * tablePropertyContainsString
-     *
      * @test
      */
     public function tablePropertyContainsString()
@@ -114,8 +124,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * getNameReturnsTableName
-     *
      * @test
      */
     public function getNameReturnsTableName()
@@ -124,8 +132,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * getTitleReturnsTitleOfTable
-     *
      * @test
      */
     public function getTitleReturnsTitleOfTable()
@@ -134,8 +140,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * getColumnsReturnsArray
-     *
      * @test
      */
     public function getColumnsReturnsArray()
@@ -144,8 +148,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * getColumnConfigurationThrowsExceptionWhenTableNotExist
-     *
      * @test
      */
     public function getColumnConfigurationThrowsExceptionWhenTableNotExist()
@@ -159,8 +161,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * getColumnConfigurationReturnsArray
-     *
      * @test
      */
     public function getColumnConfigurationReturnsArray()
@@ -177,8 +177,6 @@ class TableConfigurationTest extends UnitTestCase
     }
 
     /**
-     * getAllTablesReturnsArray
-     *
      * @test
      */
     public function getAllTablesReturnsArray()
