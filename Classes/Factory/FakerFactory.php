@@ -40,10 +40,16 @@ class FakerFactory
      */
     protected static $instance = null;
 
+    /**
+     * @codeCoverageIgnore
+     */
     protected function __construct()
     {
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     protected function __clone()
     {
     }
