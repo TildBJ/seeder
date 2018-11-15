@@ -212,12 +212,11 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         $class = $this->namespace . '\\' . $className;
 
         if (class_exists($class)) {
-            $this->outputUtility->error('Class ' . $class . ' already exists.');
-            return false;
+            throw new \InvalidArgumentException('Class ' . $class . ' already exists.');
         }
 
         if (!isset($GLOBALS['TCA'][$tableName])) {
-            $this->outputAndExit('Configuration for ' . $tableName . ' not Found!');
+            throw new \InvalidArgumentException('Configuration for ' . $tableName . ' not Found!');
         }
         $informations = $this->detectSeederInformations($tableName);
 
@@ -231,15 +230,6 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         );
 
         return true;
-    }
-
-    /**
-     * @param $string
-     */
-    protected function outputAndExit($string)
-    {
-        $this->outputUtility->error($string);
-        exit;
     }
 
     /**
@@ -268,22 +258,15 @@ class SeederCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
 
     /**
      * @param string $className
-     * @return bool|string
+     * @return string
      */
     protected function resolveSeederClass($className)
     {
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias'][$className])) {
             $className = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seeder']['alias'][$className];
-            if (!is_string($className)) {
-                $this->outputUtility->error('$className must be type of string. Type of  ' . gettype($className) . ' given.');
-                $this->sendAndExit(1);
-                return false;
-            }
         }
         if (!class_exists($className)) {
-            $this->outputUtility->error('Class ' . $className . ' does not exist.');
-            $this->sendAndExit(1);
-            return false;
+            throw new \InvalidArgumentException('Class ' . $className . ' does not exist.');
         }
 
         return $className;
