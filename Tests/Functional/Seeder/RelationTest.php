@@ -213,6 +213,7 @@ class RelationTest extends UnitTestCase
 
     public function tearDown()
     {
+        unset($GLOBALS['TCA']);
         $seedCollection = GeneralUtility::makeInstance(SeedCollection::class);
         $seedCollection->clear();
     }
