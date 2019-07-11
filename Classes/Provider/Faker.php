@@ -283,7 +283,7 @@ class Faker implements \TildBJ\Seeder\Faker
         if (preg_match('/(_a|A)t$/', $name)) {
             return 'unixtime';
         }
-        $name = GeneralUtility::strtolower($name);
+        $name = strtolower($name);
         $name = str_replace('_', '', $name);
         if ($this->hasProvider($name)) {
             return $name;
