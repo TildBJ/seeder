@@ -39,48 +39,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class DatabaseConnection implements Connection
 {
     /**
-     * connection
-     *
-     * @var \TYPO3\CMS\Core\Database\DatabaseConnection $connection
-     */
-    protected $connection;
-
-    /**
-     * output
-     *
-     * @var \TildBJ\Seeder\Message $message
-     */
-    protected $message;
-
-    /**
-     * closures
-     *
-     * @var array $closures
-     */
-    protected $closures;
-
-    /**
-     * lastInsertId
-     *
-     * @var integer $lastInsertId
-     */
-    protected $lastInsertId;
-
-    /**
-     * DatabaseConnection constructor.
-     *
-     * @param \TYPO3\CMS\Core\Database\DatabaseConnection $connection
-     * @param \TildBJ\Seeder\Message $message
-     */
-    public function __construct(
-        \TYPO3\CMS\Core\Database\DatabaseConnection $connection,
-        Seeder\Message $message
-    ) {
-        $this->connection = $connection;
-        $this->message = $message;
-    }
-
-    /**
      * fetch
      *
      * @param array $seedArray
