@@ -10,6 +10,11 @@ env:
   - TYPO3_VERSION=^9.5
 matrix:
   fast_finish: true
+  exclude:
+    - php: 7.0
+      env: TYPO3_VERSION=^9.5
+    - php: 7.1
+      env: TYPO3_VERSION=^9.5
 
 sudo: false
 
